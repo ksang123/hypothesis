@@ -870,6 +870,78 @@ class ConjectureRunner:
     def has_existing_examples(self) -> bool:
         return self.database is not None and Phase.reuse in self.settings.phases
 
+    def save_failing_test_info(self, data: ConjectureResult, output_file: str = "src/failing_test.py") -> None:
+        """Save complete information needed to reproduce a failing test."""
+        import inspect
+        import re
+        from ...control import BuildContext
+        from ...vendor.pretty import RepresentationPrinter
+
+        # Get test function details
+        state = self._test_function.__self__
+        tmp = ConjectureData.for_choices(data.choices)
+        test_func = state.test  # The actual test function
+
+        with open(output_file, "w") as f:
+            # Simple header
+            f.write("# Failing test extracted from Hypothesis\n\n")
+
+            # Save the failure location as a comment
+            f.write(f"# Failure occurred in: {self.tree.root.transition.interesting_origin.filename}\n")
+            if hasattr(self.tree.root.transition.interesting_origin, 'lineno'):
+                f.write(f"# Line number: {self.tree.root.transition.interesting_origin.lineno}\n\n")
+
+            # Include the actual function source code without decorators
+            f.write("# Original test function implementation:\n")
+            try:
+                source = inspect.getsource(test_func)
+                # Extract just the function definition and body, removing all decorators
+                lines = source.splitlines()
+                clean_lines = []
+                for line in lines:
+                    if not line.strip().startswith('@'):
+                        clean_lines.append(line)
+                clean_source = '\n'.join(clean_lines)
+                f.write(clean_source + "\n\n")
+            except (IOError, TypeError):
+                f.write(f"# Could not retrieve source code for {test_func.__name__}\n\n")
+
+            # Save the direct values for reproduction
+            f.write("# Test reproduction with exact failing values:\n")
+
+            # Create the function call with exact values
+            with BuildContext(tmp) as ctx:
+                args = state.stuff.args
+                kwargs = dict(state.stuff.kwargs)
+                kw, arg_slices = ctx.prep_args_kwargs_from_strategies(state.stuff.given_kwargs)
+                kwargs.update(kw)
+
+                # Write a function that calls the test with exact values
+                f.write("def test_run_failing_test():\n")
+
+                # Create the function call representation
+                printer = RepresentationPrinter(context=ctx)
+                printer.repr_call(
+                    test_func.__name__,
+                    args,
+                    kwargs,
+                    force_split=True,
+                    arg_slices=arg_slices,
+                )
+
+                # Format and write the actual call with proper indentation
+                call_str = printer.getvalue().replace("Trying example: ", "")
+                # Ensure proper indentation for all lines
+                indented_call = "\n".join(("    " + line) if line.strip() else line
+                                          for line in call_str.splitlines())
+                f.write(f"{indented_call}\n\n")
+
+            # Add a simple way to run the test
+            # f.write("# Run the test\n")
+            # f.write("if __name__ == '__main__':\n")
+            # f.write("    run_failing_test()\n")
+
+        print(f"Saved clean failing test to {output_file}")
     def reuse_existing_examples(self) -> None:
         """If appropriate (we have a database and have been told to use it),
         try to reload existing examples from the database.
@@ -929,6 +1001,9 @@ class ConjectureRunner:
                     continue
                 data = self.cached_test_function(choices, extend="full")
                 self._print_call_from_data(data)
+                # print("The call is at: ")
+                # print(self.tree.root.transition.interesting_origin.filename)
+                self.save_failing_test_info(data)
                 if data.status != Status.INTERESTING:
                     self.settings.database.delete(self.database_key, existing)
                     self.settings.database.delete(self.secondary_key, existing)

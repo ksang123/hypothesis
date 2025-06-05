@@ -817,6 +817,37 @@ class ConjectureRunner:
             f"{', ' + data.output if data.output else ''}"
         )
 
+    def _print_call_from_data(self, data: ConjectureResult) -> None:
+        """Pretty-print the function call corresponding to ``data``."""
+        from ...control import BuildContext
+        from ...vendor.pretty import RepresentationPrinter
+
+        state = self._test_function.__self__
+        tmp = ConjectureData.for_choices(data.choices)
+        with BuildContext(tmp) as ctx:
+            args = state.stuff.args
+            kwargs = dict(state.stuff.kwargs)
+            kw, arg_slices = ctx.prep_args_kwargs_from_strategies(
+                state.stuff.given_kwargs
+            )
+            kwargs.update(kw)
+            printer = RepresentationPrinter(context=ctx)
+            printer.text("Trying example: ")
+            printer.repr_call(
+                state.test.__name__,
+                args,
+                kwargs,
+                force_split=True,
+                arg_slices=arg_slices,
+                leading_comment=(
+                    "# " + ctx.data.slice_comments[(0, 0)]
+                    if (0, 0) in ctx.data.slice_comments
+                    else None
+                ),
+                avoid_realization=tmp.provider.avoid_realization,
+            )
+            base_report(printer.getvalue())
+
     def run(self) -> None:
         with local_settings(self.settings):
             try:
@@ -897,6 +928,7 @@ class ConjectureRunner:
                     self.settings.database.delete(self.database_key, existing)
                     continue
                 data = self.cached_test_function(choices, extend="full")
+                self._print_call_from_data(data)
                 if data.status != Status.INTERESTING:
                     self.settings.database.delete(self.database_key, existing)
                     self.settings.database.delete(self.secondary_key, existing)
@@ -932,6 +964,7 @@ class ConjectureRunner:
                         self.settings.database.delete(self.pareto_key, existing)
                         continue
                     data = self.cached_test_function(choices, extend="full")
+                    self._print_call_from_data(data)
                     if data not in self.pareto_front:
                         self.settings.database.delete(self.pareto_key, existing)
                     if data.status == Status.INTERESTING:

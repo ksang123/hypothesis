@@ -882,7 +882,7 @@ class ConjectureRunner:
         tmp = ConjectureData.for_choices(data.choices)
         test_func = state.test  # The actual test function
 
-        with open(output_file, "w") as f:
+        with open(output_file, "a") as f:
             # Simple header
             f.write("# Failing test extracted from Hypothesis\n\n")
 
@@ -917,7 +917,7 @@ class ConjectureRunner:
                 kwargs.update(kw)
 
                 # Write a function that calls the test with exact values
-                f.write("def test_run_failing_test():\n")
+                f.write(f"def test_run_failing_test_{test_func.__name__}():\n")
 
                 # Create the function call representation
                 printer = RepresentationPrinter(context=ctx)

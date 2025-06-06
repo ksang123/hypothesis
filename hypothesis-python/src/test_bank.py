@@ -83,6 +83,7 @@ class Greeter:
 def test_001_addition_commutative(x, y):
     assert x + y == y + x
 
+@example(x=6, y=8)
 @given(st.integers(), st.integers())
 def test_002_subtraction_commutative(x, y):
     assert x - y == y - x
@@ -498,12 +499,6 @@ def test_067_note(x):
 @given(st.integers())
 def test_068_fail_on_42(x):
     assert x != 42
-
-
-@given(st.data())
-def test_069_fail_on_drawn(data):
-    x = data.draw(st.integers())
-    assert x != 0
 
 
 @given(st.lists(st.integers()))

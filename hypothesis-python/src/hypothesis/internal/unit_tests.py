@@ -23,54 +23,98 @@ class UnitTestGenerator:
     def parse_existing_test_file(self, output_file: str):
         raise NotImplementedError()
 
+    def _collect_types(self, value, seen):
+        if id(value) in seen:
+            return
+        seen.add(id(value))
+        if isinstance(value, (list, tuple, set, frozenset)):
+            for item in value:
+                yield from self._collect_types(item, seen)
+        elif isinstance(value, dict):
+            for k, v in value.items():
+                yield from self._collect_types(k, seen)
+                yield from self._collect_types(v, seen)
+        else:
+            cls = value.__class__
+            if cls.__module__ != "builtins":
+                yield cls.__module__, cls.__name__
+
+    def _generate_test_body(self, test_name, test):
+        lines = []
+        filename = os.path.basename(test["filename"])
+        lineno = test.get("lineno")
+        lines.append(f"# Failure occurred in: {filename}")
+        if lineno:
+            lines.append(f"# Line number: {lineno}")
+        lines.append(f"def test_run_failing_test_{test_name}():")
+        lines.append(f"    {test['func_name']}.hypothesis.inner_test(")
+
+        printer = RepresentationPrinter(context=test["context"])
+        printer.repr_call(
+            f"{test['func_name']}.hypothesis.inner_test",
+            test["args"],
+            test["kwargs"],
+            force_split=True,
+            arg_slices=test["arg_slices"],
+        )
+        call_lines = printer.getvalue().replace("Trying example: ", "").splitlines()
+        for line in call_lines[1:]:
+            lines.append("    " + line)
+        return "\n".join(lines) + "\n"
+
     def render(self) -> None:
-        output_file = "failing_test.py" # TODO: we might wanna improve this
-        # self.parse_existing_test_file(output_file)
+        output_file = "failing_test.py"  # TODO: we might wanna improve this
+
+        existing_imports = defaultdict(set)
+        existing_funcs = {}
+        if os.path.exists(output_file):
+            import ast
+
+            with open(output_file, "r", encoding="utf-8") as f:
+                source = f.read()
+
+            tree = ast.parse(source)
+            for node in tree.body:
+                if isinstance(node, ast.ImportFrom) and node.module:
+                    for alias in node.names:
+                        existing_imports[node.module].add(alias.name)
+                elif isinstance(node, ast.FunctionDef):
+                    name = node.name
+                    start, end = node.lineno - 1, node.end_lineno
+                    func_src = "\n".join(source.splitlines()[start:end])
+                    existing_funcs[name] = func_src
+
+        module_to_names = defaultdict(set)
+        new_funcs = {}
+        for test_name, test in self._tests.items():
+            module_to_names[test["module"]].add(test["func_name"])
+            seen = set()
+            for arg in list(test["args"]) + list(test["kwargs"].values()):
+                for mod, cls in self._collect_types(arg, seen):
+                    module_to_names[mod].add(cls)
+
+            func_code = self._generate_test_body(test_name, test)
+            new_funcs[f"test_run_failing_test_{test_name}"] = func_code
+
+        for mod, names in existing_imports.items():
+            module_to_names[mod].update(names)
+
+        final_funcs = existing_funcs
+        final_funcs.update(new_funcs)
 
         with open(output_file, "w", encoding="utf-8") as f:
             f.write("# Failing tests extracted from Hypothesis\n\n")
 
-            # --- Header: unique imports ---
-            module_to_funcs = defaultdict(list)
-            for test in self._tests.values():
-                module_to_funcs[test["module"]].append(test["func_name"])
-
-            for module, funcs in sorted(module_to_funcs.items()):
+            for module, names in sorted(module_to_names.items()):
                 f.write(f"from {module} import (\n")
-                for func in sorted(set(funcs)):
-                    f.write(f"    {func},\n")
+                for name in sorted(names):
+                    f.write(f"    {name},\n")
                 f.write(")\n\n")
 
-            # --- Body: test functions ---
-            for test_name, test in self._tests.items():
-                filename = os.path.basename(test["filename"])
-                lineno = test.get("lineno")
+            for name, code in final_funcs.items():
+                f.write(code.rstrip() + "\n\n")
 
-                # Metadata comments
-                f.write(f"# Failure occurred in: {filename}\n")
-                if lineno:
-                    f.write(f"# Line number: {lineno}\n")
-
-                f.write(f"def test_run_failing_test_{test_name}():\n")
-
-                f.write(f"    {test['func_name']}.hypothesis.inner_test(\n")
-
-                # Format the call with printer for nice formatting
-                printer = RepresentationPrinter(context=test["context"])
-                printer.repr_call(
-                    f"{test['func_name']}.hypothesis.inner_test",
-                    test["args"],
-                    test["kwargs"],
-                    force_split=True,
-                    arg_slices=test["arg_slices"],
-                )
-                call_lines = printer.getvalue().replace("Trying example: ", "").splitlines()
-                for line in call_lines[1:]:  # skip the first line (function name)
-                    f.write("    " + line + "\n")
-
-                f.write("\n\n")
-
-        print(f"[unit-test-generator] Wrote {len(self._tests)} test(s) to {output_file}")
+        print(f"[unit-test-generator] Wrote {len(new_funcs)} test(s) to {output_file}")
 
 
 # def save_failing_test_info(self, data: ConjectureResult, output_file: str = None) -> None:

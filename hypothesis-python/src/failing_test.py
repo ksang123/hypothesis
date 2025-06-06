@@ -3,7 +3,6 @@
 from test_bank import (
     Dummy,
     Point,
-    test_002_subtraction_commutative,
     test_005_upper_is_lower,
     test_009_sort_is_identity,
     test_010_keys_values_equal,
@@ -30,12 +29,6 @@ from test_bank import (
     test_090_tuple_fail,
     test_108_point_origin,
 )
-
-def test_run_failing_test_test_002_subtraction_commutative():
-    test_002_subtraction_commutative.hypothesis.inner_test(
-        x=0,
-        y=1,
-    )
 
 # Failure occurred in: test_bank.py
 # Line number: 127

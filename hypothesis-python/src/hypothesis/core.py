@@ -78,7 +78,7 @@ from hypothesis.internal.compat import (
     int_from_bytes,
 )
 from hypothesis.internal.conjecture.choice import ChoiceT
-from hypothesis.internal.conjecture.data import ConjectureData, Status
+from hypothesis.internal.conjecture.data import ConjectureData, Status, ConjectureResult
 from hypothesis.internal.conjecture.engine import BUFFER_SIZE, ConjectureRunner
 from hypothesis.internal.conjecture.junkdrawer import (
     ensure_free_stackframes,
@@ -140,6 +140,7 @@ from hypothesis.strategies._internal.strategies import (
 )
 from hypothesis.strategies._internal.utils import to_jsonable
 from hypothesis.vendor.pretty import RepresentationPrinter
+from hypothesis.internal.unit_tests import UnitTestGenerator
 from hypothesis.version import __version__
 
 if sys.version_info >= (3, 10):
@@ -555,6 +556,7 @@ def execute_explicit_examples(state, wrapped_test, arguments, kwargs, original_s
                 # See https://github.com/HypothesisWorks/hypothesis/issues/2125
                 with contextlib.suppress(StopTest):
                     empty_data.conclude_test(Status.INVALID)
+                state.save_failing_test_info(empty_data.as_result())
             except BaseException as err:
                 # In order to support reporting of multiple failing examples, we yield
                 # each of the (report text, error) pairs we find back to the top-level
@@ -1228,6 +1230,41 @@ class StateForActualGivenExecution:
                 "title": title,
                 "content": content,
             }
+        )
+
+    def save_failing_test_info(self, data: ConjectureResult) -> None:
+        """Record information needed to reproduce a failing example."""
+        import os.path
+
+        origin = data.interesting_origin
+        if origin is None or origin.filename is None:
+            return
+
+        source_filename = origin.filename
+        module_name = os.path.splitext(os.path.basename(source_filename))[0]
+        line_number = getattr(origin, "lineno", None)
+
+        tmp = ConjectureData.for_choices(data.choices)
+        with BuildContext(tmp) as ctx:
+            args = self.stuff.args
+            kwargs = dict(self.stuff.kwargs)
+            kw, arg_slices = ctx.prep_args_kwargs_from_strategies(
+                self.stuff.given_kwargs
+            )
+            kwargs.update(kw)
+
+        UnitTestGenerator().add_test(
+            self.test.__name__,
+            {
+                "module": module_name,
+                "func_name": self.test.__name__,
+                "args": args,
+                "kwargs": kwargs,
+                "arg_slices": arg_slices,
+                "context": ctx,
+                "filename": source_filename,
+                "lineno": line_number,
+            },
         )
 
     def run_engine(self):

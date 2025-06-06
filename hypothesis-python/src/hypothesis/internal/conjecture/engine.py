@@ -638,6 +638,7 @@ class ConjectureRunner:
             if changed:
                 self.save_choices(data.choices)
                 self.interesting_examples[key] = data.as_result()  # type: ignore
+                self.save_failing_test_info(data.as_result())
                 if not self.using_hypothesis_backend:
                     self._backend_found_failure = True
                 self.__data_cache.pin(self._cache_key(data.choices), data.as_result())
@@ -838,7 +839,7 @@ class ConjectureRunner:
     def has_existing_examples(self) -> bool:
         return self.database is not None and Phase.reuse in self.settings.phases
 
-    def save_failing_test_info(self, data: ConjectureResult, output_file: str = None) -> None:
+    def save_failing_test_info(self, data: ConjectureResult) -> None:
         """Save complete information needed to reproduce a failing test."""
         import os.path
         from ...control import BuildContext

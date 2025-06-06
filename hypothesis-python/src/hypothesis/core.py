@@ -495,6 +495,7 @@ def execute_explicit_examples(state, wrapped_test, arguments, kwargs, original_s
         with local_settings(state.settings):
             fragments_reported = []
             empty_data = ConjectureData.for_choices([])
+            origin = None
             try:
                 execute_example = partial(
                     state.execute_once,
@@ -556,7 +557,6 @@ def execute_explicit_examples(state, wrapped_test, arguments, kwargs, original_s
                 # See https://github.com/HypothesisWorks/hypothesis/issues/2125
                 with contextlib.suppress(StopTest):
                     empty_data.conclude_test(Status.INVALID)
-                state.save_failing_test_info(empty_data.as_result())
             except BaseException as err:
                 # In order to support reporting of multiple failing examples, we yield
                 # each of the (report text, error) pairs we find back to the top-level
@@ -579,8 +579,9 @@ def execute_explicit_examples(state, wrapped_test, arguments, kwargs, original_s
                     new.__cause__ = err
                     err = new
 
+                origin = InterestingOrigin.from_exception(err)
                 with contextlib.suppress(StopTest):
-                    empty_data.conclude_test(Status.INVALID)
+                    empty_data.mark_interesting(origin)
                 yield (fragments_reported, err)
                 if (
                     state.settings.report_multiple_bugs
@@ -596,6 +597,9 @@ def execute_explicit_examples(state, wrapped_test, arguments, kwargs, original_s
                     fragments_reported[0] = fragments_reported[0].replace(
                         "Falsifying example", "Falsifying explicit example", 1
                     )
+
+                if origin is not None:
+                    state.save_failing_explicit_example(example_kwargs, origin)
 
                 tc = make_testcase(
                     start_timestamp=state._start_timestamp,
@@ -1232,26 +1236,22 @@ class StateForActualGivenExecution:
             }
         )
 
-    def save_failing_test_info(self, data: ConjectureResult) -> None:
-        """Record information needed to reproduce a failing example."""
+    def save_failing_explicit_example(
+        self, example_kwargs: dict[str, object], origin: InterestingOrigin
+    ) -> None:
+        """Record failing explicit examples for UnitTestGenerator."""
         import os.path
 
-        origin = data.interesting_origin
-        if origin is None or origin.filename is None:
+        if origin.filename is None:
             return
 
         source_filename = origin.filename
         module_name = os.path.splitext(os.path.basename(source_filename))[0]
         line_number = getattr(origin, "lineno", None)
 
-        tmp = ConjectureData.for_choices(data.choices)
-        with BuildContext(tmp) as ctx:
-            args = self.stuff.args
-            kwargs = dict(self.stuff.kwargs)
-            kw, arg_slices = ctx.prep_args_kwargs_from_strategies(
-                self.stuff.given_kwargs
-            )
-            kwargs.update(kw)
+        args = self.stuff.args
+        kwargs = dict(self.stuff.kwargs)
+        kwargs.update(example_kwargs)
 
         UnitTestGenerator().add_test(
             self.test.__name__,
@@ -1260,8 +1260,8 @@ class StateForActualGivenExecution:
                 "func_name": self.test.__name__,
                 "args": args,
                 "kwargs": kwargs,
-                "arg_slices": arg_slices,
-                "context": ctx,
+                "arg_slices": {},
+                "context": None,
                 "filename": source_filename,
                 "lineno": line_number,
             },

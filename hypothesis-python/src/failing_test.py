@@ -3,6 +3,8 @@
 from test_bank import (
     Dummy,
     Point,
+    Tree,
+    test_002_subtraction_commutative,
     test_005_upper_is_lower,
     test_009_sort_is_identity,
     test_010_keys_values_equal,
@@ -15,6 +17,7 @@ from test_bank import (
     test_042_dict_values_unique,
     test_044_set_difference_empty,
     test_053_point_x_positive,
+    test_061_tree_value_positive,
     test_068_fail_on_42,
     test_070_fail_on_empty,
     test_072_permutations,
@@ -27,6 +30,7 @@ from test_bank import (
     test_086_dict_keys_fail,
     test_088_list_of_lists_fail,
     test_090_tuple_fail,
+    test_092_nested_list_fail,
     test_108_point_origin,
 )
 
@@ -204,5 +208,27 @@ def test_run_failing_test_test_090_tuple_fail():
 def test_run_failing_test_test_108_point_origin():
     test_108_point_origin.hypothesis.inner_test(
         obj=Point(0, 1),
+    )
+
+# Failure occurred in: test_bank.py
+# Line number: 89
+def test_run_failing_test_test_002_subtraction_commutative():
+    test_002_subtraction_commutative.hypothesis.inner_test(
+        x=6,
+        y=8,
+    )
+
+# Failure occurred in: test_bank.py
+# Line number: 424
+def test_run_failing_test_test_061_tree_value_positive():
+    test_061_tree_value_positive.hypothesis.inner_test(
+        t=<test_bank.Tree object at 0x000001C73774AF00>,
+    )
+
+# Failure occurred in: test_bank.py
+# Line number: 442
+def test_run_failing_test_test_092_nested_list_fail():
+    test_092_nested_list_fail.hypothesis.inner_test(
+        lst=[0],
     )
 

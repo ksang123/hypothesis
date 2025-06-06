@@ -1253,6 +1253,77 @@ class StateForActualGivenExecution:
         kwargs = dict(self.stuff.kwargs)
         kwargs.update(example_kwargs)
 
+        from .internal.conjecture.data import ConjectureData
+        from .control import BuildContext
+        context = BuildContext(ConjectureData.for_choices([]))
+
+        def register(value):
+            """Register non-builtin objects with the BuildContext."""
+            if isinstance(value, (list, tuple, set, frozenset)):
+                for v in value:
+                    register(v)
+            elif isinstance(value, dict):
+                for k, v in value.items():
+                    register(k)
+                    register(v)
+            else:
+                import inspect
+                import dataclasses
+
+                try:
+                    import attrs  # type: ignore
+                except Exception:  # pragma: no cover - optional dependency
+                    attrs = None  # type: ignore
+
+                cls = value.__class__
+
+                if dataclasses.is_dataclass(value):
+                    kwargs = {}
+                    for f in dataclasses.fields(value):
+                        if f.init:
+                            attr_val = getattr(value, f.name)
+                            kwargs[f.name] = attr_val
+                            register(attr_val)
+                    context.record_call(value, cls, [], kwargs)
+                    return
+
+                if attrs is not None and getattr(attrs, "has", lambda _: False)(cls):
+                    kwargs = {}
+                    for f in attrs.fields(cls):  # type: ignore
+                        if f.init:
+                            attr_val = getattr(value, f.name)
+                            kwargs[f.name] = attr_val
+                            register(attr_val)
+                    context.record_call(value, cls, [], kwargs)
+                    return
+
+                try:
+                    sig = inspect.signature(cls.__init__)
+                except (ValueError, TypeError):
+                    return
+
+                args_list = []
+                kwargs = {}
+                for name, param in list(sig.parameters.items())[1:]:
+                    if param.kind in (param.VAR_POSITIONAL, param.VAR_KEYWORD):
+                        return
+                    if not hasattr(value, name):
+                        if param.default is inspect.Parameter.empty:
+                            return
+                        continue
+                    attr_val = getattr(value, name)
+                    register(attr_val)
+                    if param.kind is param.KEYWORD_ONLY:
+                        kwargs[name] = attr_val
+                    else:
+                        if param.default is inspect.Parameter.empty or attr_val != param.default:
+                            args_list.append(attr_val)
+
+                context.record_call(value, cls, args_list, kwargs)
+
+        for v in list(args) + list(kwargs.values()):
+            register(v)
+
         UnitTestGenerator().add_test(
             self.test.__name__,
             {
@@ -1261,7 +1332,7 @@ class StateForActualGivenExecution:
                 "args": args,
                 "kwargs": kwargs,
                 "arg_slices": {},
-                "context": None,
+                "context": context,
                 "filename": source_filename,
                 "lineno": line_number,
             },

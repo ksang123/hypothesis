@@ -35,6 +35,14 @@ from test_bank import (
 )
 
 # Failure occurred in: test_bank.py
+# Line number: 89
+def test_run_failing_test_test_002_subtraction_commutative():
+    test_002_subtraction_commutative.hypothesis.inner_test(
+        x=6,
+        y=8,
+    )
+
+# Failure occurred in: test_bank.py
 # Line number: 127
 def test_run_failing_test_test_030_add_one_greater():
     test_030_add_one_greater.hypothesis.inner_test(
@@ -117,6 +125,20 @@ def test_run_failing_test_test_017_dummy_inequality():
 def test_run_failing_test_test_053_point_x_positive():
     test_053_point_x_positive.hypothesis.inner_test(
         p=Point(0, 0),
+    )
+
+# Failure occurred in: test_bank.py
+# Line number: 424
+def test_run_failing_test_test_061_tree_value_positive():
+    test_061_tree_value_positive.hypothesis.inner_test(
+        t=Tree(-1, []),
+    )
+
+# Failure occurred in: test_bank.py
+# Line number: 442
+def test_run_failing_test_test_092_nested_list_fail():
+    test_092_nested_list_fail.hypothesis.inner_test(
+        lst=[0],
     )
 
 # Failure occurred in: test_bank.py
@@ -208,27 +230,5 @@ def test_run_failing_test_test_090_tuple_fail():
 def test_run_failing_test_test_108_point_origin():
     test_108_point_origin.hypothesis.inner_test(
         obj=Point(0, 1),
-    )
-
-# Failure occurred in: test_bank.py
-# Line number: 89
-def test_run_failing_test_test_002_subtraction_commutative():
-    test_002_subtraction_commutative.hypothesis.inner_test(
-        x=6,
-        y=8,
-    )
-
-# Failure occurred in: test_bank.py
-# Line number: 424
-def test_run_failing_test_test_061_tree_value_positive():
-    test_061_tree_value_positive.hypothesis.inner_test(
-        t=<test_bank.Tree object at 0x000001C73774AF00>,
-    )
-
-# Failure occurred in: test_bank.py
-# Line number: 442
-def test_run_failing_test_test_092_nested_list_fail():
-    test_092_nested_list_fail.hypothesis.inner_test(
-        lst=[0],
     )
 

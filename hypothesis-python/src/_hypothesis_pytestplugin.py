@@ -424,6 +424,17 @@ else:
         # Note: may be called multiple times, so we can go negative
         _hypothesis_globals.in_initialization -= 1
 
+
+    def pytest_sessionfinish(session, exitstatus):
+        try:
+            with open("pytest_sessionfinish_debug.log", "w") as f:
+                f.write("pytest_sessionfinish was called.\n")
+                f.write(f"Exit status: {exitstatus}\n")
+
+        except Exception as e:
+            with open("pytest_sessionfinish_debug_error.log", "w") as f:
+                f.write(f"Error in pytest_sessionfinish: {e}\n")
+
     # Monkeypatch some internals to prevent applying @pytest.fixture() to a
     # function which has already been decorated with @hypothesis.given().
     # (the reverse case is already an explicit error in Hypothesis)

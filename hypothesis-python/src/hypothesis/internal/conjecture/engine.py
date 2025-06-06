@@ -278,6 +278,7 @@ class ConjectureRunner:
         self.random: Random = random or Random(getrandbits(128))
         self.database_key: Optional[bytes] = database_key
         self.ignore_limits: bool = ignore_limits
+        self.failed_tests = {}
 
         # Global dict of per-phase statistics, and a list of per-call stats
         # which transfer to the global dict at the end of each phase.
@@ -817,37 +818,6 @@ class ConjectureRunner:
             f"{', ' + data.output if data.output else ''}"
         )
 
-    def _print_call_from_data(self, data: ConjectureResult) -> None:
-        """Pretty-print the function call corresponding to ``data``."""
-        from ...control import BuildContext
-        from ...vendor.pretty import RepresentationPrinter
-
-        state = self._test_function.__self__
-        tmp = ConjectureData.for_choices(data.choices)
-        with BuildContext(tmp) as ctx:
-            args = state.stuff.args
-            kwargs = dict(state.stuff.kwargs)
-            kw, arg_slices = ctx.prep_args_kwargs_from_strategies(
-                state.stuff.given_kwargs
-            )
-            kwargs.update(kw)
-            printer = RepresentationPrinter(context=ctx)
-            printer.text("Trying example: ")
-            printer.repr_call(
-                state.test.__name__,
-                args,
-                kwargs,
-                force_split=True,
-                arg_slices=arg_slices,
-                leading_comment=(
-                    "# " + ctx.data.slice_comments[(0, 0)]
-                    if (0, 0) in ctx.data.slice_comments
-                    else None
-                ),
-                avoid_realization=tmp.provider.avoid_realization,
-            )
-            base_report(printer.getvalue())
-
     def run(self) -> None:
         with local_settings(self.settings):
             try:
@@ -869,6 +839,14 @@ class ConjectureRunner:
 
     def has_existing_examples(self) -> bool:
         return self.database is not None and Phase.reuse in self.settings.phases
+
+    def render_failing_test_file(self, output_file: str = None) -> None:
+        """
+        this is where we actually print the file.
+        firstly, we take all the tests that failed, then only replace the newly failed ones
+        """
+        fails = self.failed_tests
+        pass
 
     def save_failing_test_info(self, data: ConjectureResult, output_file: str = None) -> None:
         """Save complete information needed to reproduce a failing test."""
@@ -896,7 +874,7 @@ class ConjectureRunner:
             print("Probably a State machine")
             return
 
-        with open(output_file, "a") as f:
+        with open(output_file, "a") as f: # TODO: idk if we wanna append or erase it
             # Simple header
             f.write("# Failing test extracted from Hypothesis\n\n")
 
@@ -924,7 +902,7 @@ class ConjectureRunner:
                 # Create the function call representation
                 printer = RepresentationPrinter(context=ctx)
                 printer.repr_call(
-                    test_func.__name__,
+                    f"{test_func.__name__}.hypothesis.inner_test", # access the actual internal function
                     args,
                     kwargs,
                     force_split=True,
@@ -939,6 +917,8 @@ class ConjectureRunner:
                 f.write(f"{indented_call}\n\n")
 
         print(f"Saved clean failing test to {output_file}")
+
+
     def reuse_existing_examples(self) -> None:
         """If appropriate (we have a database and have been told to use it),
         try to reload existing examples from the database.
@@ -997,9 +977,6 @@ class ConjectureRunner:
                     self.settings.database.delete(self.database_key, existing)
                     continue
                 data = self.cached_test_function(choices, extend="full")
-                self._print_call_from_data(data)
-                # print("The call is at: ")
-                # print(self.tree.root.transition.interesting_origin.filename)
                 self.save_failing_test_info(data)
                 if data.status != Status.INTERESTING:
                     self.settings.database.delete(self.database_key, existing)
@@ -1036,7 +1013,6 @@ class ConjectureRunner:
                         self.settings.database.delete(self.pareto_key, existing)
                         continue
                     data = self.cached_test_function(choices, extend="full")
-                    self._print_call_from_data(data)
                     if data not in self.pareto_front:
                         self.settings.database.delete(self.pareto_key, existing)
                     if data.status == Status.INTERESTING:

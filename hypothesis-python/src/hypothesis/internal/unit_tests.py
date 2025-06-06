@@ -1,185 +1,76 @@
-# unit_test_generator.py
 import os
-import re
 from collections import defaultdict
-from inspect import signature
-from typing import get_origin, get_args, Dict, Set, Tuple
-
 from ..vendor.pretty import RepresentationPrinter
 
-# --------------------------------------------------------------------------- #
-#  constants & helpers
-# --------------------------------------------------------------------------- #
-_PRIMITIVES = {int, float, bool, str, bytes, bytearray, complex}
-
-
-def _gather_types(func) -> Set[Tuple[str, str]]:
-    """Return {(module, symbol)} for every non-primitive type in *func*'s
-    parameter annotations (recurses into typing generics)."""
-    found: Set[Tuple[str, str]] = set()
-
-    def _add(tp):
-        if tp in _PRIMITIVES or tp is signature.empty:
-            return
-        origin = get_origin(tp) or tp
-        mod = getattr(origin, "__module__", "")
-        name = getattr(origin, "__name__", None)
-        if name and mod not in ("builtins", "typing"):
-            found.add((mod, name))
-        for sub in get_args(tp):
-            _add(sub)
-
-    for p in signature(func).parameters.values():
-        _add(p.annotation)
-    return found
-
-
-# --------------------------------------------------------------------------- #
-#  the singleton class
-# --------------------------------------------------------------------------- #
 class UnitTestGenerator:
-    """Accumulates failing examples and writes/updates *failing_test.py* once."""
-
     _instance = None
 
     def __new__(cls, *args, **kwargs):
         if cls._instance is None:
             cls._instance = super(UnitTestGenerator, cls).__new__(cls)
-            cls._instance._first_init = True
+            cls._instance._initialized = False
         return cls._instance
 
-    # --------------------------------------------------------------------- #
     def __init__(self):
-        if not getattr(self, "_first_init", False):
+        if self._initialized:
             return
-        self._first_init = False
-        self._tests: Dict[str, Dict] = {}          # to-be-written tests
-        self._keep_bodies: Dict[str, str] = {}     # untouched existing bodies
-        self._legacy_imports: Set[Tuple[str, str]] = set()
+        self._tests = {}
+        self._initialized = True
 
-    # --------------------------------------------------------------------- #
-    def add_test(self, base_name: str, info: Dict) -> None:
-        """
-        `base_name`  : original failing test's name (without wrapper prefix)
-        `info` must include keys:
-            module / func_name / func_obj / args / kwargs / arg_slices /
-            context / filename / lineno
-        """
-        info["types"] = _gather_types(info["func_obj"])
-        self._tests[base_name] = info
+    def add_test(self, test_name, test_info):
+        self._tests[test_name] = test_info
 
-    # --------------------------------------------------------------------- #
-    # 1)  read any existing file, keep bodies we’re not replacing, harvest imports
-    # --------------------------------------------------------------------- #
-    def _parse_existing(self, path: str) -> None:
-        if not os.path.exists(path):
-            return
+    def parse_existing_test_file(self, output_file: str):
+        raise NotImplementedError()
 
-        with open(path, "r", encoding="utf-8") as fh:
-            lines = fh.readlines()
+    def render(self) -> None:
+        output_file = "failing_test.py" # TODO: improve this
+        # self.parse_existing_test_file(output_file)
 
-        fn_pat = re.compile(r"def (test_run_failing_test_([A-Za-z0-9_]+))\s*\(")
-        imp_pat = re.compile(r"from\s+([\w.]+)\s+import\s+(.*)")
+        with open(output_file, "w", encoding="utf-8") as f:
+            f.write("# Failing tests extracted from Hypothesis\n\n")
 
-        i = 0
-        while i < len(lines):
-            line = lines[i]
+            # --- Header: unique imports ---
+            module_to_funcs = defaultdict(list)
+            for test in self._tests.values():
+                module_to_funcs[test["module"]].append(test["func_name"])
 
-            # harvest imports
-            m_imp = imp_pat.match(line.lstrip())
-            if m_imp:
-                mod, rest = m_imp.groups()
-                symbols = re.findall(r"[A-Za-z_][A-Za-z0-9_]*", rest)
-                for s in symbols:
-                    self._legacy_imports.add((mod, s))
+            for module, funcs in sorted(module_to_funcs.items()):
+                f.write(f"from {module} import (\n")
+                for func in sorted(set(funcs)):
+                    f.write(f"    {func},\n")
+                f.write(")\n\n")
 
-            # harvest existing generated test bodies
-            m_fn = fn_pat.match(line)
-            if m_fn:
-                full_name, base = m_fn.groups()
-                body = [line]
-                i += 1
-                while i < len(lines) and lines[i].startswith((" ", "\t")):
-                    body.append(lines[i])
-                    i += 1
-                if base not in self._tests:       # only keep if we are *not* regenerating
-                    self._keep_bodies[base] = "".join(body)
-                continue
-            i += 1
+            # --- Body: test functions ---
+            for test_name, test in self._tests.items():
+                filename = os.path.basename(test["filename"])
+                lineno = test.get("lineno")
 
-    # --------------------------------------------------------------------- #
-    # 2)  write / overwrite failing_test.py
-    # --------------------------------------------------------------------- #
-    def render(self, path: str = "failing_test.py") -> None:
-        self._parse_existing(path)
+                # Metadata comments
+                f.write(f"# Failure occurred in: {filename}\n")
+                if lineno:
+                    f.write(f"# Line number: {lineno}\n")
 
-        # ---------- bucket imports ----------
-        mod_to_funcs: Dict[str, Set[str]] = defaultdict(set)
-        mod_to_types: Dict[str, Set[str]] = defaultdict(set)
+                f.write(f"def test_run_failing_test_{test_name}():\n")
 
-        for mod, sym in self._legacy_imports:
-            mod_to_funcs[mod].add(sym)
+                f.write(f"    {test['func_name']}.hypothesis.inner_test(\n")
 
-        for info in self._tests.values():
-            mod_to_funcs[info["module"]].add(info["func_name"])
-            for mod, typ in info["types"]:
-                mod_to_types[mod].add(typ)
-
-        # ---------- write file ----------
-        with open(path, "w", encoding="utf-8") as fh:
-            fh.write("# *** auto-generated by UnitTestGenerator – do not edit ***\n\n")
-
-            # A) test-function imports
-            for mod, funcs in sorted(mod_to_funcs.items()):
-                fh.write(f"from {mod} import (\n")
-                for fn in sorted(funcs):
-                    fh.write(f"    {fn},\n")
-                fh.write(")\n")
-            fh.write("\n")
-
-            # B) complex-type imports (skip names already imported above)
-            already = {sym for _, sym in self._legacy_imports}.union(
-                {fn for fns in mod_to_funcs.values() for fn in fns}
-            )
-            for mod, types in sorted(mod_to_types.items()):
-                todo = sorted(t for t in types if t not in already)
-                if not todo:
-                    continue
-                fh.write(f"from {mod} import (\n")
-                for typ in todo:
-                    fh.write(f"    {typ},\n")
-                fh.write(")\n")
-            fh.write("\n")
-
-            # C) untouched legacy bodies
-            for txt in self._keep_bodies.values():
-                fh.write(txt.rstrip() + "\n\n")
-
-            # D) new / updated failing tests
-            for base, info in self._tests.items():
-                fh.write(f"# Failure occurred in: {os.path.basename(info['filename'])}\n")
-                if info.get("lineno"):
-                    fh.write(f"# Line number: {info['lineno']}\n")
-                fh.write(f"def test_run_failing_test_{base}():\n")
-
-                pr = RepresentationPrinter(context=info["context"])
-                pr.repr_call(
-                    f"{info['func_name']}.hypothesis.inner_test",
-                    info["args"],
-                    info["kwargs"],
+                # Format the call with printer for nice formatting
+                printer = RepresentationPrinter(context=test["context"])
+                printer.repr_call(
+                    f"{test['func_name']}.hypothesis.inner_test",
+                    test["args"],
+                    test["kwargs"],
                     force_split=True,
-                    arg_slices=info["arg_slices"],
+                    arg_slices=test["arg_slices"],
                 )
-                for ln in pr.getvalue().replace("Trying example: ", "").splitlines():
-                    fh.write(f"    {ln}\n")
-                fh.write("\n")
+                call_lines = printer.getvalue().replace("Trying example: ", "").splitlines()
+                for line in call_lines[1:]:  # skip the first line (function name)
+                    f.write("    " + line + "\n")
 
-        print(
-            f"[UnitTestGenerator] wrote {len(self._tests)} updated "
-            f"+ {len(self._keep_bodies)} kept test(s) → {path}"
-        )
+                f.write("\n\n")
 
-
+        print(f"[unit-test-generator] Wrote {len(self._tests)} test(s) to {output_file}")
 
 
 # def save_failing_test_info(self, data: ConjectureResult, output_file: str = None) -> None:

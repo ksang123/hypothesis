@@ -642,7 +642,6 @@ class ConjectureRunner:
                     self._backend_found_failure = True
                 self.__data_cache.pin(self._cache_key(data.choices), data.as_result())
                 self.shrunk_examples.discard(key)
-
             if self.shrinks >= MAX_SHRINKS:
                 self.exit_with(ExitReason.max_shrinks)
 

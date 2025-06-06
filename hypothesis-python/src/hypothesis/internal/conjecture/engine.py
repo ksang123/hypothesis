@@ -870,10 +870,9 @@ class ConjectureRunner:
     def has_existing_examples(self) -> bool:
         return self.database is not None and Phase.reuse in self.settings.phases
 
-    def save_failing_test_info(self, data: ConjectureResult, output_file: str = "src/failing_test.py") -> None:
+    def save_failing_test_info(self, data: ConjectureResult, output_file: str = None) -> None:
         """Save complete information needed to reproduce a failing test."""
-        import inspect
-        import re
+        import os.path
         from ...control import BuildContext
         from ...vendor.pretty import RepresentationPrinter
 
@@ -882,29 +881,29 @@ class ConjectureRunner:
         tmp = ConjectureData.for_choices(data.choices)
         test_func = state.test  # The actual test function
 
+        # Get the failing file path and directory
+        if hasattr(self.tree.root.transition, 'interesting_origin'):
+            source_filename = self.tree.root.transition.interesting_origin.filename
+            source_dir = os.path.dirname(source_filename)
+            module_name = os.path.basename(source_filename)
+            if module_name.endswith('.py'):
+                module_name = module_name[:-3]
+
+            # Set the output file to be in the same directory
+            if output_file is None:
+                output_file = os.path.join(source_dir, "failing_test.py")
+        else:
+            print("Probably a State machine")
+            return
+
         with open(output_file, "a") as f:
             # Simple header
             f.write("# Failing test extracted from Hypothesis\n\n")
 
             # Save the failure location as a comment
-            f.write(f"# Failure occurred in: {self.tree.root.transition.interesting_origin.filename}\n")
+            f.write(f"# Failure occurred in: {os.path.basename(source_filename)}\n")
             if hasattr(self.tree.root.transition.interesting_origin, 'lineno'):
                 f.write(f"# Line number: {self.tree.root.transition.interesting_origin.lineno}\n\n")
-
-            # Include the actual function source code without decorators
-            f.write("# Original test function implementation:\n")
-            try:
-                source = inspect.getsource(test_func)
-                # Extract just the function definition and body, removing all decorators
-                lines = source.splitlines()
-                clean_lines = []
-                for line in lines:
-                    if not line.strip().startswith('@'):
-                        clean_lines.append(line)
-                clean_source = '\n'.join(clean_lines)
-                f.write(clean_source + "\n\n")
-            except (IOError, TypeError):
-                f.write(f"# Could not retrieve source code for {test_func.__name__}\n\n")
 
             # Save the direct values for reproduction
             f.write("# Test reproduction with exact failing values:\n")
@@ -918,6 +917,9 @@ class ConjectureRunner:
 
                 # Write a function that calls the test with exact values
                 f.write(f"def test_run_failing_test_{test_func.__name__}():\n")
+
+                # Simple import statement without path
+                f.write(f"    from {module_name} import {test_func.__name__}\n\n")
 
                 # Create the function call representation
                 printer = RepresentationPrinter(context=ctx)
@@ -935,11 +937,6 @@ class ConjectureRunner:
                 indented_call = "\n".join(("    " + line) if line.strip() else line
                                           for line in call_str.splitlines())
                 f.write(f"{indented_call}\n\n")
-
-            # Add a simple way to run the test
-            # f.write("# Run the test\n")
-            # f.write("if __name__ == '__main__':\n")
-            # f.write("    run_failing_test()\n")
 
         print(f"Saved clean failing test to {output_file}")
     def reuse_existing_examples(self) -> None:

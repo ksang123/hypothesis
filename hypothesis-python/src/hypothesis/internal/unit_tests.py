@@ -24,7 +24,7 @@ class UnitTestGenerator:
         raise NotImplementedError()
 
     def render(self) -> None:
-        output_file = "failing_test.py" # TODO: improve this
+        output_file = "failing_test.py" # TODO: we might wanna improve this
         # self.parse_existing_test_file(output_file)
 
         with open(output_file, "w", encoding="utf-8") as f:
@@ -99,7 +99,7 @@ class UnitTestGenerator:
 #         print("Probably a State machine")
 #         return
 #
-#     with open(output_file, "a") as f: # TODO: idk if we wanna append or erase it
+#     with open(output_file, "a") as f:
 #         # Simple header
 #         f.write("# Failing test extracted from Hypothesis\n\n")
 #

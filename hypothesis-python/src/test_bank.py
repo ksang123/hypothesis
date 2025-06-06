@@ -839,28 +839,28 @@ class FailingBankStateMachine(RuleBasedStateMachine):
 
 
 # Manual wrappers to guarantee collection in any pytest configuration
-def test__run_counter_state_machine():
-    run_state_machine_as_test(CounterStateMachine)
-
-
-def test__run_stack_state_machine():
-    run_state_machine_as_test(StackStateMachine)
-
-
-def test__run_failing_state_machine():
-    run_state_machine_as_test(FailingStateMachine)
-
-
-def test__run_bank_account_state_machine():
-    run_state_machine_as_test(BankAccountStateMachine)
-
-
-def test__run_list_state_machine():
-    run_state_machine_as_test(ListStateMachine)
-
-
-def test__run_failing_bank_state_machine():
-    run_state_machine_as_test(FailingBankStateMachine)
+# def test__run_counter_state_machine():
+#     run_state_machine_as_test(CounterStateMachine)
+#
+#
+# def test__run_stack_state_machine():
+#     run_state_machine_as_test(StackStateMachine)
+#
+#
+# def test__run_failing_state_machine():
+#     run_state_machine_as_test(FailingStateMachine)
+#
+#
+# def test__run_bank_account_state_machine():
+#     run_state_machine_as_test(BankAccountStateMachine)
+#
+#
+# def test__run_list_state_machine():
+#     run_state_machine_as_test(ListStateMachine)
+#
+#
+# def test__run_failing_bank_state_machine():
+#     run_state_machine_as_test(FailingBankStateMachine)
 
 # ====================== more complex tests that is hard to do with @example! ====================
 

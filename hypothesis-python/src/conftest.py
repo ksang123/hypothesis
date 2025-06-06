@@ -1,2 +1,5 @@
+from hypothesis.internal.unit_tests import UnitTestGenerator
+
 def pytest_sessionfinish(session, exitstatus):
-    print("this function is called when the session is closed")
+    # TODO: maybe pass a path here
+    UnitTestGenerator().render()

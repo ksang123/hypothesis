@@ -278,7 +278,6 @@ class ConjectureRunner:
         self.random: Random = random or Random(getrandbits(128))
         self.database_key: Optional[bytes] = database_key
         self.ignore_limits: bool = ignore_limits
-        self.failed_tests = {}
 
         # Global dict of per-phase statistics, and a list of per-call stats
         # which transfer to the global dict at the end of each phase.
@@ -840,83 +839,45 @@ class ConjectureRunner:
     def has_existing_examples(self) -> bool:
         return self.database is not None and Phase.reuse in self.settings.phases
 
-    def render_failing_test_file(self, output_file: str = None) -> None:
-        """
-        this is where we actually print the file.
-        firstly, we take all the tests that failed, then only replace the newly failed ones
-        """
-        fails = self.failed_tests
-        pass
-
     def save_failing_test_info(self, data: ConjectureResult, output_file: str = None) -> None:
         """Save complete information needed to reproduce a failing test."""
         import os.path
         from ...control import BuildContext
-        from ...vendor.pretty import RepresentationPrinter
+        from ...internal.unit_tests import UnitTestGenerator
 
         # Get test function details
         state = self._test_function.__self__
         tmp = ConjectureData.for_choices(data.choices)
         test_func = state.test  # The actual test function
 
-        # Get the failing file path and directory
-        if hasattr(self.tree.root.transition, 'interesting_origin'):
-            source_filename = self.tree.root.transition.interesting_origin.filename
-            source_dir = os.path.dirname(source_filename)
-            module_name = os.path.basename(source_filename)
-            if module_name.endswith('.py'):
-                module_name = module_name[:-3]
-
-            # Set the output file to be in the same directory
-            if output_file is None:
-                output_file = os.path.join(source_dir, "failing_test.py")
-        else:
-            print("Probably a State machine")
+        if not hasattr(self.tree.root.transition, "interesting_origin"):
+            print("Probably a state machine test — skipping.")
             return
 
-        with open(output_file, "a") as f: # TODO: idk if we wanna append or erase it
-            # Simple header
-            f.write("# Failing test extracted from Hypothesis\n\n")
+        origin = self.tree.root.transition.interesting_origin
+        source_filename = origin.filename
+        module_name = os.path.splitext(os.path.basename(source_filename))[0]
+        line_number = getattr(origin, "lineno", None)
 
-            # Save the failure location as a comment
-            f.write(f"# Failure occurred in: {os.path.basename(source_filename)}\n")
-            if hasattr(self.tree.root.transition.interesting_origin, 'lineno'):
-                f.write(f"# Line number: {self.tree.root.transition.interesting_origin.lineno}\n\n")
+        with BuildContext(tmp) as ctx:
+            args = state.stuff.args
+            kwargs = dict(state.stuff.kwargs)
+            kw, arg_slices = ctx.prep_args_kwargs_from_strategies(state.stuff.given_kwargs)
+            kwargs.update(kw)
 
-            # Save the direct values for reproduction
-            f.write("# Test reproduction with exact failing values:\n")
-
-            # Create the function call with exact values
-            with BuildContext(tmp) as ctx:
-                args = state.stuff.args
-                kwargs = dict(state.stuff.kwargs)
-                kw, arg_slices = ctx.prep_args_kwargs_from_strategies(state.stuff.given_kwargs)
-                kwargs.update(kw)
-
-                # Write a function that calls the test with exact values
-                f.write(f"def test_run_failing_test_{test_func.__name__}():\n")
-
-                # Simple import statement without path
-                f.write(f"    from {module_name} import {test_func.__name__}\n\n")
-
-                # Create the function call representation
-                printer = RepresentationPrinter(context=ctx)
-                printer.repr_call(
-                    f"{test_func.__name__}.hypothesis.inner_test", # access the actual internal function
-                    args,
-                    kwargs,
-                    force_split=True,
-                    arg_slices=arg_slices,
-                )
-
-                # Format and write the actual call with proper indentation
-                call_str = printer.getvalue().replace("Trying example: ", "")
-                # Ensure proper indentation for all lines
-                indented_call = "\n".join(("    " + line) if line.strip() else line
-                                          for line in call_str.splitlines())
-                f.write(f"{indented_call}\n\n")
-
-        print(f"Saved clean failing test to {output_file}")
+        UnitTestGenerator().add_test(
+            test_func.__name__,
+            {
+                "module": module_name,
+                "func_name": test_func.__name__,
+                "args": args,
+                "kwargs": kwargs,
+                "arg_slices": arg_slices,
+                "context": ctx,
+                "filename": source_filename,
+                "lineno": line_number,
+            }
+        )
 
 
     def reuse_existing_examples(self) -> None:

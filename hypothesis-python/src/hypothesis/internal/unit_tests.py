@@ -20,9 +20,6 @@ class UnitTestGenerator:
     def add_test(self, test_name, test_info):
         self._tests[test_name] = test_info
 
-    def parse_existing_test_file(self, output_file: str):
-        raise NotImplementedError()
-
     def _collect_types(self, value, seen):
         if id(value) in seen:
             return

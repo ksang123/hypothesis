@@ -839,7 +839,7 @@ class ConjectureRunner:
     def has_existing_examples(self) -> bool:
         return self.database is not None and Phase.reuse in self.settings.phases
 
-    def save_failing_test_info(self, data: ConjectureResult) -> None:
+    def save_failing_test_info(self, data: ConjectureResult, copy_code: bool = False) -> None:
         """Save complete information needed to reproduce a failing test."""
         import os.path
         from ...control import BuildContext
@@ -856,9 +856,12 @@ class ConjectureRunner:
 
         origin = self.tree.root.transition.interesting_origin
         source_filename = origin.filename
+        source_dir = os.path.dirname(source_filename)
         module_name = os.path.splitext(os.path.basename(source_filename))[0]
         line_number = getattr(origin, "lineno", None)
 
+        # Create output file path in the same directory as the source file
+        output_file = os.path.join(source_dir, "failing_test.py")
         with BuildContext(tmp) as ctx:
             args = state.stuff.args
             kwargs = dict(state.stuff.kwargs)
@@ -876,7 +879,9 @@ class ConjectureRunner:
                 "context": ctx,
                 "filename": source_filename,
                 "lineno": line_number,
-            }
+                "test_func": test_func,  # Pass the actual function for source extraction
+                "copy_code": copy_code,  # Pass the flag to the generator
+            }, output_file
         )
 
 

@@ -16,8 +16,10 @@ class UnitTestGenerator:
             return
         self._tests = {}
         self._initialized = True
+        self.output_file = "failing_test.py"
 
-    def add_test(self, test_name, test_info):
+    def add_test(self, test_name, test_info, of):
+        self.output_file = of
         self._tests[test_name] = test_info
 
     def _collect_types(self, value, seen):
@@ -60,7 +62,7 @@ class UnitTestGenerator:
         return "\n".join(lines) + "\n"
 
     def render(self) -> None:
-        output_file = "failing_test.py"  # TODO: we might wanna improve this
+        output_file = self.output_file
 
         existing_imports = defaultdict(set)
         existing_funcs = {}

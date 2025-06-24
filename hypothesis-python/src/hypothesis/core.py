@@ -1325,6 +1325,9 @@ class StateForActualGivenExecution:
         for v in list(args) + list(kwargs.values()):
             register(v)
 
+        source_dir = os.path.dirname(source_filename)
+        output_file = os.path.join(source_dir, "failing_test.py")
+
         UnitTestGenerator().add_test(
             self.test.__name__,
             {
@@ -1336,7 +1339,7 @@ class StateForActualGivenExecution:
                 "context": context,
                 "filename": source_filename,
                 "lineno": line_number,
-            },
+            }, output_file
         )
 
     def run_engine(self):

@@ -22,6 +22,19 @@ class UnitTestGenerator:
         self.output_file = of
         self._tests[test_name] = test_info
 
+    def _extract_source_code(self, func):
+        """Extract the source code of a function without decorators."""
+        import inspect
+        try:
+            source_lines, _ = inspect.getsourcelines(func)
+            # Skip decorator lines (starting with @)
+            function_lines = []
+            for line in source_lines:
+                if not line.strip().startswith('@'):
+                    function_lines.append(line)
+            return "".join(function_lines)
+        except (OSError, TypeError):
+            return None
     def _collect_types(self, value, seen):
         if id(value) in seen:
             return
@@ -91,6 +104,13 @@ class UnitTestGenerator:
             for arg in list(test["args"]) + list(test["kwargs"].values()):
                 for mod, cls in self._collect_types(arg, seen):
                     module_to_names[mod].add(cls)
+
+            # Only add the original test function if copy_code is True
+            if test.get("copy_code") and "test_func" in test:
+                source_code = self._extract_source_code(test["test_func"])
+                if source_code:
+                    # Add the original test function
+                    new_funcs[test_name] = source_code
 
             func_code = self._generate_test_body(test_name, test)
             new_funcs[f"test_run_failing_test_{test_name}"] = func_code

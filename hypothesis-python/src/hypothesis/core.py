@@ -1238,7 +1238,7 @@ class StateForActualGivenExecution:
 
     #TODO: we need to improve this
     def save_failing_explicit_example(
-        self, example_kwargs: dict[str, object], origin: InterestingOrigin
+        self, example_kwargs: dict[str, object], origin: InterestingOrigin, copy_code: bool = True
     ) -> None:
         """Record failing explicit examples for UnitTestGenerator."""
         import os.path
@@ -1339,6 +1339,8 @@ class StateForActualGivenExecution:
                 "context": context,
                 "filename": source_filename,
                 "lineno": line_number,
+                "test_func": self.test,  # Pass the actual function for source extraction
+                "copy_code": copy_code,  # Pass the flag to the generator
             }, output_file
         )
 

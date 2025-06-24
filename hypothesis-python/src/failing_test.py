@@ -35,6 +35,14 @@ from test_bank import (
 )
 
 # Failure occurred in: test_bank.py
+# Line number: 89
+def test_run_failing_test_test_002_subtraction_commutative():
+    test_002_subtraction_commutative.hypothesis.inner_test(
+        x=6,
+        y=8,
+    )
+
+# Failure occurred in: test_bank.py
 # Line number: 127
 def test_run_failing_test_test_030_add_one_greater():
     test_030_add_one_greater.hypothesis.inner_test(
@@ -117,6 +125,20 @@ def test_run_failing_test_test_017_dummy_inequality():
 def test_run_failing_test_test_053_point_x_positive():
     test_053_point_x_positive.hypothesis.inner_test(
         p=Point(0, 0),
+    )
+
+# Failure occurred in: test_bank.py
+# Line number: 424
+def test_run_failing_test_test_061_tree_value_positive():
+    test_061_tree_value_positive.hypothesis.inner_test(
+        t=Tree(-1, []),
+    )
+
+# Failure occurred in: test_bank.py
+# Line number: 442
+def test_run_failing_test_test_092_nested_list_fail():
+    test_092_nested_list_fail.hypothesis.inner_test(
+        lst=[0],
     )
 
 # Failure occurred in: test_bank.py
@@ -210,25 +232,95 @@ def test_run_failing_test_test_108_point_origin():
         obj=Point(0, 1),
     )
 
-# Failure occurred in: test_bank.py
-# Line number: 89
-def test_run_failing_test_test_002_subtraction_commutative():
-    test_002_subtraction_commutative.hypothesis.inner_test(
-        x=6,
-        y=8,
-    )
+def test_002_subtraction_commutative(x, y):
+    assert x - y == y - x
 
-# Failure occurred in: test_bank.py
-# Line number: 424
-def test_run_failing_test_test_061_tree_value_positive():
-    test_061_tree_value_positive.hypothesis.inner_test(
-        t=Tree(-1, []),
-    )
+def test_030_add_one_greater(x):
+    assume(not math.isinf(x))
+    assert x + 1 > x
 
-# Failure occurred in: test_bank.py
-# Line number: 442
-def test_run_failing_test_test_092_nested_list_fail():
-    test_092_nested_list_fail.hypothesis.inner_test(
-        lst=[0],
-    )
+def test_005_upper_is_lower(s):
+    assert s.upper().islower()
+
+def test_032_string_is_upper(s):
+    assert s.isupper()
+
+def test_034_ascii_only(s):
+    assert all(ord(c) < 128 for c in s)
+
+def test_009_sort_is_identity(lst):
+    assert sorted(lst) == lst
+
+def test_037_list_unique(lst):
+    assert len(lst) == len(set(lst))
+
+def test_040_list_always_empty(lst):
+    assert len(lst) == 0
+
+def test_010_keys_values_equal(d):
+    assert set(d.keys()) == set(d.values())
+
+def test_042_dict_values_unique(d):
+    assert len(d.values()) == len(set(d.values()))
+
+def test_044_set_difference_empty(a, b):
+    assert a - b == set()
+
+def test_017_dummy_inequality(obj):
+    assert obj != obj
+
+def test_053_point_x_positive(p):
+    assert p.x > 0
+
+def test_061_tree_value_positive(t):
+    assert t.value > 0
+
+def test_092_nested_list_fail(lst):
+    assert lst == 0
+
+def test_068_fail_on_42(x):
+    assert x != 42
+
+def test_070_fail_on_empty(lst):
+    assume(len(lst) == 0)
+    assert False
+
+def test_072_permutations(lst):
+    from itertools import permutations
+
+    perms = list(permutations(lst))
+    assert lst in perms
+
+def test_073_permutation_fail(lst):
+    from itertools import permutations
+
+    perms = list(permutations(lst))
+    assert [0, 0, 0] in perms
+
+def test_075_bytes_fail(b):
+    assert b == b"abc"
+
+def test_078_booleans_fail(x):
+    assert x is True
+
+def test_080_list_just_one_fail(lst):
+    assert all(x == 2 for x in lst)
+
+def test_082_unicode_fail(s):
+    assert s == "abc"
+
+def test_084_floats_fail(lst):
+    assert all(x == 0.0 for x in lst)
+
+def test_086_dict_keys_fail(d):
+    assert all(k == 0 for k in d.keys())
+
+def test_088_list_of_lists_fail(lst):
+    assert all(x == [] for x in lst)
+
+def test_090_tuple_fail(t):
+    assert t == (0, "", 0.0)
+
+def test_108_point_origin(obj):
+    assert obj.x == 0 and obj.y == 0
 

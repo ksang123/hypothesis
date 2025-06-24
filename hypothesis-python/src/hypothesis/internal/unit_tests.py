@@ -16,7 +16,7 @@ class UnitTestGenerator:
             return
         self._tests = {}
         self._initialized = True
-        self.output_file = "failing_test.py"
+        self.output_file = "src/failing_test.py"
 
     def add_test(self, test_name, test_info, of):
         self.output_file = of

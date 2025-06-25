@@ -19,6 +19,38 @@ class RBTree:
             self.root = self.fix_insert(inserted)
 
     def fix_insert(self, node):
+        while node != self.root and node.parent.color == Color.RED:
+            parent = node.parent
+            grandparent = parent.parent
+            if parent == grandparent.left:
+                uncle = grandparent.right
+                if uncle and uncle.color == Color.RED:
+                    parent.color = Color.BLACK
+                    uncle.color = Color.BLACK
+                    grandparent.color = Color.RED
+                    node = grandparent
+                else:
+                    if node == parent.right:
+                        node = parent
+                        self.rotate_left(node)
+                    parent.color = Color.BLACK
+                    grandparent.color = Color.RED
+                    self.rotate_right(grandparent)
+            else:
+                uncle = grandparent.left
+                if uncle and uncle.color == Color.RED:
+                    parent.color = Color.BLACK
+                    uncle.color = Color.BLACK
+                    grandparent.color = Color.RED
+                    node = grandparent
+                else:
+                    if node == parent.left:
+                        node = parent
+                        self.rotate_right(node)
+                    parent.color = Color.BLACK
+                    grandparent.color = Color.RED
+                    self.rotate_left(grandparent)
+        self.root.color = Color.BLACK
         return self.root
 
     def delete(self, value):
@@ -27,13 +59,91 @@ class RBTree:
             self.root = self.fix_delete(sibling)
 
     def fix_delete(self, node):
+        while node != self.root and (node is None or node.color == Color.BLACK):
+            parent = node.parent if node else None
+            if node == parent.left:
+                sibling = parent.right
+                if sibling and sibling.color == Color.RED:
+                    sibling.color = Color.BLACK
+                    parent.color = Color.RED
+                    self.rotate_left(parent)
+                    sibling = parent.right
+                if (sibling.left is None or sibling.left.color == Color.BLACK) and \
+                        (sibling.right is None or sibling.right.color == Color.BLACK):
+                    sibling.color = Color.RED
+                    node = parent
+                else:
+                    if sibling.right is None or sibling.right.color == Color.BLACK:
+                        if sibling.left:
+                            sibling.left.color = Color.BLACK
+                        sibling.color = Color.RED
+                        self.rotate_right(sibling)
+                        sibling = parent.right
+                    sibling.color = parent.color
+                    parent.color = Color.BLACK
+                    if sibling.right:
+                        sibling.right.color = Color.BLACK
+                    self.rotate_left(parent)
+                    node = self.root
+            else:
+                sibling = parent.left
+                if sibling and sibling.color == Color.RED:
+                    sibling.color = Color.BLACK
+                    parent.color = Color.RED
+                    self.rotate_right(parent)
+                    sibling = parent.left
+                if (sibling.left is None or sibling.left.color == Color.BLACK) and \
+                        (sibling.right is None or sibling.right.color == Color.BLACK):
+                    sibling.color = Color.RED
+                    node = parent
+                else:
+                    if sibling.left is None or sibling.left.color == Color.BLACK:
+                        if sibling.right:
+                            sibling.right.color = Color.BLACK
+                        sibling.color = Color.RED
+                        self.rotate_left(sibling)
+                        sibling = parent.left
+                    sibling.color = parent.color
+                    parent.color = Color.BLACK
+                    if sibling.left:
+                        sibling.left.color = Color.BLACK
+                    self.rotate_right(parent)
+                    node = self.root
+        if node:
+            node.color = Color.BLACK
         return self.root
 
-    def rotate_right(self, node):
-        pass
-
     def rotate_left(self, node):
-        pass
+        right = node.right
+        node.right = right.left
+        if right.left:
+            right.left.parent = node
+        right.parent = node.parent
+        if node.parent is None:
+            self.root = right
+        elif node == node.parent.left:
+            node.parent.left = right
+        else:
+            node.parent.right = right
+        right.left = node
+        node.parent = right
+        return right
+
+    def rotate_right(self, node):
+        left = node.left
+        node.left = left.right
+        if left.right:
+            left.right.parent = node
+        left.parent = node.parent
+        if node.parent is None:
+            self.root = left
+        elif node == node.parent.right:
+            node.parent.right = left
+        else:
+            node.parent.left = left
+        left.right = node
+        node.parent = left
+        return left
 
     def search(self, value):
         if self.root is not None:

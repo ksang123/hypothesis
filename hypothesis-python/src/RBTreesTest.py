@@ -3,7 +3,7 @@ import random
 from RBtrees import *
 
 @st.composite
-def rb_functional_tree(draw, depth=0, max_depth=4):
+def rb_functional_tree(draw, depth=0, max_depth=6):
     if depth >= max_depth or draw(st.booleans()):
         return None
 
@@ -16,7 +16,7 @@ def rb_functional_tree(draw, depth=0, max_depth=4):
 
 
 @st.composite
-def rb_imperative_tree(draw, max_depth=4, current_depth=0, low=0, high=100, parent=None):
+def rb_imperative_tree(draw, max_depth=6, current_depth=0, low=0, high=100, parent=None):
     if current_depth >= max_depth or high - low <= 1 or draw(st.booleans()):
         return None
 

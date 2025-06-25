@@ -232,17 +232,16 @@ def is_rb_kept(tree):
         return True
     if tree.root.color != Color.BLACK:
         return False
+    return _is_rb_kept(tree.root) and is_balanced(tree)
 
-    def validate(node):
-        if node is None:
-            return True
-        if node.color == Color.RED:
-            if (node.left and node.left.color == Color.RED) or \
-               (node.right and node.right.color == Color.RED):
-                return False
-        return validate(node.left) and validate(node.right)
-
-    return validate(tree.root) and is_balanced(tree)
+def _is_rb_kept(node):
+    if node is None:
+        return True
+    if node.color == Color.RED:
+        if (node.left and node.left.color == Color.RED) or \
+           (node.right and node.right.color == Color.RED):
+            return False
+    return _is_rb_kept(node.left) and _is_rb_kept(node.right)
 
 
 def is_bst(tree):
@@ -266,3 +265,4 @@ def is_balanced(tree):
         return left_bh + (1 if node.color == Color.BLACK else 0)
 
     return black_height(tree.root) > 0
+

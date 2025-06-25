@@ -56,7 +56,8 @@ def rb_imperative_tree(draw, max_depth=6, current_depth=0, low=0, high=100, pare
 
 @given(rb_imperative_tree())
 def test_is_bst_imperative(tree):
-    assert is_bst(tree)
+    if tree is not None:
+        assert not is_bst(tree)
 
 @given(rb_functional_tree())
 def test_is_bst_functional(tree):

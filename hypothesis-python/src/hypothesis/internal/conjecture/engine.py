@@ -839,7 +839,7 @@ class ConjectureRunner:
     def has_existing_examples(self) -> bool:
         return self.database is not None and Phase.reuse in self.settings.phases
 
-    def save_failing_test_info(self, data: ConjectureResult, copy_code: bool = True) -> None:
+    def save_failing_test_info(self, data: ConjectureResult, copy_code: bool = False) -> None:
         """Save complete information needed to reproduce a failing test."""
         import os.path
         from ...control import BuildContext

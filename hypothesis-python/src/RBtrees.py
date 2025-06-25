@@ -228,10 +228,41 @@ class RBTreeFunctional(RBNode):
             self.right.parent = self
 
 def is_rb_kept(tree):
-    pass
+    if tree.root is None:
+        return True
+    if tree.root.color != Color.BLACK:
+        return False
+
+    def validate(node):
+        if node is None:
+            return True
+        if node.color == Color.RED:
+            if (node.left and node.left.color == Color.RED) or \
+               (node.right and node.right.color == Color.RED):
+                return False
+        return validate(node.left) and validate(node.right)
+
+    return validate(tree.root) and is_balanced(tree)
+
 
 def is_bst(tree):
-    pass
+    return _is_bst(tree.root, None, None)
+
+def _is_bst(node, low, high):
+    if node is None:
+        return True
+    if (low is not None and node.value <= low) or (high is not None and node.value >= high):
+        return False
+    return _is_bst(node.left, low, node.value) and _is_bst(node.right, node.value, high)
 
 def is_balanced(tree):
-    pass
+    def black_height(node):
+        if node is None:
+            return 1
+        left_bh = black_height(node.left)
+        right_bh = black_height(node.right)
+        if left_bh == 0 or right_bh == 0 or left_bh != right_bh:
+            return 0
+        return left_bh + (1 if node.color == Color.BLACK else 0)
+
+    return black_height(tree.root) > 0

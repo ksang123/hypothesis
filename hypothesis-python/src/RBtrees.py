@@ -93,9 +93,6 @@ class RBNode:
             current = current.left
         return current
 
-    def fix_delete(self):
-        pass
-
     def search(self, value):
         if value == self.value:
             return True

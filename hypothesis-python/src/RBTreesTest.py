@@ -17,7 +17,7 @@ def rb_functional_tree(draw, depth=0, max_depth=4):
 
 @st.composite
 def rb_imperative_tree(draw, max_depth=4, current_depth=0, low=0, high=100, parent=None):
-    if current_depth >= max_depth or draw(st.booleans()):
+    if current_depth >= max_depth or high - low <= 1 or draw(st.booleans()):
         return None
 
     value = draw(st.integers(min_value=low + 1, max_value=high - 1))

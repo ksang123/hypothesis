@@ -1,6 +1,7 @@
 import os
 from collections import defaultdict
 from ..vendor.pretty import RepresentationPrinter
+from pathlib import Path
 
 class UnitTestGenerator:
     _instance = None
@@ -12,11 +13,14 @@ class UnitTestGenerator:
         return cls._instance
 
     def __init__(self):
+        self._COPYCODE = False
         if self._initialized:
             return
         self._tests = {}
         self._initialized = True
-        self.output_file = "src/failing_test.py"
+        script_path = Path(__file__).resolve()
+        src_path = script_path.parents[2]
+        self.output_file = f"{src_path}/failing_test.py"
 
     def add_test(self, test_name, test_info, of):
         self.output_file = of
@@ -35,6 +39,7 @@ class UnitTestGenerator:
             return "".join(function_lines)
         except (OSError, TypeError):
             return None
+
     def _collect_types(self, value, seen):
         if id(value) in seen:
             return
@@ -106,7 +111,7 @@ class UnitTestGenerator:
                     module_to_names[mod].add(cls)
 
             # Only add the original test function if copy_code is True
-            if test.get("copy_code") and "test_func" in test:
+            if self._COPYCODE and "test_func" in test:
                 source_code = self._extract_source_code(test["test_func"])
                 if source_code:
                     # Add the original test function

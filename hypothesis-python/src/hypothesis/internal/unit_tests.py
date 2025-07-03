@@ -13,9 +13,9 @@ class UnitTestGenerator:
         return cls._instance
 
     def __init__(self):
-        self._COPYCODE = False
         if self._initialized:
             return
+        self._COPYCODE = False
         self._tests = {}
         self._initialized = True
         script_path = Path(__file__).resolve()

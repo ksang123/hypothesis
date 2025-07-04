@@ -225,10 +225,11 @@ class UnitTestGenerator:
             func_code = self._generate_test_body(test_name, test)
             new_funcs[f"test_run_failing_test_{test_name}"] = func_code
 
-        for mod, names in existing_imports.items():
-            module_to_names[mod].update(names)
+        if self._KEEP_FUNCS:
+            for mod, names in existing_imports.items():
+                module_to_names[mod].update(names)
 
-        final_funcs = existing_funcs
+        final_funcs = existing_funcs if self._KEEP_FUNCS else {}
         final_funcs.update(new_funcs)
 
         with open(output_file, "w", encoding="utf-8") as f:

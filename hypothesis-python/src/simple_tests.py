@@ -84,3 +84,19 @@ def test_integer_is_even(n):
 @given(st.integers(min_value=1, max_value=10))
 def test_positive_int_negative(x):
     assert x < 0
+
+@given(st.text(min_size=1, max_size=5))
+def test_non_empty_string_empty(s):
+    assert s == ""
+
+@given(st.floats(min_value=-3, max_value=3, allow_nan=False, allow_infinity=False))
+def test_float_square_negative(f):
+    assert f * f < 0
+
+@given(st.lists(st.integers(), min_size=2, max_size=4))
+def test_list_palindromic(lst):
+    assert lst == lst[::-1]
+
+@given(st.dictionaries(st.text(min_size=1, max_size=2), st.integers(), min_size=1, max_size=3))
+def test_keys_match_values(d):
+    assert all(str(v) == k for k, v in d.items())

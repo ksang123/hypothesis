@@ -172,7 +172,10 @@ class UnitTestGenerator:
             else:
                 lines.append(f"    {var_name} = {values[var_name]!r}")
 
-        lines.append(f"    {test['func_name']}.hypothesis.inner_test(")
+        if self._COPY_CODE:
+            lines.append(f"    {test['func_name']}(")
+        else:
+            lines.append(f"    {test['func_name']}.hypothesis.inner_test(")
         for arg in test["args"]:
             lines.append(f"        {arg!r},")
         for k, v in test["kwargs"].items():
@@ -209,7 +212,10 @@ class UnitTestGenerator:
         module_to_names = defaultdict(set)
         new_funcs = {}
         for test_name, test in self._tests.items():
-            module_to_names[test["module"]].add(test["func_name"])
+            if not self._COPY_CODE:
+                module_to_names[test["module"]].add(test["func_name"])
+            elif self._KEEP_FUNCS:
+                existing_imports[test["module"]].discard(test["func_name"])
             seen = set()
             for arg in list(test["args"]) + list(test["kwargs"].values()):
                 for mod, cls in self._collect_types(arg, seen):
@@ -227,7 +233,8 @@ class UnitTestGenerator:
 
         if self._KEEP_FUNCS:
             for mod, names in existing_imports.items():
-                module_to_names[mod].update(names)
+                if names:
+                    module_to_names[mod].update(names)
 
         final_funcs = existing_funcs if self._KEEP_FUNCS else {}
         final_funcs.update(new_funcs)
@@ -236,6 +243,8 @@ class UnitTestGenerator:
             f.write("# Failing tests extracted from Hypothesis\n\n")
 
             for module, names in sorted(module_to_names.items()):
+                if not names:
+                    continue
                 f.write(f"from {module} import (\n")
                 for name in sorted(names):
                     f.write(f"    {name},\n")

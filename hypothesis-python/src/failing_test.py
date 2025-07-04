@@ -7,6 +7,7 @@ from simple_tests import (
     test_integer_is_even,
     test_keys_match_values,
     test_list_palindromic,
+    test_my_complex_pair,
     test_my_pair,
     test_no_true_flags,
     test_non_empty_string_empty,
@@ -17,7 +18,24 @@ from simple_tests import (
 )
 
 # Failure occurred in: simple_tests.py
-# Line number: 52
+# Line number: 65
+def test_run_failing_test_test_my_complex_pair():
+    pair_x = 0
+    pair_y = 0
+    pair_z = 0
+    pair_i = 0
+    pair_j = 0
+    pair_k = MyPair(pair_x, pair_y)
+    pair_k = MyPair(pair_k, pair_z)
+    pair_k = MyPair(pair_k, pair_i)
+    pair_k = MyPair(pair_k, pair_j)
+    pair = pair_k
+    test_my_complex_pair.hypothesis.inner_test(
+        pair=pair,
+    )
+
+# Failure occurred in: simple_tests.py
+# Line number: 70
 def test_run_failing_test_test_my_pair():
     pair_i = 0
     pair_j = 1
@@ -27,7 +45,7 @@ def test_run_failing_test_test_my_pair():
     )
 
 # Failure occurred in: simple_tests.py
-# Line number: 57
+# Line number: 75
 def test_run_failing_test_test_pair_elements_differ():
     pair_i = 0
     pair = (pair_i, pair_i)
@@ -36,7 +54,7 @@ def test_run_failing_test_test_pair_elements_differ():
     )
 
 # Failure occurred in: simple_tests.py
-# Line number: 61
+# Line number: 79
 def test_run_failing_test_test_no_true_flags():
     flags = (False, False, True)
     test_no_true_flags.hypothesis.inner_test(
@@ -44,7 +62,7 @@ def test_run_failing_test_test_no_true_flags():
     )
 
 # Failure occurred in: simple_tests.py
-# Line number: 65
+# Line number: 83
 def test_run_failing_test_test_palindrome_not_pal():
     s_half = '0'
     s = s_half + s_half[::-1]
@@ -53,7 +71,7 @@ def test_run_failing_test_test_palindrome_not_pal():
     )
 
 # Failure occurred in: simple_tests.py
-# Line number: 69
+# Line number: 87
 def test_run_failing_test_test_dict_value_not_mod3():
     d_keys = [0]
     d = {k: k % 3 for k in d_keys}
@@ -62,7 +80,7 @@ def test_run_failing_test_test_dict_value_not_mod3():
     )
 
 # Failure occurred in: simple_tests.py
-# Line number: 73
+# Line number: 91
 def test_run_failing_test_test_pair_unsorted():
     p_a = 0.0
     p_b = 0.0
@@ -72,7 +90,7 @@ def test_run_failing_test_test_pair_unsorted():
     )
 
 # Failure occurred in: simple_tests.py
-# Line number: 82
+# Line number: 100
 def test_run_failing_test_test_integer_is_even():
     n = 0
     m = 0
@@ -82,7 +100,7 @@ def test_run_failing_test_test_integer_is_even():
     )
 
 # Failure occurred in: simple_tests.py
-# Line number: 86
+# Line number: 104
 def test_run_failing_test_test_positive_int_negative():
     x = 1
     test_positive_int_negative.hypothesis.inner_test(
@@ -90,7 +108,7 @@ def test_run_failing_test_test_positive_int_negative():
     )
 
 # Failure occurred in: simple_tests.py
-# Line number: 90
+# Line number: 108
 def test_run_failing_test_test_non_empty_string_empty():
     s = '0'
     test_non_empty_string_empty.hypothesis.inner_test(
@@ -98,7 +116,7 @@ def test_run_failing_test_test_non_empty_string_empty():
     )
 
 # Failure occurred in: simple_tests.py
-# Line number: 94
+# Line number: 112
 def test_run_failing_test_test_float_square_negative():
     f = 0.0
     test_float_square_negative.hypothesis.inner_test(
@@ -106,7 +124,7 @@ def test_run_failing_test_test_float_square_negative():
     )
 
 # Failure occurred in: simple_tests.py
-# Line number: 98
+# Line number: 116
 def test_run_failing_test_test_list_palindromic():
     lst = [0, 1]
     test_list_palindromic.hypothesis.inner_test(
@@ -114,7 +132,7 @@ def test_run_failing_test_test_list_palindromic():
     )
 
 # Failure occurred in: simple_tests.py
-# Line number: 102
+# Line number: 120
 def test_run_failing_test_test_keys_match_values():
     d = {'1': 0}
     test_keys_match_values.hypothesis.inner_test(

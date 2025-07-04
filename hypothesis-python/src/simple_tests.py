@@ -77,9 +77,9 @@ def test_pair_unsorted(p):
 im putting here tests without a custom strategy
 to understand how it will work with default strategies
 """
-@given(st.integers())
-def test_integer_is_even(n):
-    assert n % 2 == 0
+@given(st.integers(), st.integers())
+def test_integer_is_even(n, m):
+    assert m + n % 10 != 0
 
 @given(st.integers(min_value=1, max_value=10))
 def test_positive_int_negative(x):

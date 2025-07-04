@@ -2,7 +2,8 @@ import os
 from collections import defaultdict
 
 from ..strategies._internal.core import CompositeStrategy
-from ..vendor.pretty import RepresentationPrinter
+from ..control import BuildContext
+from .conjecture.data import ConjectureData
 from pathlib import Path
 import inspect
 import ast
@@ -21,6 +22,7 @@ class UnitTestGenerator:
             return
         self._COPY_CODE = False
         self._KEEP_FUNCS = False
+        self._PRINT_SOURCE = False
         self._tests = {}
         self._initialized = True
         script_path = Path(__file__).resolve()
@@ -60,6 +62,80 @@ class UnitTestGenerator:
             if cls.__module__ != "builtins":
                 yield cls.__module__, cls.__name__
 
+    def _eval_strategies(self, given_kwargs, choices):
+        data = ConjectureData.for_choices(choices)
+        values = {}
+        draws = {}
+        with BuildContext(data) as ctx:
+            for name, strat in given_kwargs.items():
+                st = strat._LazyStrategy__wrapped_strategy
+                if isinstance(st, CompositeStrategy):
+                    local = []
+
+                    def dr(s):
+                        v = ctx.data.draw(s)
+                        local.append(v)
+                        return v
+
+                    values[name] = st.definition(dr, *st.args, **st.kwargs)
+                    draws[name] = local
+                else:
+                    values[name] = ctx.data.draw(st)
+                    draws[name] = [values[name]]
+        return values, draws
+
+    class _Prefixer(ast.NodeTransformer):
+        def __init__(self, mapping):
+            super().__init__()
+            self.mapping = mapping
+
+        def visit_Name(self, node):
+            if node.id in self.mapping:
+                return ast.copy_location(ast.Name(id=self.mapping[node.id], ctx=node.ctx), node)
+            return node
+
+    class _DrawReplacer(ast.NodeTransformer):
+        def __init__(self, draws):
+            super().__init__()
+            self.draws = draws
+            self.idx = 0
+
+        def visit_Call(self, node):
+            if (
+                isinstance(node.func, ast.Name)
+                and node.func.id == "draw"
+                and self.idx < len(self.draws)
+            ):
+                val = self.draws[self.idx]
+                self.idx += 1
+                return ast.copy_location(ast.Constant(value=val), node)
+            return self.generic_visit(node)
+
+    def _render_strategy_lines(self, df, draws, var_name):
+        source = self._extract_source_code(df)
+        tree = ast.parse(source)
+        body = tree.body[0].body
+        prefix = f"{var_name}_"
+        mapping = {}
+        lines = []
+        replacer = self._DrawReplacer(draws)
+        for stmt in body:
+            stmt = replacer.visit(stmt)
+            if isinstance(stmt, ast.Assign) and len(stmt.targets) == 1 and isinstance(stmt.targets[0], ast.Name):
+                orig = stmt.targets[0].id
+                new_name = prefix + orig
+                mapping[orig] = new_name
+                value = self._Prefixer(mapping).visit(stmt.value)
+                lines.append(f"    {new_name} = {ast.unparse(value)}")
+            elif isinstance(stmt, ast.Return):
+                value = self._Prefixer(mapping).visit(stmt.value)
+                lines.append(f"    {var_name} = {ast.unparse(value)}")
+            else:
+                value = self._Prefixer(mapping).visit(stmt)
+                for l in ast.unparse(value).split("\n"):
+                    lines.append(f"    {l}")
+        return lines
+
     def _generate_test_body(self, test_name, test):
         lines = []
         filename = os.path.basename(test["filename"])
@@ -69,37 +145,42 @@ class UnitTestGenerator:
             lines.append(f"# Line number: {lineno}")
         lines.append(f"def test_run_failing_test_{test_name}():")
         given_kwargs = test.get("given_kwargs", {})
+        values, draws = self._eval_strategies(given_kwargs, test.get("choices", []))
+
+        if self._PRINT_SOURCE:
+            lines.append('    """')
+            for var_name, strat in given_kwargs.items():
+                lines.append(f"    {var_name}:")
+                st = strat._LazyStrategy__wrapped_strategy  # private? nah
+                if isinstance(st, CompositeStrategy):
+                    df = st.definition
+                    lines.append("STRATEGY CODE:")
+                    lines.append(strip_leading_indent_after_first_line(self._extract_source_code(df)))
+                else:
+                    # For built-in strategies we only show the strategy name
+                    name = repr(strat)
+                    if "(" in name:
+                        name = name.split("(")[0] + "()"
+                    value = values.get(var_name)
+                    lines.append(f"    {name} -> {value!r}")
+            lines.append('    """')
 
         for var_name, strat in given_kwargs.items():
-            lines.append('    """')
-            lines.append(f"    {var_name}:")
-            st = strat._LazyStrategy__wrapped_strategy # private? nah
+            st = strat._LazyStrategy__wrapped_strategy  # private? nah
             if isinstance(st, CompositeStrategy):
-                df = st.definition
-                lines.append("STRATEGY CODE:")
-                lines.append(strip_leading_indent_after_first_line(self._extract_source_code(df)))
+                lines.extend(self._render_strategy_lines(st.definition, draws[var_name], var_name))
             else:
-                # For built-in strategies we only show the strategy name
-                name = repr(strat)
-                if "(" in name:
-                    name = name.split("(")[0] + "()"
-                value = test["kwargs"].get(var_name)
-                lines.append(f"    {name} -> {value!r}")
-            lines.append('    """')
+                lines.append(f"    {var_name} = {values[var_name]!r}")
 
         lines.append(f"    {test['func_name']}.hypothesis.inner_test(")
-
-        printer = RepresentationPrinter(context=test["context"])
-        printer.repr_call(
-            f"{test['func_name']}.hypothesis.inner_test",
-            test["args"],
-            test["kwargs"],
-            force_split=True,
-            arg_slices=test["arg_slices"],
-        )
-        call_lines = printer.getvalue().replace("Trying example: ", "").splitlines()
-        for line in call_lines[1:]:
-            lines.append("    " + line)
+        for arg in test["args"]:
+            lines.append(f"        {arg!r},")
+        for k, v in test["kwargs"].items():
+            if k in given_kwargs:
+                lines.append(f"        {k}={k},")
+            else:
+                lines.append(f"        {k}={v!r},")
+        lines.append("    )")
         return "\n".join(lines) + "\n"
 
     def render(self) -> None:

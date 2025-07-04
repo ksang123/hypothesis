@@ -1,5 +1,7 @@
 import os
 from collections import defaultdict
+
+from ..strategies._internal.core import CompositeStrategy
 from ..vendor.pretty import RepresentationPrinter
 from pathlib import Path
 
@@ -56,6 +58,65 @@ class UnitTestGenerator:
             if cls.__module__ != "builtins":
                 yield cls.__module__, cls.__name__
 
+    def _is_composite(self, strat):
+        return isinstance(strat, CompositeStrategy)
+
+    def _strategy_draws(self, strat, choices):
+        from ..internal.conjecture.data import ConjectureData
+
+        data = ConjectureData.for_choices(choices)
+        draws = []
+
+        def draw(s):
+            val = data.draw(s)
+            draws.append(val)
+            return val
+
+        res = strat.definition(draw, *getattr(strat, "args", ()), **getattr(strat, "kwargs", {}))
+        return res, draws
+
+    def _pretty(self, value, context):
+        p = RepresentationPrinter(context=context)
+        p.pretty(value)
+        return p.getvalue()
+
+    def _strategy_lines(self, strat, draws, var_name, context):
+        import inspect
+        import ast
+        import textwrap
+
+        try:
+            src_lines, _ = inspect.getsourcelines(strat.definition)
+            src = textwrap.dedent("".join(l for l in src_lines if not l.strip().startswith("@")))
+            tree = ast.parse(src)
+            func = tree.body[0]
+        except Exception:
+            return [f"{var_name} = {self._pretty(draws[-1], context)}"]
+
+        lines = []
+        draw_iter = iter(draws)
+        for stmt in func.body:
+            if (
+                    isinstance(stmt, ast.Assign)
+                    and isinstance(stmt.value, ast.Call)
+                    and isinstance(stmt.value.func, ast.Name)
+                    and stmt.value.func.id == "draw"
+                    and len(stmt.targets) == 1
+                    and isinstance(stmt.targets[0], ast.Name)
+            ):
+                name = stmt.targets[0].id
+                val = next(draw_iter, None)
+                lines.append(f"{name} = {self._pretty(val, context)}")
+            elif isinstance(stmt, ast.Return):
+                expr = ast.unparse(stmt.value)
+                lines.append(f"{var_name} = {expr}")
+            else:
+                try:
+                    lines.append(ast.unparse(stmt))
+                except Exception:
+                    pass
+        return lines
+
     def _generate_test_body(self, test_name, test):
         lines = []
         filename = os.path.basename(test["filename"])
@@ -64,6 +125,15 @@ class UnitTestGenerator:
         if lineno:
             lines.append(f"# Line number: {lineno}")
         lines.append(f"def test_run_failing_test_{test_name}():")
+        given_kwargs = test.get("given_kwargs", {})
+        choices = test.get("choices")
+        if given_kwargs and choices is not None:
+            for name, strat in given_kwargs.items():
+                if name in test["arg_slices"] and self._is_composite(strat):
+                    start, end = test["arg_slices"][name]
+                    value, draws = self._strategy_draws(strat, choices[start:end])
+                    for l in self._strategy_lines(strat, draws, name, test["context"]):
+                        lines.append("    " + l)
         lines.append(f"    {test['func_name']}.hypothesis.inner_test(")
 
         printer = RepresentationPrinter(context=test["context"])

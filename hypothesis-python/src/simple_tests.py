@@ -1,5 +1,16 @@
 from hypothesis import given, strategies as st
 
+class MyPair:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+
+@st.composite
+def my_pair(draw):
+    i = draw(st.integers(min_value=0, max_value=10))
+    j = draw(st.integers(min_value=0, max_value=10))
+    return MyPair(i, j)
+
 @st.composite
 def pair_same_ints(draw):
     i = draw(st.integers(min_value=-5, max_value=5))
@@ -35,6 +46,11 @@ def sorted_float_pair(draw):
     b = draw(st.floats(min_value=-10, max_value=10, allow_nan=False, allow_infinity=False))
     return tuple(sorted((a, b)))
 
+@given(my_pair())
+def test_my_pair(pair):
+    a, b = pair.x, pair.y
+    assert a == b
+
 @given(pair_same_ints())
 def test_pair_elements_differ(pair):
     a, b = pair
@@ -68,19 +84,3 @@ def test_integer_is_even(n):
 @given(st.integers(min_value=1, max_value=10))
 def test_positive_int_negative(x):
     assert x < 0
-
-@given(st.text(min_size=1, max_size=5))
-def test_non_empty_string_empty(s):
-    assert s == ""
-
-@given(st.floats(min_value=-3, max_value=3, allow_nan=False, allow_infinity=False))
-def test_float_square_negative(f):
-    assert f * f < 0
-
-@given(st.lists(st.integers(), min_size=2, max_size=4))
-def test_list_palindromic(lst):
-    assert lst == lst[::-1]
-
-@given(st.dictionaries(st.text(min_size=1, max_size=2), st.integers(), min_size=1, max_size=3))
-def test_keys_match_values(d):
-    assert all(str(v) == k for k, v in d.items())

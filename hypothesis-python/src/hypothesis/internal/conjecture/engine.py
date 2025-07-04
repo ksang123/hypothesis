@@ -880,6 +880,8 @@ class ConjectureRunner:
                 "filename": source_filename,
                 "lineno": line_number,
                 "test_func": test_func,  # Pass the actual function for source extraction
+                "given_kwargs": state.stuff.given_kwargs,
+                "choices": data.choices,
             }, output_file
         )
 

@@ -17,7 +17,8 @@ class UnitTestGenerator:
     def __init__(self):
         if self._initialized:
             return
-        self._COPYCODE = False
+        self._COPY_CODE = False
+        self._KEEP_FUNCS = False
         self._tests = {}
         self._initialized = True
         script_path = Path(__file__).resolve()
@@ -68,6 +69,20 @@ class UnitTestGenerator:
         lines.append(f"def test_run_failing_test_{test_name}():")
         given_kwargs = test.get("given_kwargs", {})
         choices = test.get("choices")
+
+        for var_name, strat in given_kwargs.items():
+            lines.append('    """')
+            lines.append(f"    {var_name}:")
+            if isinstance(strat, CompositeStrategy):
+                src = self._extract_source_code(strat.definition)
+                if src is None:
+                    src = "<source unavailable>"
+                for l in src.rstrip().splitlines():
+                    lines.append(f"    {l}")
+            else:
+                lines.append(f"    {repr(strat)}")
+            lines.append('    """')
+
         lines.append(f"    {test['func_name']}.hypothesis.inner_test(")
 
         printer = RepresentationPrinter(context=test["context"])
@@ -88,22 +103,25 @@ class UnitTestGenerator:
 
         existing_imports = defaultdict(set)
         existing_funcs = {}
-        if os.path.exists(output_file):
-            import ast
+        if os.path.exists(output_file) and self._KEEP_FUNCS:
+            try:
+                import ast
 
-            with open(output_file, "r", encoding="utf-8") as f:
-                source = f.read()
+                with open(output_file, "r", encoding="utf-8") as f:
+                    source = f.read()
 
-            tree = ast.parse(source)
-            for node in tree.body:
-                if isinstance(node, ast.ImportFrom) and node.module:
-                    for alias in node.names:
-                        existing_imports[node.module].add(alias.name)
-                elif isinstance(node, ast.FunctionDef):
-                    name = node.name
-                    start, end = node.lineno - 1, node.end_lineno
-                    func_src = "\n".join(source.splitlines()[start:end])
-                    existing_funcs[name] = func_src
+                tree = ast.parse(source)
+                for node in tree.body:
+                    if isinstance(node, ast.ImportFrom) and node.module:
+                        for alias in node.names:
+                            existing_imports[node.module].add(alias.name)
+                    elif isinstance(node, ast.FunctionDef):
+                        name = node.name
+                        start, end = node.lineno - 1, node.end_lineno
+                        func_src = "\n".join(source.splitlines()[start:end])
+                        existing_funcs[name] = func_src
+            except Exception:
+                print("failed to keep tests :(")
 
         module_to_names = defaultdict(set)
         new_funcs = {}
@@ -115,7 +133,7 @@ class UnitTestGenerator:
                     module_to_names[mod].add(cls)
 
             # Only add the original test function if copy_code is True
-            if self._COPYCODE and "test_func" in test:
+            if self._COPY_CODE and "test_func" in test:
                 source_code = self._extract_source_code(test["test_func"])
                 if source_code:
                     # Add the original test function

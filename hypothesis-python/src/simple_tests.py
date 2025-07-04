@@ -6,6 +6,19 @@ class MyPair:
         self.y = y
 
 @st.composite
+def complex_pair(draw):
+    x = draw(st.integers(min_value=-10, max_value=10))
+    y = draw(st.integers(min_value=-10, max_value=10))
+    z = draw(st.integers(min_value=-10, max_value=10))
+    i = draw(st.integers(min_value=-10, max_value=10))
+    j = draw(st.integers(min_value=-10, max_value=10))
+    k = MyPair(x, y)
+    k = MyPair(k, z)
+    k = MyPair(k, i)
+    k = MyPair(k, j)
+    return k
+
+@st.composite
 def my_pair(draw):
     i = draw(st.integers(min_value=0, max_value=10))
     j = draw(st.integers(min_value=0, max_value=10))
@@ -45,6 +58,11 @@ def sorted_float_pair(draw):
     a = draw(st.floats(min_value=-10, max_value=10, allow_nan=False, allow_infinity=False))
     b = draw(st.floats(min_value=-10, max_value=10, allow_nan=False, allow_infinity=False))
     return tuple(sorted((a, b)))
+
+@given(complex_pair())
+def test_my_complex_pair(pair):
+    a, b = pair.x, pair.y
+    assert a == b
 
 @given(my_pair())
 def test_my_pair(pair):

@@ -30,18 +30,22 @@ class UnitTestGenerator:
         self._tests[test_name] = test_info
 
     def _extract_source_code(self, func):
-        """Extract the source code of a function without decorators."""
+        """Return the source code of ``func`` without decorator lines."""
         import inspect
+        import textwrap
+
         try:
-            source_lines, _ = inspect.getsourcelines(func)
-            # Skip decorator lines (starting with @)
-            function_lines = []
-            for line in source_lines:
-                if not line.strip().startswith('@'):
-                    function_lines.append(line)
-            return "".join(function_lines)
-        except (OSError, TypeError):
+            unwrapped = inspect.unwrap(func)
+            src = inspect.getsource(unwrapped)
+        except Exception:
             return None
+
+        lines = []
+        for line in textwrap.dedent(src).splitlines():
+            if line.strip().startswith("@"):  # ignore decorators
+                continue
+            lines.append(line)
+        return "\n".join(lines)
 
     def _collect_types(self, value, seen):
         if id(value) in seen:
@@ -80,7 +84,11 @@ class UnitTestGenerator:
                 for l in src.rstrip().splitlines():
                     lines.append(f"    {l}")
             else:
-                lines.append(f"    {repr(strat)}")
+                # For built-in strategies we only show the strategy name
+                name = repr(strat)
+                if "(" in name:
+                    name = name.split("(")[0] + "()"
+                lines.append(f"    {name}")
             lines.append('    """')
 
         lines.append(f"    {test['func_name']}.hypothesis.inner_test(")

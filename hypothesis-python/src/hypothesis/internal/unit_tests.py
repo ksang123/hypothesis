@@ -4,6 +4,8 @@ from collections import defaultdict
 from ..strategies._internal.core import CompositeStrategy
 from ..vendor.pretty import RepresentationPrinter
 from pathlib import Path
+import inspect
+import ast
 
 class UnitTestGenerator:
     _instance = None
@@ -30,22 +32,17 @@ class UnitTestGenerator:
         self._tests[test_name] = test_info
 
     def _extract_source_code(self, func):
-        """Return the source code of ``func`` without decorator lines."""
-        import inspect
-        import textwrap
-
+        """Extract the source code of a function without decorators."""
         try:
-            unwrapped = inspect.unwrap(func)
-            src = inspect.getsource(unwrapped)
-        except Exception:
+            source_lines, _ = inspect.getsourcelines(func)
+            # Skip decorator lines (starting with @)
+            function_lines = []
+            for line in source_lines:
+                if not line.strip().startswith('@'):
+                    function_lines.append(line)
+            return "".join(function_lines)
+        except (OSError, TypeError):
             return None
-
-        lines = []
-        for line in textwrap.dedent(src).splitlines():
-            if line.strip().startswith("@"):  # ignore decorators
-                continue
-            lines.append(line)
-        return "\n".join(lines)
 
     def _collect_types(self, value, seen):
         if id(value) in seen:
@@ -72,23 +69,22 @@ class UnitTestGenerator:
             lines.append(f"# Line number: {lineno}")
         lines.append(f"def test_run_failing_test_{test_name}():")
         given_kwargs = test.get("given_kwargs", {})
-        choices = test.get("choices")
 
         for var_name, strat in given_kwargs.items():
             lines.append('    """')
             lines.append(f"    {var_name}:")
-            if isinstance(strat, CompositeStrategy):
-                src = self._extract_source_code(strat.definition)
-                if src is None:
-                    src = "<source unavailable>"
-                for l in src.rstrip().splitlines():
-                    lines.append(f"    {l}")
+            st = strat._LazyStrategy__wrapped_strategy # private? nah
+            if isinstance(st, CompositeStrategy):
+                df = st.definition
+                lines.append("STRATEGY CODE:")
+                lines.append(strip_leading_indent_after_first_line(self._extract_source_code(df)))
             else:
                 # For built-in strategies we only show the strategy name
                 name = repr(strat)
                 if "(" in name:
                     name = name.split("(")[0] + "()"
-                lines.append(f"    {name}")
+                value = test["kwargs"].get(var_name)
+                lines.append(f"    {name} -> {value!r}")
             lines.append('    """')
 
         lines.append(f"    {test['func_name']}.hypothesis.inner_test(")
@@ -113,8 +109,6 @@ class UnitTestGenerator:
         existing_funcs = {}
         if os.path.exists(output_file) and self._KEEP_FUNCS:
             try:
-                import ast
-
                 with open(output_file, "r", encoding="utf-8") as f:
                     source = f.read()
 
@@ -169,6 +163,17 @@ class UnitTestGenerator:
                 f.write(code.rstrip() + "\n\n")
 
         print(f"[unit-test-generator] Wrote {len(new_funcs)} test(s) to {output_file}")
+
+
+def strip_leading_indent_after_first_line(source: str) -> str:
+    first, _, rest = source.partition("\n")
+    if not rest:
+        return ''
+
+    lines = rest.splitlines()
+    first_line_indent = len(lines[0]) - len(lines[0].lstrip())
+
+    return "\n".join(line[first_line_indent:] if len(line) >= first_line_indent else line for line in lines)
 
 
 # def save_failing_test_info(self, data: ConjectureResult, output_file: str = None) -> None:

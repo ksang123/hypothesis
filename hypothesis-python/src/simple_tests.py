@@ -59,6 +59,11 @@ def sorted_float_pair(draw):
     b = draw(st.floats(min_value=-10, max_value=10, allow_nan=False, allow_infinity=False))
     return tuple(sorted((a, b)))
 
+@given(complex_pair(), complex_pair())
+def test_my_complex_pair_prefixer_test(pair1, pair2):
+    a, b = pair1.x, pair2.y
+    assert a == b
+
 @given(complex_pair())
 def test_my_complex_pair(pair):
     a, b = pair.x, pair.y

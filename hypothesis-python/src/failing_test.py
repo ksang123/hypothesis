@@ -20,18 +20,29 @@ from simple_tests import (
 # Failure occurred in: simple_tests.py
 # Line number: 65
 def test_run_failing_test_test_my_complex_pair():
-    pair_x = 0
-    pair_y = 0
-    pair_z = 0
-    pair_i = 0
-    pair_j = 0
-    pair_k = MyPair(pair_x, pair_y)
-    pair_k = MyPair(pair_k, pair_z)
-    pair_k = MyPair(pair_k, pair_i)
-    pair_k = MyPair(pair_k, pair_j)
-    pair = pair_k
+    pair1_x = 0
+    pair1_y = 0
+    pair1_z = 0
+    pair1_i = 0
+    pair1_j = 0
+    pair1_k = MyPair(pair1_x, pair1_y)
+    pair1_k = MyPair(pair1_k, pair1_z)
+    pair1_k = MyPair(pair1_k, pair1_i)
+    pair1_k = MyPair(pair1_k, pair1_j)
+    pair1 = pair1_k
+    pair2_x = 0
+    pair2_y = 0
+    pair2_z = 0
+    pair2_i = 0
+    pair2_j = 0
+    pair2_k = MyPair(pair2_x, pair2_y)
+    pair2_k = MyPair(pair2_k, pair2_z)
+    pair2_k = MyPair(pair2_k, pair2_i)
+    pair2_k = MyPair(pair2_k, pair2_j)
+    pair2 = pair2_k
     test_my_complex_pair.hypothesis.inner_test(
-        pair=pair,
+        pair1=pair1,
+        pair2=pair2,
     )
 
 # Failure occurred in: simple_tests.py

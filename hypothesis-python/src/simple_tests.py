@@ -1,7 +1,7 @@
 from hypothesis import given, strategies as st
 
 class MyPair:
-    def __init__(self, x, y):
+    def __init__(self, x=None, y=None):
         self.x = x
         self.y = y
 
@@ -17,6 +17,17 @@ def complex_pair(draw):
     k = MyPair(k, i)
     k = MyPair(k, j)
     return k
+
+@st.composite
+def imperative_pair(draw):
+    p = MyPair()
+    p2 = MyPair()
+    p.x = draw(st.integers(min_value=-10, max_value=10))
+    p.y = p2
+    p.y.x = draw(st.integers(min_value=-10, max_value=10))
+    p.y.y = draw(st.integers(min_value=-10, max_value=10))
+    return p
+
 
 @st.composite
 def my_pair(draw):
@@ -62,6 +73,11 @@ def sorted_float_pair(draw):
 @given(complex_pair(), complex_pair())
 def test_my_complex_pair_prefixer_test(pair1, pair2):
     a, b = pair1.x, pair2.y
+    assert a == b
+
+@given(imperative_pair())
+def test_imperative_pair(pair):
+    a, b = pair.x, pair.y
     assert a == b
 
 @given(complex_pair())

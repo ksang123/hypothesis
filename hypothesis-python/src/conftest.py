@@ -1,67 +1,6 @@
-# from _typeshed import TraceFunction
-from types import FrameType
-from typing import Any
-
 from hypothesis.internal.unit_tests import UnitTestGenerator
-# conftest.py
 import sys
-import traceback
-from hypothesis.strategies import SearchStrategy
-import linecache
-
-
-flag = False
-
-def shortenName(name: str) -> str:
-    """Take only the last 2 subdirectories of a path."""
-    parts = name.split('\\')
-    if len(parts) > 2:
-        return '/'.join(parts[-2:])
-    return name
-
-
-# Add a flag to track if we're inside do_draw execution
-inside_do_draw = False
-
-
-def trace_lines(frame, event, arg):
-    global inside_do_draw
-
-    # Check if we're returning from do_draw
-    if event == 'return' and frame.f_code.co_name == 'do_draw':
-        inside_do_draw = False
-        print("Finished tracing do_draw calls")
-
-    # Print line information as before
-    code = frame.f_code
-    filename = frame.f_code.co_filename
-    lineno = frame.f_lineno
-    func_name = frame.f_code.co_name
-    line = linecache.getline(filename, lineno).strip()
-    print(f"{shortenName(filename)}:{func_name}:{lineno}: {line}")
-
-    return trace_lines
-
-
-def trace_calls(frame: FrameType, event: str, arg: Any):
-    global inside_do_draw
-
-    if event != 'call':
-        return
-
-    func_name = frame.f_code.co_name
-
-    # Set flag when entering do_draw
-    if func_name == "do_draw":
-        inside_do_draw = True
-        print("Started tracing do_draw calls")
-        return trace_lines
-    # Trace any function called while inside do_draw
-    elif inside_do_draw:
-        print(f"Tracing nested call to {func_name}")
-        return trace_lines
-
-    return
+from tracing import *
 
 
 def pytest_configure(config):
@@ -78,7 +17,7 @@ def pytest_unconfigure(config):
 
 def pytest_runtest_call(item):
     """Trace the test function itself."""
-    sys.settrace(trace_calls)
+    sys.setprofile(trace_calls)
 
 def pytest_sessionfinish(session, exitstatus):
     # TODO: maybe pass a path here

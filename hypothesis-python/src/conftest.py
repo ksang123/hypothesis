@@ -4,6 +4,10 @@ from tracing import *
 
 
 def pytest_configure(config):
+    pass
+    with open("hypothesis_trace.log", "w") as f:
+        print("", file=f)
+    instrument_hypothesis()
     """Called once at the start of pytest session."""
     # global original_do_draw
     # original_do_draw = SearchStrategy.do_draw
@@ -17,7 +21,7 @@ def pytest_unconfigure(config):
 
 def pytest_runtest_call(item):
     """Trace the test function itself."""
-    sys.setprofile(trace_calls)
+    # sys.setprofile(trace_calls)
 
 def pytest_sessionfinish(session, exitstatus):
     # TODO: maybe pass a path here

@@ -1417,6 +1417,7 @@ class StateForActualGivenExecution:
                     f"{' Also, '.join(explanations)}"
                 )
 
+        import sys
         # If we have not traced executions, warn about that now (but only when
         # we'd expect to do so reliably, i.e. on CPython>=3.12)
         if (

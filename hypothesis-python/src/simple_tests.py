@@ -124,6 +124,11 @@ def test_integer_is_even(n, m):
 def test_positive_int_negative(x):
     assert x < 0
 
+
+@given(st.integers(min_value=-3, max_value=10), st.integers(min_value=-3, max_value=10))
+def test_bla(x, y):
+    assert x != 4 or y != 5
+
 @given(st.text(min_size=1, max_size=5))
 def test_non_empty_string_empty(s):
     assert s == ""

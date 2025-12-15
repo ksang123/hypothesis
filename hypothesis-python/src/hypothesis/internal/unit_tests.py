@@ -137,6 +137,15 @@ class UnitTestGenerator:
         return lines
 
     def _generate_test_body(self, test_name, test):
+        with open("hypothesis_trace.log", "a") as f:
+            print("=" * 50, file=f)
+        from pathlib import Path
+        import sys
+        sys.path.append(str(Path(__file__).resolve().parents[2]))
+        from tracing import trace_calls
+        sys.setprofile(trace_calls)
+
+
         lines = []
         filename = os.path.basename(test["filename"])
         lineno = test.get("lineno")
@@ -184,6 +193,8 @@ class UnitTestGenerator:
             else:
                 lines.append(f"        {k}={v!r},")
         lines.append("    )")
+        with open("hypothesis_trace.log", "a") as f:
+            print("=" * 50, file=f)
         return "\n".join(lines) + "\n"
 
     def render(self) -> None:

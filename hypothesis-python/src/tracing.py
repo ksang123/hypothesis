@@ -1,21 +1,22 @@
 import linecache
+from typing import Set, List
 
-flag = False
-captured_values = {
-    'draw_result': None,
-    'nested_results': {}  # Function name -> return value
-}
+
+# flag = False
 #
-def shortenName(name: str) -> str:
-    """Take only the last 2 subdirectories of a path."""
-    parts = name.split('\\')
-    if len(parts) > 2:
-        return '/'.join(parts[-2:])
-    return name
+# def shortenName(name: str) -> str:
+#     """Take only the last 2 subdirectories of a path."""
+#     parts = name.split('\\')
+#     if len(parts) > 3:
+#         return '/'.join(parts[-3:])
+#     return name
 #
 #
 # # Add a flag to track if we're inside do_draw execution
-inside_do_draw = False
+# inside_do_draw = False
+# inside_custom = False
+# depth = 0
+# custom: Set[str] = {'rb_functional_tree', 'rb_imperative_tree'}
 #
 #
 # def trace_lines(frame, event, arg):
@@ -69,45 +70,68 @@ inside_do_draw = False
 #     return
 
 
-def myLog(s: str) -> None:
+def myLog(s: str, pre = "-----------------") -> None:
     pass
     with open("hypothesis_trace.log", "a") as f:
-        print(f"----------------{s}", file=f)
+        print(f"{pre}{s}", file=f)
+
+
+class DrawResult:
+    def __init__(self, r = None, c = False, b = None, p = None):
+        self.result = r
+        # self.composite = c
+        self.innerBody: List[DrawResult] = b
+        self.parent = p
+
+    def __repr__(self):
+        return f"DrawResult(result={self.result}, innerBody={"\n\t" if self.innerBody else ""}{self.innerBody})"
+
+
+captured_values: List[DrawResult] = []
+
+last = None
+#     {
+#     'draw_result': None,
+#     'nested_results': {}  # Function name -> return value
+# }
+
 
 def trace_calls(frame, event, arg):
-    global inside_do_draw, captured_values
-
-    # Profile needs to handle both 'call' and 'return' in the same function
-    if event == 'call':
-        func_name = frame.f_code.co_name
-        if func_name == "draw":
-            inside_do_draw = True
-            myLog(f"Started tracing draw calls")
-        elif inside_do_draw:
-            myLog(f"Tracing nested call to {func_name}")
-
-    elif event == 'return':
-        func_name = frame.f_code.co_name
-        if func_name == "draw":
-            inside_do_draw = False
-            captured_values['draw_result'] = arg
-            myLog(f"Captured draw return value: {arg}")
-            myLog("Finished tracing draw calls")
-        elif inside_do_draw:
-            captured_values['nested_results'][func_name] = arg
-            myLog(f"Captured nested call to {func_name} with return value: {arg}")
-        else:
-            pass
-            # myLog(f"Unexpected return event for {func_name}")
-
+    global captured_values, last
     # Still print line information if inside_do_draw
-    if inside_do_draw and event in ('call', 'return'):
-        filename = frame.f_code.co_filename
-        lineno = frame.f_lineno
-        line = linecache.getline(filename, lineno).strip()
-        myLog(f"{shortenName(filename)}:{func_name}:{lineno}: {line}")
 
-    return trace_calls  # Always return self to continue tracing
+    func_name = frame.f_code.co_name
+    if event == 'call':
+        if func_name == "draw":
+            if not last:
+                captured_values.append(DrawResult())
+                last = captured_values[-1]
+                myLog("==================Made a new draw")
+            else:
+                myLog("Made a new composite draw")
+                if last.innerBody is None:
+                    last.innerBody = []
+                newOne = DrawResult()
+                last.innerBody.append(newOne)
+                newOne.parent = last
+                last = newOne
+
+        if func_name.startswith("draw_"):
+            myLog("Made a new basic draw")
+            # last.composite = False
+    if event == 'return':
+        if func_name == "draw":
+            myLog(f"Returned from draw with {arg}")
+            if last.parent:
+                last.parent.result = "<This will swapped out>" #last.innerBody
+            if not last.innerBody:
+                last.result = arg
+            else:
+                last.result = None
+            last = last.parent
+            if last is None:
+                myLog("===================Not composite")
+            myLog(f"Now the list is {"\n".join(map(lambda x: f"{x}", captured_values))}")
 
 draw_log = []
 

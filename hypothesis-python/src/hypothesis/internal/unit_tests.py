@@ -67,6 +67,13 @@ class UnitTestGenerator:
         values = {}
         draws = {}
         with BuildContext(data) as ctx:
+            with open("hypothesis_trace.log", "a") as f:
+                print("=" * 50, file=f)
+            from pathlib import Path
+            import sys
+            sys.path.append(str(Path(__file__).resolve().parents[2]))
+            from tracing import trace_calls
+            sys.setprofile(trace_calls)
             for name, strat in given_kwargs.items():
                 st = strat._LazyStrategy__wrapped_strategy
                 if isinstance(st, CompositeStrategy):
@@ -82,6 +89,7 @@ class UnitTestGenerator:
                 else:
                     values[name] = ctx.data.draw(st)
                     draws[name] = [values[name]]
+            sys.setprofile(None)
         return values, draws
 
     class _Prefixer(ast.NodeTransformer):
@@ -137,13 +145,6 @@ class UnitTestGenerator:
         return lines
 
     def _generate_test_body(self, test_name, test):
-        with open("hypothesis_trace.log", "a") as f:
-            print("=" * 50, file=f)
-        from pathlib import Path
-        import sys
-        sys.path.append(str(Path(__file__).resolve().parents[2]))
-        from tracing import trace_calls
-        sys.setprofile(trace_calls)
 
 
         lines = []

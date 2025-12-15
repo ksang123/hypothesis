@@ -1,0 +1,2160 @@
+Started tracing draw calls
+conjecture/data.py:draw:1088: def draw(
+Tracing nested call to gc_cumulative_time
+conjecture/junkdrawer.py:gc_cumulative_time:412: def gc_cumulative_time() -> float:
+Captured nested call to gc_cumulative_time with return value: 0
+conjecture/junkdrawer.py:gc_cumulative_time:455: return _gc_cumulative_time
+Tracing nested call to validate
+_internal/strategies.py:validate:473: def validate(self) -> None:
+Captured nested call to validate with return value: None
+_internal/strategies.py:validate:479: return
+Tracing nested call to is_empty
+_internal/strategies.py:is_empty:243: @property
+Tracing nested call to recursive_property
+_internal/strategies.py:recursive_property:81: def recursive_property(strategy: "SearchStrategy", name: str, default: object) -> Any:
+Tracing nested call to forced_value
+_internal/strategies.py:forced_value:111: def forced_value(target: SearchStrategy) -> Any:
+Captured nested call to forced_value with return value: False
+_internal/strategies.py:forced_value:115: return getattr(target, cache_key)
+Captured nested call to recursive_property with return value: False
+_internal/strategies.py:recursive_property:118: return forced_value(strategy)
+Captured nested call to is_empty with return value: False
+_internal/strategies.py:is_empty:250: return recursive_property(self, "is_empty", True)
+Tracing nested call to unwrap_strategies
+_internal/lazy.py:unwrap_strategies:31: def unwrap_strategies(s):
+Tracing nested call to __getitem__
+Lib/weakref.py:__getitem__:414: def __getitem__(self, key):
+Captured nested call to __getitem__ with return value: None
+Lib/weakref.py:__getitem__:415: return self.data[ref(key)]
+Tracing nested call to __setitem__
+Lib/weakref.py:__setitem__:427: def __setitem__(self, key, value):
+Captured nested call to __setitem__ with return value: None
+Lib/weakref.py:__setitem__:428: self.data[ref(key, self._remove)] = value
+Tracing nested call to wrapped_strategy
+_internal/lazy.py:wrapped_strategy:112: @property
+Captured nested call to wrapped_strategy with return value: integers()
+_internal/lazy.py:wrapped_strategy:132: return self.__wrapped_strategy
+Tracing nested call to unwrap_strategies
+_internal/lazy.py:unwrap_strategies:31: def unwrap_strategies(s):
+Captured nested call to unwrap_strategies with return value: integers()
+_internal/lazy.py:unwrap_strategies:36: return s
+Tracing nested call to __setitem__
+Lib/weakref.py:__setitem__:427: def __setitem__(self, key, value):
+Captured nested call to __setitem__ with return value: None
+Lib/weakref.py:__setitem__:428: self.data[ref(key, self._remove)] = value
+Tracing nested call to clear
+<frozen _collections_abc>:clear:933: 
+Tracing nested call to popitem
+Lib/weakref.py:popitem:495: def popitem(self):
+Captured nested call to popitem with return value: (integers(), integers())
+Lib/weakref.py:popitem:501: return o, value
+Tracing nested call to popitem
+Lib/weakref.py:popitem:495: def popitem(self):
+Captured nested call to popitem with return value: None
+Lib/weakref.py:popitem:498: key, value = self.data.popitem()
+Captured nested call to clear with return value: None
+<frozen _collections_abc>:clear:939: 
+Captured nested call to unwrap_strategies with return value: integers()
+_internal/lazy.py:unwrap_strategies:65: assert unwrap_depth >= 0
+Tracing nested call to label
+_internal/strategies.py:label:502: @property
+Tracing nested call to calc_label
+_internal/strategies.py:calc_label:511: def calc_label(self) -> int:
+Tracing nested call to class_label
+_internal/strategies.py:class_label:491: @property
+Tracing nested call to calc_label_from_cls
+conjecture/utils.py:calc_label_from_cls:37: def calc_label_from_cls(cls: type) -> int:
+Tracing nested call to calc_label_from_name
+conjecture/utils.py:calc_label_from_name:32: def calc_label_from_name(name: str) -> int:
+Tracing nested call to int_from_bytes
+internal/compat.py:int_from_bytes:104: def int_from_bytes(data: typing.Union[bytes, bytearray]) -> int:
+Captured nested call to int_from_bytes with return value: 15101551161751157077
+internal/compat.py:int_from_bytes:105: return int.from_bytes(data, "big")
+Captured nested call to calc_label_from_name with return value: 15101551161751157077
+conjecture/utils.py:calc_label_from_name:34: return int_from_bytes(hashed[:8])
+Captured nested call to calc_label_from_cls with return value: 15101551161751157077
+conjecture/utils.py:calc_label_from_cls:38: return calc_label_from_name(cls.__qualname__)
+Captured nested call to class_label with return value: 15101551161751157077
+_internal/strategies.py:class_label:500: return result
+Captured nested call to calc_label with return value: 15101551161751157077
+_internal/strategies.py:calc_label:512: return self.class_label
+Tracing nested call to cast
+Lib/typing.py:cast:2216: def cast(typ, val):
+Captured nested call to cast with return value: 15101551161751157077
+Lib/typing.py:cast:2224: return val
+Captured nested call to label with return value: 15101551161751157077
+_internal/strategies.py:label:509: return cast(int, self.__label)
+Tracing nested call to start_span
+conjecture/data.py:start_span:1156: def start_span(self, label: int) -> None:
+Tracing nested call to span_start
+conjecture/providers.py:span_start:412: def span_start(self, label: int, /) -> None:  # noqa: B027  # non-abstract noop
+Captured nested call to span_start with return value: None
+conjecture/providers.py:span_start:412: def span_start(self, label: int, /) -> None:  # noqa: B027  # non-abstract noop
+Tracing nested call to __assert_not_frozen
+conjecture/data.py:__assert_not_frozen:1078: def __assert_not_frozen(self, name: str) -> None:
+Captured nested call to __assert_not_frozen with return value: None
+conjecture/data.py:__assert_not_frozen:1079: if self.frozen:
+Tracing nested call to start_span
+conjecture/data.py:start_span:330: def start_span(self, label: int) -> None:
+Tracing nested call to append
+conjecture/junkdrawer.py:append:142: def append(self, n: int) -> None:
+Tracing nested call to __len__
+conjecture/junkdrawer.py:__len__:103: def __len__(self) -> int:
+Captured nested call to __len__ with return value: 1
+conjecture/junkdrawer.py:__len__:104: return len(self.__underlying)
+Tracing nested call to __setitem__
+conjecture/junkdrawer.py:__setitem__:147: def __setitem__(self, i: int, n: int) -> None:
+Captured nested call to __setitem__ with return value: None
+conjecture/junkdrawer.py:__setitem__:151: return
+Captured nested call to append with return value: None
+conjecture/junkdrawer.py:append:145: self[i] = n
+Captured nested call to start_span with return value: None
+conjecture/data.py:start_span:337: self.trail.append(TrailType.START_SPAN + i)
+Captured nested call to start_span with return value: None
+conjecture/data.py:start_span:1169: self.labels_for_structure_stack.append({label})
+Tracing nested call to do_draw
+_internal/numbers.py:do_draw:68: def do_draw(self, data: ConjectureData) -> int:
+Tracing nested call to draw_integer
+conjecture/data.py:draw_integer:807: def draw_integer(
+Tracing nested call to _pooled_constraints
+conjecture/data.py:_pooled_constraints:943: def _pooled_constraints(self, choice_type, constraints):
+Tracing nested call to choice_constraints_key
+conjecture/choice.py:choice_constraints_key:604: def choice_constraints_key(choice_type, constraints):
+Captured nested call to choice_constraints_key with return value: (None, None, None, 0)
+conjecture/choice.py:choice_constraints_key:613: return (
+Tracing nested call to __getitem__
+internal/cache.py:__getitem__:334: def __getitem__(self, key: K) -> V:
+Tracing nested call to cache
+internal/cache.py:cache:319: @property
+Captured nested call to cache with return value: OrderedDict()
+internal/cache.py:cache:325: return self._threadlocal.cache
+Captured nested call to __getitem__ with return value: None
+internal/cache.py:__getitem__:335: val = self.cache[key]
+Tracing nested call to __setitem__
+internal/cache.py:__setitem__:327: def __setitem__(self, key: K, value: V) -> None:
+Tracing nested call to cache
+internal/cache.py:cache:319: @property
+Captured nested call to cache with return value: OrderedDict()
+internal/cache.py:cache:322: return self._threadlocal.cache
+Tracing nested call to cache
+internal/cache.py:cache:319: @property
+Captured nested call to cache with return value: OrderedDict([(('integer', None, None, None, 0), {'min_value': None, 'max_value': None, 'weights': None, 'shrink_towards': 0})])
+internal/cache.py:cache:322: return self._threadlocal.cache
+Tracing nested call to cache
+internal/cache.py:cache:319: @property
+Captured nested call to cache with return value: OrderedDict([(('integer', None, None, None, 0), {'min_value': None, 'max_value': None, 'weights': None, 'shrink_towards': 0})])
+internal/cache.py:cache:322: return self._threadlocal.cache
+Captured nested call to __setitem__ with return value: None
+internal/cache.py:__setitem__:331: while len(self.cache) > self.max_size:
+Captured nested call to _pooled_constraints with return value: {'min_value': None, 'max_value': None, 'weights': None, 'shrink_towards': 0}
+conjecture/data.py:_pooled_constraints:954: return constraints
+Tracing nested call to _draw
+conjecture/data.py:_draw:740: def _draw(self, choice_type, constraints, *, observe, forced):
+Tracing nested call to _pop_choice
+conjecture/data.py:_pop_choice:956: def _pop_choice(
+Tracing nested call to choice_permitted
+conjecture/choice.py:choice_permitted:531: def choice_permitted(choice: ChoiceT, constraints: ChoiceConstraintsT) -> bool:
+Tracing nested call to cast
+Lib/typing.py:cast:2216: def cast(typ, val):
+Captured nested call to cast with return value: {'min_value': None, 'max_value': None, 'weights': None, 'shrink_towards': 0}
+Lib/typing.py:cast:2224: return val
+Captured nested call to choice_permitted with return value: True
+conjecture/choice.py:choice_permitted:538: return not (max_value is not None and choice > max_value)
+Captured nested call to _pop_choice with return value: 0
+conjecture/data.py:_pop_choice:1043: return choice
+Tracing nested call to draw_integer
+conjecture/datatree.py:draw_integer:1004: def draw_integer(
+Tracing nested call to draw_value
+conjecture/datatree.py:draw_value:1033: def draw_value(
+Tracing nested call to compute_max_children
+conjecture/datatree.py:compute_max_children:204: def compute_max_children(
+Tracing nested call to cast
+Lib/typing.py:cast:2216: def cast(typ, val):
+Captured nested call to cast with return value: {'min_value': None, 'max_value': None, 'weights': None, 'shrink_towards': 0}
+Lib/typing.py:cast:2224: return val
+Captured nested call to compute_max_children with return value: 340282366920938463463374607431768211455
+conjecture/datatree.py:compute_max_children:214: return 2**128 - 1
+Captured nested call to draw_value with return value: None
+conjecture/datatree.py:draw_value:1117: if self._trail[-1] is not self._current_node:
+Captured nested call to draw_integer with return value: None
+conjecture/datatree.py:draw_integer:1007: self.draw_value(
+Tracing nested call to choices_size
+conjecture/choice.py:choices_size:622: def choices_size(choices: Iterable[ChoiceT]) -> int:
+Tracing nested call to choices_to_bytes
+hypothesis/database.py:choices_to_bytes:1170: def choices_to_bytes(choices: Iterable[ChoiceT], /) -> bytes:
+Captured nested call to choices_to_bytes with return value: b'A\x00'
+hypothesis/database.py:choices_to_bytes:1207: return b"".join(parts)
+Captured nested call to choices_size with return value: 2
+conjecture/choice.py:choices_size:625: return len(choices_to_bytes(choices))
+Tracing nested call to __init__
+<attrs generated init hypothesis.internal.conjecture.choice.ChoiceNode>:__init__:1: def __init__(self, type, value, constraints, was_forced, index=attr_dict['index'].default):
+Captured nested call to __init__ with return value: None
+<attrs generated init hypothesis.internal.conjecture.choice.ChoiceNode>:__init__:6: self.index = index
+Tracing nested call to record_choice
+conjecture/data.py:record_choice:327: def record_choice(self) -> None:
+Tracing nested call to append
+conjecture/junkdrawer.py:append:142: def append(self, n: int) -> None:
+Tracing nested call to __len__
+conjecture/junkdrawer.py:__len__:103: def __len__(self) -> int:
+Captured nested call to __len__ with return value: 2
+conjecture/junkdrawer.py:__len__:104: return len(self.__underlying)
+Tracing nested call to __setitem__
+conjecture/junkdrawer.py:__setitem__:147: def __setitem__(self, i: int, n: int) -> None:
+Tracing nested call to __upgrade
+conjecture/junkdrawer.py:__upgrade:160: def __upgrade(self) -> None:
+Tracing nested call to array_or_list
+conjecture/junkdrawer.py:array_or_list:33: def array_or_list(
+Captured nested call to array_or_list with return value: array('H', [3, 4, 0])
+conjecture/junkdrawer.py:array_or_list:38: return array.array(code, contents)
+Captured nested call to __upgrade with return value: None
+conjecture/junkdrawer.py:__upgrade:163: self.__underlying = array_or_list(code, self.__underlying)
+Tracing nested call to __upgrade
+conjecture/junkdrawer.py:__upgrade:160: def __upgrade(self) -> None:
+Tracing nested call to array_or_list
+conjecture/junkdrawer.py:array_or_list:33: def array_or_list(
+Captured nested call to array_or_list with return value: array('I', [3, 4, 0])
+conjecture/junkdrawer.py:array_or_list:38: return array.array(code, contents)
+Captured nested call to __upgrade with return value: None
+conjecture/junkdrawer.py:__upgrade:163: self.__underlying = array_or_list(code, self.__underlying)
+Tracing nested call to __upgrade
+conjecture/junkdrawer.py:__upgrade:160: def __upgrade(self) -> None:
+Tracing nested call to array_or_list
+conjecture/junkdrawer.py:array_or_list:33: def array_or_list(
+Captured nested call to array_or_list with return value: array('L', [3, 4, 0])
+conjecture/junkdrawer.py:array_or_list:38: return array.array(code, contents)
+Captured nested call to __upgrade with return value: None
+conjecture/junkdrawer.py:__upgrade:163: self.__underlying = array_or_list(code, self.__underlying)
+Tracing nested call to __upgrade
+conjecture/junkdrawer.py:__upgrade:160: def __upgrade(self) -> None:
+Tracing nested call to array_or_list
+conjecture/junkdrawer.py:array_or_list:33: def array_or_list(
+Captured nested call to array_or_list with return value: array('Q', [3, 4, 0])
+conjecture/junkdrawer.py:array_or_list:38: return array.array(code, contents)
+Captured nested call to __upgrade with return value: None
+conjecture/junkdrawer.py:__upgrade:163: self.__underlying = array_or_list(code, self.__underlying)
+Captured nested call to __setitem__ with return value: None
+conjecture/junkdrawer.py:__setitem__:151: return
+Captured nested call to append with return value: None
+conjecture/junkdrawer.py:append:145: self[i] = n
+Captured nested call to record_choice with return value: None
+conjecture/data.py:record_choice:328: self.trail.append(TrailType.CHOICE)
+Captured nested call to _draw with return value: 0
+conjecture/data.py:_draw:805: return value
+Captured nested call to draw_integer with return value: 0
+conjecture/data.py:draw_integer:844: return self._draw("integer", constraints, observe=observe, forced=forced)
+Captured nested call to do_draw with return value: 0
+_internal/numbers.py:do_draw:83: return data.draw_integer(
+Tracing nested call to gc_cumulative_time
+conjecture/junkdrawer.py:gc_cumulative_time:412: def gc_cumulative_time() -> float:
+Captured nested call to gc_cumulative_time with return value: 0
+conjecture/junkdrawer.py:gc_cumulative_time:455: return _gc_cumulative_time
+Tracing nested call to stop_span
+conjecture/data.py:stop_span:1171: def stop_span(self, *, discard: bool = False) -> None:
+Tracing nested call to span_end
+conjecture/providers.py:span_end:423: def span_end(self, discard: bool, /) -> None:  # noqa: B027, FBT001
+Captured nested call to span_end with return value: None
+conjecture/providers.py:span_end:423: def span_end(self, discard: bool, /) -> None:  # noqa: B027, FBT001
+Tracing nested call to stop_span
+conjecture/data.py:stop_span:339: def stop_span(self, *, discard: bool) -> None:
+Tracing nested call to append
+conjecture/junkdrawer.py:append:142: def append(self, n: int) -> None:
+Tracing nested call to __len__
+conjecture/junkdrawer.py:__len__:103: def __len__(self) -> int:
+Captured nested call to __len__ with return value: 3
+conjecture/junkdrawer.py:__len__:104: return len(self.__underlying)
+Tracing nested call to __setitem__
+conjecture/junkdrawer.py:__setitem__:147: def __setitem__(self, i: int, n: int) -> None:
+Captured nested call to __setitem__ with return value: None
+conjecture/junkdrawer.py:__setitem__:151: return
+Captured nested call to append with return value: None
+conjecture/junkdrawer.py:append:145: self[i] = n
+Captured nested call to stop_span with return value: None
+conjecture/data.py:stop_span:343: self.trail.append(TrailType.STOP_SPAN_NO_DISCARD)
+Captured nested call to stop_span with return value: None
+conjecture/data.py:stop_span:1189: if discard:
+Captured draw return value: 0
+Finished tracing draw calls
+Started tracing draw calls
+conjecture/data.py:draw:1088: def draw(
+Tracing nested call to gc_cumulative_time
+conjecture/junkdrawer.py:gc_cumulative_time:412: def gc_cumulative_time() -> float:
+Captured nested call to gc_cumulative_time with return value: 0
+conjecture/junkdrawer.py:gc_cumulative_time:455: return _gc_cumulative_time
+Tracing nested call to validate
+_internal/strategies.py:validate:473: def validate(self) -> None:
+Captured nested call to validate with return value: None
+_internal/strategies.py:validate:479: return
+Tracing nested call to is_empty
+_internal/strategies.py:is_empty:243: @property
+Tracing nested call to recursive_property
+_internal/strategies.py:recursive_property:81: def recursive_property(strategy: "SearchStrategy", name: str, default: object) -> Any:
+Tracing nested call to forced_value
+_internal/strategies.py:forced_value:111: def forced_value(target: SearchStrategy) -> Any:
+Captured nested call to forced_value with return value: False
+_internal/strategies.py:forced_value:115: return getattr(target, cache_key)
+Captured nested call to recursive_property with return value: False
+_internal/strategies.py:recursive_property:118: return forced_value(strategy)
+Captured nested call to is_empty with return value: False
+_internal/strategies.py:is_empty:250: return recursive_property(self, "is_empty", True)
+Tracing nested call to unwrap_strategies
+_internal/lazy.py:unwrap_strategies:31: def unwrap_strategies(s):
+Tracing nested call to __getitem__
+Lib/weakref.py:__getitem__:414: def __getitem__(self, key):
+Captured nested call to __getitem__ with return value: None
+Lib/weakref.py:__getitem__:415: return self.data[ref(key)]
+Tracing nested call to __setitem__
+Lib/weakref.py:__setitem__:427: def __setitem__(self, key, value):
+Captured nested call to __setitem__ with return value: None
+Lib/weakref.py:__setitem__:428: self.data[ref(key, self._remove)] = value
+Tracing nested call to wrapped_strategy
+_internal/lazy.py:wrapped_strategy:112: @property
+Captured nested call to wrapped_strategy with return value: integers()
+_internal/lazy.py:wrapped_strategy:132: return self.__wrapped_strategy
+Tracing nested call to unwrap_strategies
+_internal/lazy.py:unwrap_strategies:31: def unwrap_strategies(s):
+Captured nested call to unwrap_strategies with return value: integers()
+_internal/lazy.py:unwrap_strategies:36: return s
+Tracing nested call to __setitem__
+Lib/weakref.py:__setitem__:427: def __setitem__(self, key, value):
+Captured nested call to __setitem__ with return value: None
+Lib/weakref.py:__setitem__:428: self.data[ref(key, self._remove)] = value
+Tracing nested call to clear
+<frozen _collections_abc>:clear:933: 
+Tracing nested call to popitem
+Lib/weakref.py:popitem:495: def popitem(self):
+Captured nested call to popitem with return value: (integers(), integers())
+Lib/weakref.py:popitem:501: return o, value
+Tracing nested call to popitem
+Lib/weakref.py:popitem:495: def popitem(self):
+Captured nested call to popitem with return value: None
+Lib/weakref.py:popitem:498: key, value = self.data.popitem()
+Captured nested call to clear with return value: None
+<frozen _collections_abc>:clear:939: 
+Captured nested call to unwrap_strategies with return value: integers()
+_internal/lazy.py:unwrap_strategies:65: assert unwrap_depth >= 0
+Tracing nested call to label
+_internal/strategies.py:label:502: @property
+Tracing nested call to cast
+Lib/typing.py:cast:2216: def cast(typ, val):
+Captured nested call to cast with return value: 15101551161751157077
+Lib/typing.py:cast:2224: return val
+Captured nested call to label with return value: 15101551161751157077
+_internal/strategies.py:label:509: return cast(int, self.__label)
+Tracing nested call to start_span
+conjecture/data.py:start_span:1156: def start_span(self, label: int) -> None:
+Tracing nested call to span_start
+conjecture/providers.py:span_start:412: def span_start(self, label: int, /) -> None:  # noqa: B027  # non-abstract noop
+Captured nested call to span_start with return value: None
+conjecture/providers.py:span_start:412: def span_start(self, label: int, /) -> None:  # noqa: B027  # non-abstract noop
+Tracing nested call to __assert_not_frozen
+conjecture/data.py:__assert_not_frozen:1078: def __assert_not_frozen(self, name: str) -> None:
+Captured nested call to __assert_not_frozen with return value: None
+conjecture/data.py:__assert_not_frozen:1079: if self.frozen:
+Tracing nested call to start_span
+conjecture/data.py:start_span:330: def start_span(self, label: int) -> None:
+Tracing nested call to append
+conjecture/junkdrawer.py:append:142: def append(self, n: int) -> None:
+Tracing nested call to __len__
+conjecture/junkdrawer.py:__len__:103: def __len__(self) -> int:
+Captured nested call to __len__ with return value: 4
+conjecture/junkdrawer.py:__len__:104: return len(self.__underlying)
+Tracing nested call to __setitem__
+conjecture/junkdrawer.py:__setitem__:147: def __setitem__(self, i: int, n: int) -> None:
+Captured nested call to __setitem__ with return value: None
+conjecture/junkdrawer.py:__setitem__:151: return
+Captured nested call to append with return value: None
+conjecture/junkdrawer.py:append:145: self[i] = n
+Captured nested call to start_span with return value: None
+conjecture/data.py:start_span:337: self.trail.append(TrailType.START_SPAN + i)
+Captured nested call to start_span with return value: None
+conjecture/data.py:start_span:1169: self.labels_for_structure_stack.append({label})
+Tracing nested call to do_draw
+_internal/numbers.py:do_draw:68: def do_draw(self, data: ConjectureData) -> int:
+Tracing nested call to draw_integer
+conjecture/data.py:draw_integer:807: def draw_integer(
+Tracing nested call to _pooled_constraints
+conjecture/data.py:_pooled_constraints:943: def _pooled_constraints(self, choice_type, constraints):
+Tracing nested call to choice_constraints_key
+conjecture/choice.py:choice_constraints_key:604: def choice_constraints_key(choice_type, constraints):
+Captured nested call to choice_constraints_key with return value: (None, None, None, 0)
+conjecture/choice.py:choice_constraints_key:613: return (
+Tracing nested call to __getitem__
+internal/cache.py:__getitem__:334: def __getitem__(self, key: K) -> V:
+Tracing nested call to cache
+internal/cache.py:cache:319: @property
+Captured nested call to cache with return value: OrderedDict([(('integer', None, None, None, 0), {'min_value': None, 'max_value': None, 'weights': None, 'shrink_towards': 0})])
+internal/cache.py:cache:322: return self._threadlocal.cache
+Tracing nested call to cache
+internal/cache.py:cache:319: @property
+Captured nested call to cache with return value: OrderedDict([(('integer', None, None, None, 0), {'min_value': None, 'max_value': None, 'weights': None, 'shrink_towards': 0})])
+internal/cache.py:cache:322: return self._threadlocal.cache
+Captured nested call to __getitem__ with return value: {'min_value': None, 'max_value': None, 'weights': None, 'shrink_towards': 0}
+internal/cache.py:__getitem__:337: return val
+Captured nested call to _pooled_constraints with return value: {'min_value': None, 'max_value': None, 'weights': None, 'shrink_towards': 0}
+conjecture/data.py:_pooled_constraints:951: return POOLED_CONSTRAINTS_CACHE[key]
+Tracing nested call to _draw
+conjecture/data.py:_draw:740: def _draw(self, choice_type, constraints, *, observe, forced):
+Tracing nested call to _pop_choice
+conjecture/data.py:_pop_choice:956: def _pop_choice(
+Tracing nested call to choice_permitted
+conjecture/choice.py:choice_permitted:531: def choice_permitted(choice: ChoiceT, constraints: ChoiceConstraintsT) -> bool:
+Tracing nested call to cast
+Lib/typing.py:cast:2216: def cast(typ, val):
+Captured nested call to cast with return value: {'min_value': None, 'max_value': None, 'weights': None, 'shrink_towards': 0}
+Lib/typing.py:cast:2224: return val
+Captured nested call to choice_permitted with return value: True
+conjecture/choice.py:choice_permitted:538: return not (max_value is not None and choice > max_value)
+Captured nested call to _pop_choice with return value: 0
+conjecture/data.py:_pop_choice:1043: return choice
+Tracing nested call to draw_integer
+conjecture/datatree.py:draw_integer:1004: def draw_integer(
+Tracing nested call to draw_value
+conjecture/datatree.py:draw_value:1033: def draw_value(
+Tracing nested call to compute_max_children
+conjecture/datatree.py:compute_max_children:204: def compute_max_children(
+Tracing nested call to cast
+Lib/typing.py:cast:2216: def cast(typ, val):
+Captured nested call to cast with return value: {'min_value': None, 'max_value': None, 'weights': None, 'shrink_towards': 0}
+Lib/typing.py:cast:2224: return val
+Captured nested call to compute_max_children with return value: 340282366920938463463374607431768211455
+conjecture/datatree.py:compute_max_children:214: return 2**128 - 1
+Captured nested call to draw_value with return value: None
+conjecture/datatree.py:draw_value:1117: if self._trail[-1] is not self._current_node:
+Captured nested call to draw_integer with return value: None
+conjecture/datatree.py:draw_integer:1007: self.draw_value(
+Tracing nested call to choices_size
+conjecture/choice.py:choices_size:622: def choices_size(choices: Iterable[ChoiceT]) -> int:
+Tracing nested call to choices_to_bytes
+hypothesis/database.py:choices_to_bytes:1170: def choices_to_bytes(choices: Iterable[ChoiceT], /) -> bytes:
+Captured nested call to choices_to_bytes with return value: b'A\x00'
+hypothesis/database.py:choices_to_bytes:1207: return b"".join(parts)
+Captured nested call to choices_size with return value: 2
+conjecture/choice.py:choices_size:625: return len(choices_to_bytes(choices))
+Tracing nested call to __init__
+<attrs generated init hypothesis.internal.conjecture.choice.ChoiceNode>:__init__:1: def __init__(self, type, value, constraints, was_forced, index=attr_dict['index'].default):
+Captured nested call to __init__ with return value: None
+<attrs generated init hypothesis.internal.conjecture.choice.ChoiceNode>:__init__:6: self.index = index
+Tracing nested call to record_choice
+conjecture/data.py:record_choice:327: def record_choice(self) -> None:
+Tracing nested call to append
+conjecture/junkdrawer.py:append:142: def append(self, n: int) -> None:
+Tracing nested call to __len__
+conjecture/junkdrawer.py:__len__:103: def __len__(self) -> int:
+Captured nested call to __len__ with return value: 5
+conjecture/junkdrawer.py:__len__:104: return len(self.__underlying)
+Tracing nested call to __setitem__
+conjecture/junkdrawer.py:__setitem__:147: def __setitem__(self, i: int, n: int) -> None:
+Captured nested call to __setitem__ with return value: None
+conjecture/junkdrawer.py:__setitem__:151: return
+Captured nested call to append with return value: None
+conjecture/junkdrawer.py:append:145: self[i] = n
+Captured nested call to record_choice with return value: None
+conjecture/data.py:record_choice:328: self.trail.append(TrailType.CHOICE)
+Captured nested call to _draw with return value: 0
+conjecture/data.py:_draw:805: return value
+Captured nested call to draw_integer with return value: 0
+conjecture/data.py:draw_integer:844: return self._draw("integer", constraints, observe=observe, forced=forced)
+Captured nested call to do_draw with return value: 0
+_internal/numbers.py:do_draw:83: return data.draw_integer(
+Tracing nested call to gc_cumulative_time
+conjecture/junkdrawer.py:gc_cumulative_time:412: def gc_cumulative_time() -> float:
+Captured nested call to gc_cumulative_time with return value: 0
+conjecture/junkdrawer.py:gc_cumulative_time:455: return _gc_cumulative_time
+Tracing nested call to stop_span
+conjecture/data.py:stop_span:1171: def stop_span(self, *, discard: bool = False) -> None:
+Tracing nested call to span_end
+conjecture/providers.py:span_end:423: def span_end(self, discard: bool, /) -> None:  # noqa: B027, FBT001
+Captured nested call to span_end with return value: None
+conjecture/providers.py:span_end:423: def span_end(self, discard: bool, /) -> None:  # noqa: B027, FBT001
+Tracing nested call to stop_span
+conjecture/data.py:stop_span:339: def stop_span(self, *, discard: bool) -> None:
+Tracing nested call to append
+conjecture/junkdrawer.py:append:142: def append(self, n: int) -> None:
+Tracing nested call to __len__
+conjecture/junkdrawer.py:__len__:103: def __len__(self) -> int:
+Captured nested call to __len__ with return value: 6
+conjecture/junkdrawer.py:__len__:104: return len(self.__underlying)
+Tracing nested call to __setitem__
+conjecture/junkdrawer.py:__setitem__:147: def __setitem__(self, i: int, n: int) -> None:
+Captured nested call to __setitem__ with return value: None
+conjecture/junkdrawer.py:__setitem__:151: return
+Captured nested call to append with return value: None
+conjecture/junkdrawer.py:append:145: self[i] = n
+Captured nested call to stop_span with return value: None
+conjecture/data.py:stop_span:343: self.trail.append(TrailType.STOP_SPAN_NO_DISCARD)
+Captured nested call to stop_span with return value: None
+conjecture/data.py:stop_span:1189: if discard:
+Captured draw return value: 0
+Finished tracing draw calls
+Started tracing draw calls
+conjecture/data.py:draw:1088: def draw(
+Tracing nested call to gc_cumulative_time
+conjecture/junkdrawer.py:gc_cumulative_time:412: def gc_cumulative_time() -> float:
+Captured nested call to gc_cumulative_time with return value: 0
+conjecture/junkdrawer.py:gc_cumulative_time:455: return _gc_cumulative_time
+Tracing nested call to validate
+_internal/strategies.py:validate:473: def validate(self) -> None:
+Captured nested call to validate with return value: None
+_internal/strategies.py:validate:479: return
+Tracing nested call to is_empty
+_internal/strategies.py:is_empty:243: @property
+Tracing nested call to recursive_property
+_internal/strategies.py:recursive_property:81: def recursive_property(strategy: "SearchStrategy", name: str, default: object) -> Any:
+Tracing nested call to forced_value
+_internal/strategies.py:forced_value:111: def forced_value(target: SearchStrategy) -> Any:
+Captured nested call to forced_value with return value: False
+_internal/strategies.py:forced_value:115: return getattr(target, cache_key)
+Captured nested call to recursive_property with return value: False
+_internal/strategies.py:recursive_property:118: return forced_value(strategy)
+Captured nested call to is_empty with return value: False
+_internal/strategies.py:is_empty:250: return recursive_property(self, "is_empty", True)
+Tracing nested call to unwrap_strategies
+_internal/lazy.py:unwrap_strategies:31: def unwrap_strategies(s):
+Tracing nested call to __getitem__
+Lib/weakref.py:__getitem__:414: def __getitem__(self, key):
+Captured nested call to __getitem__ with return value: None
+Lib/weakref.py:__getitem__:415: return self.data[ref(key)]
+Tracing nested call to __setitem__
+Lib/weakref.py:__setitem__:427: def __setitem__(self, key, value):
+Captured nested call to __setitem__ with return value: None
+Lib/weakref.py:__setitem__:428: self.data[ref(key, self._remove)] = value
+Tracing nested call to wrapped_strategy
+_internal/lazy.py:wrapped_strategy:112: @property
+Captured nested call to wrapped_strategy with return value: integers()
+_internal/lazy.py:wrapped_strategy:132: return self.__wrapped_strategy
+Tracing nested call to unwrap_strategies
+_internal/lazy.py:unwrap_strategies:31: def unwrap_strategies(s):
+Captured nested call to unwrap_strategies with return value: integers()
+_internal/lazy.py:unwrap_strategies:36: return s
+Tracing nested call to __setitem__
+Lib/weakref.py:__setitem__:427: def __setitem__(self, key, value):
+Captured nested call to __setitem__ with return value: None
+Lib/weakref.py:__setitem__:428: self.data[ref(key, self._remove)] = value
+Tracing nested call to clear
+<frozen _collections_abc>:clear:933: 
+Tracing nested call to popitem
+Lib/weakref.py:popitem:495: def popitem(self):
+Captured nested call to popitem with return value: (integers(), integers())
+Lib/weakref.py:popitem:501: return o, value
+Tracing nested call to popitem
+Lib/weakref.py:popitem:495: def popitem(self):
+Captured nested call to popitem with return value: None
+Lib/weakref.py:popitem:498: key, value = self.data.popitem()
+Captured nested call to clear with return value: None
+<frozen _collections_abc>:clear:939: 
+Captured nested call to unwrap_strategies with return value: integers()
+_internal/lazy.py:unwrap_strategies:65: assert unwrap_depth >= 0
+Tracing nested call to label
+_internal/strategies.py:label:502: @property
+Tracing nested call to cast
+Lib/typing.py:cast:2216: def cast(typ, val):
+Captured nested call to cast with return value: 15101551161751157077
+Lib/typing.py:cast:2224: return val
+Captured nested call to label with return value: 15101551161751157077
+_internal/strategies.py:label:509: return cast(int, self.__label)
+Tracing nested call to start_span
+conjecture/data.py:start_span:1156: def start_span(self, label: int) -> None:
+Tracing nested call to span_start
+conjecture/providers.py:span_start:412: def span_start(self, label: int, /) -> None:  # noqa: B027  # non-abstract noop
+Captured nested call to span_start with return value: None
+conjecture/providers.py:span_start:412: def span_start(self, label: int, /) -> None:  # noqa: B027  # non-abstract noop
+Tracing nested call to __assert_not_frozen
+conjecture/data.py:__assert_not_frozen:1078: def __assert_not_frozen(self, name: str) -> None:
+Captured nested call to __assert_not_frozen with return value: None
+conjecture/data.py:__assert_not_frozen:1079: if self.frozen:
+Tracing nested call to start_span
+conjecture/data.py:start_span:330: def start_span(self, label: int) -> None:
+Tracing nested call to append
+conjecture/junkdrawer.py:append:142: def append(self, n: int) -> None:
+Tracing nested call to __len__
+conjecture/junkdrawer.py:__len__:103: def __len__(self) -> int:
+Captured nested call to __len__ with return value: 1
+conjecture/junkdrawer.py:__len__:104: return len(self.__underlying)
+Tracing nested call to __setitem__
+conjecture/junkdrawer.py:__setitem__:147: def __setitem__(self, i: int, n: int) -> None:
+Captured nested call to __setitem__ with return value: None
+conjecture/junkdrawer.py:__setitem__:151: return
+Captured nested call to append with return value: None
+conjecture/junkdrawer.py:append:145: self[i] = n
+Captured nested call to start_span with return value: None
+conjecture/data.py:start_span:337: self.trail.append(TrailType.START_SPAN + i)
+Captured nested call to start_span with return value: None
+conjecture/data.py:start_span:1169: self.labels_for_structure_stack.append({label})
+Tracing nested call to do_draw
+_internal/numbers.py:do_draw:68: def do_draw(self, data: ConjectureData) -> int:
+Tracing nested call to draw_integer
+conjecture/data.py:draw_integer:807: def draw_integer(
+Tracing nested call to _pooled_constraints
+conjecture/data.py:_pooled_constraints:943: def _pooled_constraints(self, choice_type, constraints):
+Tracing nested call to choice_constraints_key
+conjecture/choice.py:choice_constraints_key:604: def choice_constraints_key(choice_type, constraints):
+Captured nested call to choice_constraints_key with return value: (None, None, None, 0)
+conjecture/choice.py:choice_constraints_key:613: return (
+Tracing nested call to __getitem__
+internal/cache.py:__getitem__:334: def __getitem__(self, key: K) -> V:
+Tracing nested call to cache
+internal/cache.py:cache:319: @property
+Captured nested call to cache with return value: OrderedDict([(('integer', None, None, None, 0), {'min_value': None, 'max_value': None, 'weights': None, 'shrink_towards': 0})])
+internal/cache.py:cache:322: return self._threadlocal.cache
+Tracing nested call to cache
+internal/cache.py:cache:319: @property
+Captured nested call to cache with return value: OrderedDict([(('integer', None, None, None, 0), {'min_value': None, 'max_value': None, 'weights': None, 'shrink_towards': 0})])
+internal/cache.py:cache:322: return self._threadlocal.cache
+Captured nested call to __getitem__ with return value: {'min_value': None, 'max_value': None, 'weights': None, 'shrink_towards': 0}
+internal/cache.py:__getitem__:337: return val
+Captured nested call to _pooled_constraints with return value: {'min_value': None, 'max_value': None, 'weights': None, 'shrink_towards': 0}
+conjecture/data.py:_pooled_constraints:951: return POOLED_CONSTRAINTS_CACHE[key]
+Tracing nested call to _draw
+conjecture/data.py:_draw:740: def _draw(self, choice_type, constraints, *, observe, forced):
+Tracing nested call to _pop_choice
+conjecture/data.py:_pop_choice:956: def _pop_choice(
+Tracing nested call to choice_permitted
+conjecture/choice.py:choice_permitted:531: def choice_permitted(choice: ChoiceT, constraints: ChoiceConstraintsT) -> bool:
+Tracing nested call to cast
+Lib/typing.py:cast:2216: def cast(typ, val):
+Captured nested call to cast with return value: {'min_value': None, 'max_value': None, 'weights': None, 'shrink_towards': 0}
+Lib/typing.py:cast:2224: return val
+Captured nested call to choice_permitted with return value: True
+conjecture/choice.py:choice_permitted:538: return not (max_value is not None and choice > max_value)
+Captured nested call to _pop_choice with return value: 0
+conjecture/data.py:_pop_choice:1043: return choice
+Tracing nested call to draw_integer
+conjecture/data.py:draw_integer:548: def draw_integer(
+Captured nested call to draw_integer with return value: None
+conjecture/data.py:draw_integer:551: pass
+Tracing nested call to choices_size
+conjecture/choice.py:choices_size:622: def choices_size(choices: Iterable[ChoiceT]) -> int:
+Tracing nested call to choices_to_bytes
+hypothesis/database.py:choices_to_bytes:1170: def choices_to_bytes(choices: Iterable[ChoiceT], /) -> bytes:
+Captured nested call to choices_to_bytes with return value: b'A\x00'
+hypothesis/database.py:choices_to_bytes:1207: return b"".join(parts)
+Captured nested call to choices_size with return value: 2
+conjecture/choice.py:choices_size:625: return len(choices_to_bytes(choices))
+Tracing nested call to __init__
+<attrs generated init hypothesis.internal.conjecture.choice.ChoiceNode>:__init__:1: def __init__(self, type, value, constraints, was_forced, index=attr_dict['index'].default):
+Captured nested call to __init__ with return value: None
+<attrs generated init hypothesis.internal.conjecture.choice.ChoiceNode>:__init__:6: self.index = index
+Tracing nested call to record_choice
+conjecture/data.py:record_choice:327: def record_choice(self) -> None:
+Tracing nested call to append
+conjecture/junkdrawer.py:append:142: def append(self, n: int) -> None:
+Tracing nested call to __len__
+conjecture/junkdrawer.py:__len__:103: def __len__(self) -> int:
+Captured nested call to __len__ with return value: 2
+conjecture/junkdrawer.py:__len__:104: return len(self.__underlying)
+Tracing nested call to __setitem__
+conjecture/junkdrawer.py:__setitem__:147: def __setitem__(self, i: int, n: int) -> None:
+Tracing nested call to __upgrade
+conjecture/junkdrawer.py:__upgrade:160: def __upgrade(self) -> None:
+Tracing nested call to array_or_list
+conjecture/junkdrawer.py:array_or_list:33: def array_or_list(
+Captured nested call to array_or_list with return value: array('H', [3, 4, 0])
+conjecture/junkdrawer.py:array_or_list:38: return array.array(code, contents)
+Captured nested call to __upgrade with return value: None
+conjecture/junkdrawer.py:__upgrade:163: self.__underlying = array_or_list(code, self.__underlying)
+Tracing nested call to __upgrade
+conjecture/junkdrawer.py:__upgrade:160: def __upgrade(self) -> None:
+Tracing nested call to array_or_list
+conjecture/junkdrawer.py:array_or_list:33: def array_or_list(
+Captured nested call to array_or_list with return value: array('I', [3, 4, 0])
+conjecture/junkdrawer.py:array_or_list:38: return array.array(code, contents)
+Captured nested call to __upgrade with return value: None
+conjecture/junkdrawer.py:__upgrade:163: self.__underlying = array_or_list(code, self.__underlying)
+Tracing nested call to __upgrade
+conjecture/junkdrawer.py:__upgrade:160: def __upgrade(self) -> None:
+Tracing nested call to array_or_list
+conjecture/junkdrawer.py:array_or_list:33: def array_or_list(
+Captured nested call to array_or_list with return value: array('L', [3, 4, 0])
+conjecture/junkdrawer.py:array_or_list:38: return array.array(code, contents)
+Captured nested call to __upgrade with return value: None
+conjecture/junkdrawer.py:__upgrade:163: self.__underlying = array_or_list(code, self.__underlying)
+Tracing nested call to __upgrade
+conjecture/junkdrawer.py:__upgrade:160: def __upgrade(self) -> None:
+Tracing nested call to array_or_list
+conjecture/junkdrawer.py:array_or_list:33: def array_or_list(
+Captured nested call to array_or_list with return value: array('Q', [3, 4, 0])
+conjecture/junkdrawer.py:array_or_list:38: return array.array(code, contents)
+Captured nested call to __upgrade with return value: None
+conjecture/junkdrawer.py:__upgrade:163: self.__underlying = array_or_list(code, self.__underlying)
+Captured nested call to __setitem__ with return value: None
+conjecture/junkdrawer.py:__setitem__:151: return
+Captured nested call to append with return value: None
+conjecture/junkdrawer.py:append:145: self[i] = n
+Captured nested call to record_choice with return value: None
+conjecture/data.py:record_choice:328: self.trail.append(TrailType.CHOICE)
+Captured nested call to _draw with return value: 0
+conjecture/data.py:_draw:805: return value
+Captured nested call to draw_integer with return value: 0
+conjecture/data.py:draw_integer:844: return self._draw("integer", constraints, observe=observe, forced=forced)
+Captured nested call to do_draw with return value: 0
+_internal/numbers.py:do_draw:83: return data.draw_integer(
+Tracing nested call to gc_cumulative_time
+conjecture/junkdrawer.py:gc_cumulative_time:412: def gc_cumulative_time() -> float:
+Captured nested call to gc_cumulative_time with return value: 0
+conjecture/junkdrawer.py:gc_cumulative_time:455: return _gc_cumulative_time
+Tracing nested call to stop_span
+conjecture/data.py:stop_span:1171: def stop_span(self, *, discard: bool = False) -> None:
+Tracing nested call to span_end
+conjecture/providers.py:span_end:423: def span_end(self, discard: bool, /) -> None:  # noqa: B027, FBT001
+Captured nested call to span_end with return value: None
+conjecture/providers.py:span_end:423: def span_end(self, discard: bool, /) -> None:  # noqa: B027, FBT001
+Tracing nested call to stop_span
+conjecture/data.py:stop_span:339: def stop_span(self, *, discard: bool) -> None:
+Tracing nested call to append
+conjecture/junkdrawer.py:append:142: def append(self, n: int) -> None:
+Tracing nested call to __len__
+conjecture/junkdrawer.py:__len__:103: def __len__(self) -> int:
+Captured nested call to __len__ with return value: 3
+conjecture/junkdrawer.py:__len__:104: return len(self.__underlying)
+Tracing nested call to __setitem__
+conjecture/junkdrawer.py:__setitem__:147: def __setitem__(self, i: int, n: int) -> None:
+Captured nested call to __setitem__ with return value: None
+conjecture/junkdrawer.py:__setitem__:151: return
+Captured nested call to append with return value: None
+conjecture/junkdrawer.py:append:145: self[i] = n
+Captured nested call to stop_span with return value: None
+conjecture/data.py:stop_span:343: self.trail.append(TrailType.STOP_SPAN_NO_DISCARD)
+Captured nested call to stop_span with return value: None
+conjecture/data.py:stop_span:1189: if discard:
+Captured draw return value: 0
+Finished tracing draw calls
+Started tracing draw calls
+conjecture/data.py:draw:1088: def draw(
+Tracing nested call to gc_cumulative_time
+conjecture/junkdrawer.py:gc_cumulative_time:412: def gc_cumulative_time() -> float:
+Captured nested call to gc_cumulative_time with return value: 0
+conjecture/junkdrawer.py:gc_cumulative_time:455: return _gc_cumulative_time
+Tracing nested call to validate
+_internal/strategies.py:validate:473: def validate(self) -> None:
+Captured nested call to validate with return value: None
+_internal/strategies.py:validate:479: return
+Tracing nested call to is_empty
+_internal/strategies.py:is_empty:243: @property
+Tracing nested call to recursive_property
+_internal/strategies.py:recursive_property:81: def recursive_property(strategy: "SearchStrategy", name: str, default: object) -> Any:
+Tracing nested call to forced_value
+_internal/strategies.py:forced_value:111: def forced_value(target: SearchStrategy) -> Any:
+Captured nested call to forced_value with return value: False
+_internal/strategies.py:forced_value:115: return getattr(target, cache_key)
+Captured nested call to recursive_property with return value: False
+_internal/strategies.py:recursive_property:118: return forced_value(strategy)
+Captured nested call to is_empty with return value: False
+_internal/strategies.py:is_empty:250: return recursive_property(self, "is_empty", True)
+Tracing nested call to unwrap_strategies
+_internal/lazy.py:unwrap_strategies:31: def unwrap_strategies(s):
+Tracing nested call to __getitem__
+Lib/weakref.py:__getitem__:414: def __getitem__(self, key):
+Captured nested call to __getitem__ with return value: None
+Lib/weakref.py:__getitem__:415: return self.data[ref(key)]
+Tracing nested call to __setitem__
+Lib/weakref.py:__setitem__:427: def __setitem__(self, key, value):
+Captured nested call to __setitem__ with return value: None
+Lib/weakref.py:__setitem__:428: self.data[ref(key, self._remove)] = value
+Tracing nested call to wrapped_strategy
+_internal/lazy.py:wrapped_strategy:112: @property
+Captured nested call to wrapped_strategy with return value: integers()
+_internal/lazy.py:wrapped_strategy:132: return self.__wrapped_strategy
+Tracing nested call to unwrap_strategies
+_internal/lazy.py:unwrap_strategies:31: def unwrap_strategies(s):
+Captured nested call to unwrap_strategies with return value: integers()
+_internal/lazy.py:unwrap_strategies:36: return s
+Tracing nested call to __setitem__
+Lib/weakref.py:__setitem__:427: def __setitem__(self, key, value):
+Captured nested call to __setitem__ with return value: None
+Lib/weakref.py:__setitem__:428: self.data[ref(key, self._remove)] = value
+Tracing nested call to clear
+<frozen _collections_abc>:clear:933: 
+Tracing nested call to popitem
+Lib/weakref.py:popitem:495: def popitem(self):
+Captured nested call to popitem with return value: (integers(), integers())
+Lib/weakref.py:popitem:501: return o, value
+Tracing nested call to popitem
+Lib/weakref.py:popitem:495: def popitem(self):
+Captured nested call to popitem with return value: None
+Lib/weakref.py:popitem:498: key, value = self.data.popitem()
+Captured nested call to clear with return value: None
+<frozen _collections_abc>:clear:939: 
+Captured nested call to unwrap_strategies with return value: integers()
+_internal/lazy.py:unwrap_strategies:65: assert unwrap_depth >= 0
+Tracing nested call to label
+_internal/strategies.py:label:502: @property
+Tracing nested call to cast
+Lib/typing.py:cast:2216: def cast(typ, val):
+Captured nested call to cast with return value: 15101551161751157077
+Lib/typing.py:cast:2224: return val
+Captured nested call to label with return value: 15101551161751157077
+_internal/strategies.py:label:509: return cast(int, self.__label)
+Tracing nested call to start_span
+conjecture/data.py:start_span:1156: def start_span(self, label: int) -> None:
+Tracing nested call to span_start
+conjecture/providers.py:span_start:412: def span_start(self, label: int, /) -> None:  # noqa: B027  # non-abstract noop
+Captured nested call to span_start with return value: None
+conjecture/providers.py:span_start:412: def span_start(self, label: int, /) -> None:  # noqa: B027  # non-abstract noop
+Tracing nested call to __assert_not_frozen
+conjecture/data.py:__assert_not_frozen:1078: def __assert_not_frozen(self, name: str) -> None:
+Captured nested call to __assert_not_frozen with return value: None
+conjecture/data.py:__assert_not_frozen:1079: if self.frozen:
+Tracing nested call to start_span
+conjecture/data.py:start_span:330: def start_span(self, label: int) -> None:
+Tracing nested call to append
+conjecture/junkdrawer.py:append:142: def append(self, n: int) -> None:
+Tracing nested call to __len__
+conjecture/junkdrawer.py:__len__:103: def __len__(self) -> int:
+Captured nested call to __len__ with return value: 4
+conjecture/junkdrawer.py:__len__:104: return len(self.__underlying)
+Tracing nested call to __setitem__
+conjecture/junkdrawer.py:__setitem__:147: def __setitem__(self, i: int, n: int) -> None:
+Captured nested call to __setitem__ with return value: None
+conjecture/junkdrawer.py:__setitem__:151: return
+Captured nested call to append with return value: None
+conjecture/junkdrawer.py:append:145: self[i] = n
+Captured nested call to start_span with return value: None
+conjecture/data.py:start_span:337: self.trail.append(TrailType.START_SPAN + i)
+Captured nested call to start_span with return value: None
+conjecture/data.py:start_span:1169: self.labels_for_structure_stack.append({label})
+Tracing nested call to do_draw
+_internal/numbers.py:do_draw:68: def do_draw(self, data: ConjectureData) -> int:
+Tracing nested call to draw_integer
+conjecture/data.py:draw_integer:807: def draw_integer(
+Tracing nested call to _pooled_constraints
+conjecture/data.py:_pooled_constraints:943: def _pooled_constraints(self, choice_type, constraints):
+Tracing nested call to choice_constraints_key
+conjecture/choice.py:choice_constraints_key:604: def choice_constraints_key(choice_type, constraints):
+Captured nested call to choice_constraints_key with return value: (None, None, None, 0)
+conjecture/choice.py:choice_constraints_key:613: return (
+Tracing nested call to __getitem__
+internal/cache.py:__getitem__:334: def __getitem__(self, key: K) -> V:
+Tracing nested call to cache
+internal/cache.py:cache:319: @property
+Captured nested call to cache with return value: OrderedDict([(('integer', None, None, None, 0), {'min_value': None, 'max_value': None, 'weights': None, 'shrink_towards': 0})])
+internal/cache.py:cache:322: return self._threadlocal.cache
+Tracing nested call to cache
+internal/cache.py:cache:319: @property
+Captured nested call to cache with return value: OrderedDict([(('integer', None, None, None, 0), {'min_value': None, 'max_value': None, 'weights': None, 'shrink_towards': 0})])
+internal/cache.py:cache:322: return self._threadlocal.cache
+Captured nested call to __getitem__ with return value: {'min_value': None, 'max_value': None, 'weights': None, 'shrink_towards': 0}
+internal/cache.py:__getitem__:337: return val
+Captured nested call to _pooled_constraints with return value: {'min_value': None, 'max_value': None, 'weights': None, 'shrink_towards': 0}
+conjecture/data.py:_pooled_constraints:951: return POOLED_CONSTRAINTS_CACHE[key]
+Tracing nested call to _draw
+conjecture/data.py:_draw:740: def _draw(self, choice_type, constraints, *, observe, forced):
+Tracing nested call to _pop_choice
+conjecture/data.py:_pop_choice:956: def _pop_choice(
+Tracing nested call to choice_permitted
+conjecture/choice.py:choice_permitted:531: def choice_permitted(choice: ChoiceT, constraints: ChoiceConstraintsT) -> bool:
+Tracing nested call to cast
+Lib/typing.py:cast:2216: def cast(typ, val):
+Captured nested call to cast with return value: {'min_value': None, 'max_value': None, 'weights': None, 'shrink_towards': 0}
+Lib/typing.py:cast:2224: return val
+Captured nested call to choice_permitted with return value: True
+conjecture/choice.py:choice_permitted:538: return not (max_value is not None and choice > max_value)
+Captured nested call to _pop_choice with return value: 0
+conjecture/data.py:_pop_choice:1043: return choice
+Tracing nested call to draw_integer
+conjecture/data.py:draw_integer:548: def draw_integer(
+Captured nested call to draw_integer with return value: None
+conjecture/data.py:draw_integer:551: pass
+Tracing nested call to choices_size
+conjecture/choice.py:choices_size:622: def choices_size(choices: Iterable[ChoiceT]) -> int:
+Tracing nested call to choices_to_bytes
+hypothesis/database.py:choices_to_bytes:1170: def choices_to_bytes(choices: Iterable[ChoiceT], /) -> bytes:
+Captured nested call to choices_to_bytes with return value: b'A\x00'
+hypothesis/database.py:choices_to_bytes:1207: return b"".join(parts)
+Captured nested call to choices_size with return value: 2
+conjecture/choice.py:choices_size:625: return len(choices_to_bytes(choices))
+Tracing nested call to __init__
+<attrs generated init hypothesis.internal.conjecture.choice.ChoiceNode>:__init__:1: def __init__(self, type, value, constraints, was_forced, index=attr_dict['index'].default):
+Captured nested call to __init__ with return value: None
+<attrs generated init hypothesis.internal.conjecture.choice.ChoiceNode>:__init__:6: self.index = index
+Tracing nested call to record_choice
+conjecture/data.py:record_choice:327: def record_choice(self) -> None:
+Tracing nested call to append
+conjecture/junkdrawer.py:append:142: def append(self, n: int) -> None:
+Tracing nested call to __len__
+conjecture/junkdrawer.py:__len__:103: def __len__(self) -> int:
+Captured nested call to __len__ with return value: 5
+conjecture/junkdrawer.py:__len__:104: return len(self.__underlying)
+Tracing nested call to __setitem__
+conjecture/junkdrawer.py:__setitem__:147: def __setitem__(self, i: int, n: int) -> None:
+Captured nested call to __setitem__ with return value: None
+conjecture/junkdrawer.py:__setitem__:151: return
+Captured nested call to append with return value: None
+conjecture/junkdrawer.py:append:145: self[i] = n
+Captured nested call to record_choice with return value: None
+conjecture/data.py:record_choice:328: self.trail.append(TrailType.CHOICE)
+Captured nested call to _draw with return value: 0
+conjecture/data.py:_draw:805: return value
+Captured nested call to draw_integer with return value: 0
+conjecture/data.py:draw_integer:844: return self._draw("integer", constraints, observe=observe, forced=forced)
+Captured nested call to do_draw with return value: 0
+_internal/numbers.py:do_draw:83: return data.draw_integer(
+Tracing nested call to gc_cumulative_time
+conjecture/junkdrawer.py:gc_cumulative_time:412: def gc_cumulative_time() -> float:
+Captured nested call to gc_cumulative_time with return value: 0
+conjecture/junkdrawer.py:gc_cumulative_time:455: return _gc_cumulative_time
+Tracing nested call to stop_span
+conjecture/data.py:stop_span:1171: def stop_span(self, *, discard: bool = False) -> None:
+Tracing nested call to span_end
+conjecture/providers.py:span_end:423: def span_end(self, discard: bool, /) -> None:  # noqa: B027, FBT001
+Captured nested call to span_end with return value: None
+conjecture/providers.py:span_end:423: def span_end(self, discard: bool, /) -> None:  # noqa: B027, FBT001
+Tracing nested call to stop_span
+conjecture/data.py:stop_span:339: def stop_span(self, *, discard: bool) -> None:
+Tracing nested call to append
+conjecture/junkdrawer.py:append:142: def append(self, n: int) -> None:
+Tracing nested call to __len__
+conjecture/junkdrawer.py:__len__:103: def __len__(self) -> int:
+Captured nested call to __len__ with return value: 6
+conjecture/junkdrawer.py:__len__:104: return len(self.__underlying)
+Tracing nested call to __setitem__
+conjecture/junkdrawer.py:__setitem__:147: def __setitem__(self, i: int, n: int) -> None:
+Captured nested call to __setitem__ with return value: None
+conjecture/junkdrawer.py:__setitem__:151: return
+Captured nested call to append with return value: None
+conjecture/junkdrawer.py:append:145: self[i] = n
+Captured nested call to stop_span with return value: None
+conjecture/data.py:stop_span:343: self.trail.append(TrailType.STOP_SPAN_NO_DISCARD)
+Captured nested call to stop_span with return value: None
+conjecture/data.py:stop_span:1189: if discard:
+Captured draw return value: 0
+Finished tracing draw calls
+Started tracing draw calls
+conjecture/data.py:draw:1088: def draw(
+Tracing nested call to gc_cumulative_time
+conjecture/junkdrawer.py:gc_cumulative_time:412: def gc_cumulative_time() -> float:
+Captured nested call to gc_cumulative_time with return value: 0
+conjecture/junkdrawer.py:gc_cumulative_time:455: return _gc_cumulative_time
+Tracing nested call to validate
+_internal/strategies.py:validate:473: def validate(self) -> None:
+Captured nested call to validate with return value: None
+_internal/strategies.py:validate:479: return
+Tracing nested call to is_empty
+_internal/strategies.py:is_empty:243: @property
+Tracing nested call to recursive_property
+_internal/strategies.py:recursive_property:81: def recursive_property(strategy: "SearchStrategy", name: str, default: object) -> Any:
+Tracing nested call to forced_value
+_internal/strategies.py:forced_value:111: def forced_value(target: SearchStrategy) -> Any:
+Captured nested call to forced_value with return value: False
+_internal/strategies.py:forced_value:115: return getattr(target, cache_key)
+Captured nested call to recursive_property with return value: False
+_internal/strategies.py:recursive_property:118: return forced_value(strategy)
+Captured nested call to is_empty with return value: False
+_internal/strategies.py:is_empty:250: return recursive_property(self, "is_empty", True)
+Tracing nested call to unwrap_strategies
+_internal/lazy.py:unwrap_strategies:31: def unwrap_strategies(s):
+Tracing nested call to __getitem__
+Lib/weakref.py:__getitem__:414: def __getitem__(self, key):
+Captured nested call to __getitem__ with return value: None
+Lib/weakref.py:__getitem__:415: return self.data[ref(key)]
+Tracing nested call to __setitem__
+Lib/weakref.py:__setitem__:427: def __setitem__(self, key, value):
+Captured nested call to __setitem__ with return value: None
+Lib/weakref.py:__setitem__:428: self.data[ref(key, self._remove)] = value
+Tracing nested call to wrapped_strategy
+_internal/lazy.py:wrapped_strategy:112: @property
+Captured nested call to wrapped_strategy with return value: integers()
+_internal/lazy.py:wrapped_strategy:132: return self.__wrapped_strategy
+Tracing nested call to unwrap_strategies
+_internal/lazy.py:unwrap_strategies:31: def unwrap_strategies(s):
+Captured nested call to unwrap_strategies with return value: integers()
+_internal/lazy.py:unwrap_strategies:36: return s
+Tracing nested call to __setitem__
+Lib/weakref.py:__setitem__:427: def __setitem__(self, key, value):
+Captured nested call to __setitem__ with return value: None
+Lib/weakref.py:__setitem__:428: self.data[ref(key, self._remove)] = value
+Tracing nested call to clear
+<frozen _collections_abc>:clear:933: 
+Tracing nested call to popitem
+Lib/weakref.py:popitem:495: def popitem(self):
+Captured nested call to popitem with return value: (integers(), integers())
+Lib/weakref.py:popitem:501: return o, value
+Tracing nested call to popitem
+Lib/weakref.py:popitem:495: def popitem(self):
+Captured nested call to popitem with return value: None
+Lib/weakref.py:popitem:498: key, value = self.data.popitem()
+Captured nested call to clear with return value: None
+<frozen _collections_abc>:clear:939: 
+Captured nested call to unwrap_strategies with return value: integers()
+_internal/lazy.py:unwrap_strategies:65: assert unwrap_depth >= 0
+Tracing nested call to label
+_internal/strategies.py:label:502: @property
+Tracing nested call to cast
+Lib/typing.py:cast:2216: def cast(typ, val):
+Captured nested call to cast with return value: 15101551161751157077
+Lib/typing.py:cast:2224: return val
+Captured nested call to label with return value: 15101551161751157077
+_internal/strategies.py:label:509: return cast(int, self.__label)
+Tracing nested call to start_span
+conjecture/data.py:start_span:1156: def start_span(self, label: int) -> None:
+Tracing nested call to span_start
+conjecture/providers.py:span_start:412: def span_start(self, label: int, /) -> None:  # noqa: B027  # non-abstract noop
+Captured nested call to span_start with return value: None
+conjecture/providers.py:span_start:412: def span_start(self, label: int, /) -> None:  # noqa: B027  # non-abstract noop
+Tracing nested call to __assert_not_frozen
+conjecture/data.py:__assert_not_frozen:1078: def __assert_not_frozen(self, name: str) -> None:
+Captured nested call to __assert_not_frozen with return value: None
+conjecture/data.py:__assert_not_frozen:1079: if self.frozen:
+Tracing nested call to start_span
+conjecture/data.py:start_span:330: def start_span(self, label: int) -> None:
+Tracing nested call to append
+conjecture/junkdrawer.py:append:142: def append(self, n: int) -> None:
+Tracing nested call to __len__
+conjecture/junkdrawer.py:__len__:103: def __len__(self) -> int:
+Captured nested call to __len__ with return value: 1
+conjecture/junkdrawer.py:__len__:104: return len(self.__underlying)
+Tracing nested call to __setitem__
+conjecture/junkdrawer.py:__setitem__:147: def __setitem__(self, i: int, n: int) -> None:
+Captured nested call to __setitem__ with return value: None
+conjecture/junkdrawer.py:__setitem__:151: return
+Captured nested call to append with return value: None
+conjecture/junkdrawer.py:append:145: self[i] = n
+Captured nested call to start_span with return value: None
+conjecture/data.py:start_span:337: self.trail.append(TrailType.START_SPAN + i)
+Captured nested call to start_span with return value: None
+conjecture/data.py:start_span:1169: self.labels_for_structure_stack.append({label})
+Tracing nested call to do_draw
+_internal/numbers.py:do_draw:68: def do_draw(self, data: ConjectureData) -> int:
+Tracing nested call to draw_integer
+conjecture/data.py:draw_integer:807: def draw_integer(
+Tracing nested call to _pooled_constraints
+conjecture/data.py:_pooled_constraints:943: def _pooled_constraints(self, choice_type, constraints):
+Tracing nested call to choice_constraints_key
+conjecture/choice.py:choice_constraints_key:604: def choice_constraints_key(choice_type, constraints):
+Captured nested call to choice_constraints_key with return value: (None, None, None, 0)
+conjecture/choice.py:choice_constraints_key:613: return (
+Tracing nested call to __getitem__
+internal/cache.py:__getitem__:334: def __getitem__(self, key: K) -> V:
+Tracing nested call to cache
+internal/cache.py:cache:319: @property
+Captured nested call to cache with return value: OrderedDict([(('integer', None, None, None, 0), {'min_value': None, 'max_value': None, 'weights': None, 'shrink_towards': 0})])
+internal/cache.py:cache:322: return self._threadlocal.cache
+Tracing nested call to cache
+internal/cache.py:cache:319: @property
+Captured nested call to cache with return value: OrderedDict([(('integer', None, None, None, 0), {'min_value': None, 'max_value': None, 'weights': None, 'shrink_towards': 0})])
+internal/cache.py:cache:322: return self._threadlocal.cache
+Captured nested call to __getitem__ with return value: {'min_value': None, 'max_value': None, 'weights': None, 'shrink_towards': 0}
+internal/cache.py:__getitem__:337: return val
+Captured nested call to _pooled_constraints with return value: {'min_value': None, 'max_value': None, 'weights': None, 'shrink_towards': 0}
+conjecture/data.py:_pooled_constraints:951: return POOLED_CONSTRAINTS_CACHE[key]
+Tracing nested call to _draw
+conjecture/data.py:_draw:740: def _draw(self, choice_type, constraints, *, observe, forced):
+Tracing nested call to _pop_choice
+conjecture/data.py:_pop_choice:956: def _pop_choice(
+Tracing nested call to choice_permitted
+conjecture/choice.py:choice_permitted:531: def choice_permitted(choice: ChoiceT, constraints: ChoiceConstraintsT) -> bool:
+Tracing nested call to cast
+Lib/typing.py:cast:2216: def cast(typ, val):
+Captured nested call to cast with return value: {'min_value': None, 'max_value': None, 'weights': None, 'shrink_towards': 0}
+Lib/typing.py:cast:2224: return val
+Captured nested call to choice_permitted with return value: True
+conjecture/choice.py:choice_permitted:538: return not (max_value is not None and choice > max_value)
+Captured nested call to _pop_choice with return value: 0
+conjecture/data.py:_pop_choice:1043: return choice
+Tracing nested call to draw_integer
+conjecture/data.py:draw_integer:548: def draw_integer(
+Captured nested call to draw_integer with return value: None
+conjecture/data.py:draw_integer:551: pass
+Tracing nested call to choices_size
+conjecture/choice.py:choices_size:622: def choices_size(choices: Iterable[ChoiceT]) -> int:
+Tracing nested call to choices_to_bytes
+hypothesis/database.py:choices_to_bytes:1170: def choices_to_bytes(choices: Iterable[ChoiceT], /) -> bytes:
+Captured nested call to choices_to_bytes with return value: b'A\x00'
+hypothesis/database.py:choices_to_bytes:1207: return b"".join(parts)
+Captured nested call to choices_size with return value: 2
+conjecture/choice.py:choices_size:625: return len(choices_to_bytes(choices))
+Tracing nested call to __init__
+<attrs generated init hypothesis.internal.conjecture.choice.ChoiceNode>:__init__:1: def __init__(self, type, value, constraints, was_forced, index=attr_dict['index'].default):
+Captured nested call to __init__ with return value: None
+<attrs generated init hypothesis.internal.conjecture.choice.ChoiceNode>:__init__:6: self.index = index
+Tracing nested call to record_choice
+conjecture/data.py:record_choice:327: def record_choice(self) -> None:
+Tracing nested call to append
+conjecture/junkdrawer.py:append:142: def append(self, n: int) -> None:
+Tracing nested call to __len__
+conjecture/junkdrawer.py:__len__:103: def __len__(self) -> int:
+Captured nested call to __len__ with return value: 2
+conjecture/junkdrawer.py:__len__:104: return len(self.__underlying)
+Tracing nested call to __setitem__
+conjecture/junkdrawer.py:__setitem__:147: def __setitem__(self, i: int, n: int) -> None:
+Tracing nested call to __upgrade
+conjecture/junkdrawer.py:__upgrade:160: def __upgrade(self) -> None:
+Tracing nested call to array_or_list
+conjecture/junkdrawer.py:array_or_list:33: def array_or_list(
+Captured nested call to array_or_list with return value: array('H', [3, 4, 0])
+conjecture/junkdrawer.py:array_or_list:38: return array.array(code, contents)
+Captured nested call to __upgrade with return value: None
+conjecture/junkdrawer.py:__upgrade:163: self.__underlying = array_or_list(code, self.__underlying)
+Tracing nested call to __upgrade
+conjecture/junkdrawer.py:__upgrade:160: def __upgrade(self) -> None:
+Tracing nested call to array_or_list
+conjecture/junkdrawer.py:array_or_list:33: def array_or_list(
+Captured nested call to array_or_list with return value: array('I', [3, 4, 0])
+conjecture/junkdrawer.py:array_or_list:38: return array.array(code, contents)
+Captured nested call to __upgrade with return value: None
+conjecture/junkdrawer.py:__upgrade:163: self.__underlying = array_or_list(code, self.__underlying)
+Tracing nested call to __upgrade
+conjecture/junkdrawer.py:__upgrade:160: def __upgrade(self) -> None:
+Tracing nested call to array_or_list
+conjecture/junkdrawer.py:array_or_list:33: def array_or_list(
+Captured nested call to array_or_list with return value: array('L', [3, 4, 0])
+conjecture/junkdrawer.py:array_or_list:38: return array.array(code, contents)
+Captured nested call to __upgrade with return value: None
+conjecture/junkdrawer.py:__upgrade:163: self.__underlying = array_or_list(code, self.__underlying)
+Tracing nested call to __upgrade
+conjecture/junkdrawer.py:__upgrade:160: def __upgrade(self) -> None:
+Tracing nested call to array_or_list
+conjecture/junkdrawer.py:array_or_list:33: def array_or_list(
+Captured nested call to array_or_list with return value: array('Q', [3, 4, 0])
+conjecture/junkdrawer.py:array_or_list:38: return array.array(code, contents)
+Captured nested call to __upgrade with return value: None
+conjecture/junkdrawer.py:__upgrade:163: self.__underlying = array_or_list(code, self.__underlying)
+Captured nested call to __setitem__ with return value: None
+conjecture/junkdrawer.py:__setitem__:151: return
+Captured nested call to append with return value: None
+conjecture/junkdrawer.py:append:145: self[i] = n
+Captured nested call to record_choice with return value: None
+conjecture/data.py:record_choice:328: self.trail.append(TrailType.CHOICE)
+Captured nested call to _draw with return value: 0
+conjecture/data.py:_draw:805: return value
+Captured nested call to draw_integer with return value: 0
+conjecture/data.py:draw_integer:844: return self._draw("integer", constraints, observe=observe, forced=forced)
+Captured nested call to do_draw with return value: 0
+_internal/numbers.py:do_draw:83: return data.draw_integer(
+Tracing nested call to gc_cumulative_time
+conjecture/junkdrawer.py:gc_cumulative_time:412: def gc_cumulative_time() -> float:
+Captured nested call to gc_cumulative_time with return value: 0
+conjecture/junkdrawer.py:gc_cumulative_time:455: return _gc_cumulative_time
+Tracing nested call to stop_span
+conjecture/data.py:stop_span:1171: def stop_span(self, *, discard: bool = False) -> None:
+Tracing nested call to span_end
+conjecture/providers.py:span_end:423: def span_end(self, discard: bool, /) -> None:  # noqa: B027, FBT001
+Captured nested call to span_end with return value: None
+conjecture/providers.py:span_end:423: def span_end(self, discard: bool, /) -> None:  # noqa: B027, FBT001
+Tracing nested call to stop_span
+conjecture/data.py:stop_span:339: def stop_span(self, *, discard: bool) -> None:
+Tracing nested call to append
+conjecture/junkdrawer.py:append:142: def append(self, n: int) -> None:
+Tracing nested call to __len__
+conjecture/junkdrawer.py:__len__:103: def __len__(self) -> int:
+Captured nested call to __len__ with return value: 3
+conjecture/junkdrawer.py:__len__:104: return len(self.__underlying)
+Tracing nested call to __setitem__
+conjecture/junkdrawer.py:__setitem__:147: def __setitem__(self, i: int, n: int) -> None:
+Captured nested call to __setitem__ with return value: None
+conjecture/junkdrawer.py:__setitem__:151: return
+Captured nested call to append with return value: None
+conjecture/junkdrawer.py:append:145: self[i] = n
+Captured nested call to stop_span with return value: None
+conjecture/data.py:stop_span:343: self.trail.append(TrailType.STOP_SPAN_NO_DISCARD)
+Captured nested call to stop_span with return value: None
+conjecture/data.py:stop_span:1189: if discard:
+Captured draw return value: 0
+Finished tracing draw calls
+Started tracing draw calls
+conjecture/data.py:draw:1088: def draw(
+Tracing nested call to gc_cumulative_time
+conjecture/junkdrawer.py:gc_cumulative_time:412: def gc_cumulative_time() -> float:
+Captured nested call to gc_cumulative_time with return value: 0
+conjecture/junkdrawer.py:gc_cumulative_time:455: return _gc_cumulative_time
+Tracing nested call to validate
+_internal/strategies.py:validate:473: def validate(self) -> None:
+Captured nested call to validate with return value: None
+_internal/strategies.py:validate:479: return
+Tracing nested call to is_empty
+_internal/strategies.py:is_empty:243: @property
+Tracing nested call to recursive_property
+_internal/strategies.py:recursive_property:81: def recursive_property(strategy: "SearchStrategy", name: str, default: object) -> Any:
+Tracing nested call to forced_value
+_internal/strategies.py:forced_value:111: def forced_value(target: SearchStrategy) -> Any:
+Captured nested call to forced_value with return value: False
+_internal/strategies.py:forced_value:115: return getattr(target, cache_key)
+Captured nested call to recursive_property with return value: False
+_internal/strategies.py:recursive_property:118: return forced_value(strategy)
+Captured nested call to is_empty with return value: False
+_internal/strategies.py:is_empty:250: return recursive_property(self, "is_empty", True)
+Tracing nested call to unwrap_strategies
+_internal/lazy.py:unwrap_strategies:31: def unwrap_strategies(s):
+Tracing nested call to __getitem__
+Lib/weakref.py:__getitem__:414: def __getitem__(self, key):
+Captured nested call to __getitem__ with return value: None
+Lib/weakref.py:__getitem__:415: return self.data[ref(key)]
+Tracing nested call to __setitem__
+Lib/weakref.py:__setitem__:427: def __setitem__(self, key, value):
+Captured nested call to __setitem__ with return value: None
+Lib/weakref.py:__setitem__:428: self.data[ref(key, self._remove)] = value
+Tracing nested call to wrapped_strategy
+_internal/lazy.py:wrapped_strategy:112: @property
+Captured nested call to wrapped_strategy with return value: integers()
+_internal/lazy.py:wrapped_strategy:132: return self.__wrapped_strategy
+Tracing nested call to unwrap_strategies
+_internal/lazy.py:unwrap_strategies:31: def unwrap_strategies(s):
+Captured nested call to unwrap_strategies with return value: integers()
+_internal/lazy.py:unwrap_strategies:36: return s
+Tracing nested call to __setitem__
+Lib/weakref.py:__setitem__:427: def __setitem__(self, key, value):
+Captured nested call to __setitem__ with return value: None
+Lib/weakref.py:__setitem__:428: self.data[ref(key, self._remove)] = value
+Tracing nested call to clear
+<frozen _collections_abc>:clear:933: 
+Tracing nested call to popitem
+Lib/weakref.py:popitem:495: def popitem(self):
+Captured nested call to popitem with return value: (integers(), integers())
+Lib/weakref.py:popitem:501: return o, value
+Tracing nested call to popitem
+Lib/weakref.py:popitem:495: def popitem(self):
+Captured nested call to popitem with return value: None
+Lib/weakref.py:popitem:498: key, value = self.data.popitem()
+Captured nested call to clear with return value: None
+<frozen _collections_abc>:clear:939: 
+Captured nested call to unwrap_strategies with return value: integers()
+_internal/lazy.py:unwrap_strategies:65: assert unwrap_depth >= 0
+Tracing nested call to label
+_internal/strategies.py:label:502: @property
+Tracing nested call to cast
+Lib/typing.py:cast:2216: def cast(typ, val):
+Captured nested call to cast with return value: 15101551161751157077
+Lib/typing.py:cast:2224: return val
+Captured nested call to label with return value: 15101551161751157077
+_internal/strategies.py:label:509: return cast(int, self.__label)
+Tracing nested call to start_span
+conjecture/data.py:start_span:1156: def start_span(self, label: int) -> None:
+Tracing nested call to span_start
+conjecture/providers.py:span_start:412: def span_start(self, label: int, /) -> None:  # noqa: B027  # non-abstract noop
+Captured nested call to span_start with return value: None
+conjecture/providers.py:span_start:412: def span_start(self, label: int, /) -> None:  # noqa: B027  # non-abstract noop
+Tracing nested call to __assert_not_frozen
+conjecture/data.py:__assert_not_frozen:1078: def __assert_not_frozen(self, name: str) -> None:
+Captured nested call to __assert_not_frozen with return value: None
+conjecture/data.py:__assert_not_frozen:1079: if self.frozen:
+Tracing nested call to start_span
+conjecture/data.py:start_span:330: def start_span(self, label: int) -> None:
+Tracing nested call to append
+conjecture/junkdrawer.py:append:142: def append(self, n: int) -> None:
+Tracing nested call to __len__
+conjecture/junkdrawer.py:__len__:103: def __len__(self) -> int:
+Captured nested call to __len__ with return value: 4
+conjecture/junkdrawer.py:__len__:104: return len(self.__underlying)
+Tracing nested call to __setitem__
+conjecture/junkdrawer.py:__setitem__:147: def __setitem__(self, i: int, n: int) -> None:
+Captured nested call to __setitem__ with return value: None
+conjecture/junkdrawer.py:__setitem__:151: return
+Captured nested call to append with return value: None
+conjecture/junkdrawer.py:append:145: self[i] = n
+Captured nested call to start_span with return value: None
+conjecture/data.py:start_span:337: self.trail.append(TrailType.START_SPAN + i)
+Captured nested call to start_span with return value: None
+conjecture/data.py:start_span:1169: self.labels_for_structure_stack.append({label})
+Tracing nested call to do_draw
+_internal/numbers.py:do_draw:68: def do_draw(self, data: ConjectureData) -> int:
+Tracing nested call to draw_integer
+conjecture/data.py:draw_integer:807: def draw_integer(
+Tracing nested call to _pooled_constraints
+conjecture/data.py:_pooled_constraints:943: def _pooled_constraints(self, choice_type, constraints):
+Tracing nested call to choice_constraints_key
+conjecture/choice.py:choice_constraints_key:604: def choice_constraints_key(choice_type, constraints):
+Captured nested call to choice_constraints_key with return value: (None, None, None, 0)
+conjecture/choice.py:choice_constraints_key:613: return (
+Tracing nested call to __getitem__
+internal/cache.py:__getitem__:334: def __getitem__(self, key: K) -> V:
+Tracing nested call to cache
+internal/cache.py:cache:319: @property
+Captured nested call to cache with return value: OrderedDict([(('integer', None, None, None, 0), {'min_value': None, 'max_value': None, 'weights': None, 'shrink_towards': 0})])
+internal/cache.py:cache:322: return self._threadlocal.cache
+Tracing nested call to cache
+internal/cache.py:cache:319: @property
+Captured nested call to cache with return value: OrderedDict([(('integer', None, None, None, 0), {'min_value': None, 'max_value': None, 'weights': None, 'shrink_towards': 0})])
+internal/cache.py:cache:322: return self._threadlocal.cache
+Captured nested call to __getitem__ with return value: {'min_value': None, 'max_value': None, 'weights': None, 'shrink_towards': 0}
+internal/cache.py:__getitem__:337: return val
+Captured nested call to _pooled_constraints with return value: {'min_value': None, 'max_value': None, 'weights': None, 'shrink_towards': 0}
+conjecture/data.py:_pooled_constraints:951: return POOLED_CONSTRAINTS_CACHE[key]
+Tracing nested call to _draw
+conjecture/data.py:_draw:740: def _draw(self, choice_type, constraints, *, observe, forced):
+Tracing nested call to _pop_choice
+conjecture/data.py:_pop_choice:956: def _pop_choice(
+Tracing nested call to choice_permitted
+conjecture/choice.py:choice_permitted:531: def choice_permitted(choice: ChoiceT, constraints: ChoiceConstraintsT) -> bool:
+Tracing nested call to cast
+Lib/typing.py:cast:2216: def cast(typ, val):
+Captured nested call to cast with return value: {'min_value': None, 'max_value': None, 'weights': None, 'shrink_towards': 0}
+Lib/typing.py:cast:2224: return val
+Captured nested call to choice_permitted with return value: True
+conjecture/choice.py:choice_permitted:538: return not (max_value is not None and choice > max_value)
+Captured nested call to _pop_choice with return value: 0
+conjecture/data.py:_pop_choice:1043: return choice
+Tracing nested call to draw_integer
+conjecture/data.py:draw_integer:548: def draw_integer(
+Captured nested call to draw_integer with return value: None
+conjecture/data.py:draw_integer:551: pass
+Tracing nested call to choices_size
+conjecture/choice.py:choices_size:622: def choices_size(choices: Iterable[ChoiceT]) -> int:
+Tracing nested call to choices_to_bytes
+hypothesis/database.py:choices_to_bytes:1170: def choices_to_bytes(choices: Iterable[ChoiceT], /) -> bytes:
+Captured nested call to choices_to_bytes with return value: b'A\x00'
+hypothesis/database.py:choices_to_bytes:1207: return b"".join(parts)
+Captured nested call to choices_size with return value: 2
+conjecture/choice.py:choices_size:625: return len(choices_to_bytes(choices))
+Tracing nested call to __init__
+<attrs generated init hypothesis.internal.conjecture.choice.ChoiceNode>:__init__:1: def __init__(self, type, value, constraints, was_forced, index=attr_dict['index'].default):
+Captured nested call to __init__ with return value: None
+<attrs generated init hypothesis.internal.conjecture.choice.ChoiceNode>:__init__:6: self.index = index
+Tracing nested call to record_choice
+conjecture/data.py:record_choice:327: def record_choice(self) -> None:
+Tracing nested call to append
+conjecture/junkdrawer.py:append:142: def append(self, n: int) -> None:
+Tracing nested call to __len__
+conjecture/junkdrawer.py:__len__:103: def __len__(self) -> int:
+Captured nested call to __len__ with return value: 5
+conjecture/junkdrawer.py:__len__:104: return len(self.__underlying)
+Tracing nested call to __setitem__
+conjecture/junkdrawer.py:__setitem__:147: def __setitem__(self, i: int, n: int) -> None:
+Captured nested call to __setitem__ with return value: None
+conjecture/junkdrawer.py:__setitem__:151: return
+Captured nested call to append with return value: None
+conjecture/junkdrawer.py:append:145: self[i] = n
+Captured nested call to record_choice with return value: None
+conjecture/data.py:record_choice:328: self.trail.append(TrailType.CHOICE)
+Captured nested call to _draw with return value: 0
+conjecture/data.py:_draw:805: return value
+Captured nested call to draw_integer with return value: 0
+conjecture/data.py:draw_integer:844: return self._draw("integer", constraints, observe=observe, forced=forced)
+Captured nested call to do_draw with return value: 0
+_internal/numbers.py:do_draw:83: return data.draw_integer(
+Tracing nested call to gc_cumulative_time
+conjecture/junkdrawer.py:gc_cumulative_time:412: def gc_cumulative_time() -> float:
+Captured nested call to gc_cumulative_time with return value: 0
+conjecture/junkdrawer.py:gc_cumulative_time:455: return _gc_cumulative_time
+Tracing nested call to stop_span
+conjecture/data.py:stop_span:1171: def stop_span(self, *, discard: bool = False) -> None:
+Tracing nested call to span_end
+conjecture/providers.py:span_end:423: def span_end(self, discard: bool, /) -> None:  # noqa: B027, FBT001
+Captured nested call to span_end with return value: None
+conjecture/providers.py:span_end:423: def span_end(self, discard: bool, /) -> None:  # noqa: B027, FBT001
+Tracing nested call to stop_span
+conjecture/data.py:stop_span:339: def stop_span(self, *, discard: bool) -> None:
+Tracing nested call to append
+conjecture/junkdrawer.py:append:142: def append(self, n: int) -> None:
+Tracing nested call to __len__
+conjecture/junkdrawer.py:__len__:103: def __len__(self) -> int:
+Captured nested call to __len__ with return value: 6
+conjecture/junkdrawer.py:__len__:104: return len(self.__underlying)
+Tracing nested call to __setitem__
+conjecture/junkdrawer.py:__setitem__:147: def __setitem__(self, i: int, n: int) -> None:
+Captured nested call to __setitem__ with return value: None
+conjecture/junkdrawer.py:__setitem__:151: return
+Captured nested call to append with return value: None
+conjecture/junkdrawer.py:append:145: self[i] = n
+Captured nested call to stop_span with return value: None
+conjecture/data.py:stop_span:343: self.trail.append(TrailType.STOP_SPAN_NO_DISCARD)
+Captured nested call to stop_span with return value: None
+conjecture/data.py:stop_span:1189: if discard:
+Captured draw return value: 0
+Finished tracing draw calls
+Started tracing draw calls
+conjecture/data.py:draw:1088: def draw(
+Tracing nested call to gc_cumulative_time
+conjecture/junkdrawer.py:gc_cumulative_time:412: def gc_cumulative_time() -> float:
+Captured nested call to gc_cumulative_time with return value: 0
+conjecture/junkdrawer.py:gc_cumulative_time:455: return _gc_cumulative_time
+Tracing nested call to validate
+_internal/strategies.py:validate:473: def validate(self) -> None:
+Captured nested call to validate with return value: None
+_internal/strategies.py:validate:479: return
+Tracing nested call to is_empty
+_internal/strategies.py:is_empty:243: @property
+Tracing nested call to recursive_property
+_internal/strategies.py:recursive_property:81: def recursive_property(strategy: "SearchStrategy", name: str, default: object) -> Any:
+Tracing nested call to forced_value
+_internal/strategies.py:forced_value:111: def forced_value(target: SearchStrategy) -> Any:
+Captured nested call to forced_value with return value: False
+_internal/strategies.py:forced_value:115: return getattr(target, cache_key)
+Captured nested call to recursive_property with return value: False
+_internal/strategies.py:recursive_property:118: return forced_value(strategy)
+Captured nested call to is_empty with return value: False
+_internal/strategies.py:is_empty:250: return recursive_property(self, "is_empty", True)
+Tracing nested call to unwrap_strategies
+_internal/lazy.py:unwrap_strategies:31: def unwrap_strategies(s):
+Tracing nested call to __getitem__
+Lib/weakref.py:__getitem__:414: def __getitem__(self, key):
+Captured nested call to __getitem__ with return value: None
+Lib/weakref.py:__getitem__:415: return self.data[ref(key)]
+Tracing nested call to __setitem__
+Lib/weakref.py:__setitem__:427: def __setitem__(self, key, value):
+Captured nested call to __setitem__ with return value: None
+Lib/weakref.py:__setitem__:428: self.data[ref(key, self._remove)] = value
+Tracing nested call to wrapped_strategy
+_internal/lazy.py:wrapped_strategy:112: @property
+Captured nested call to wrapped_strategy with return value: integers()
+_internal/lazy.py:wrapped_strategy:132: return self.__wrapped_strategy
+Tracing nested call to unwrap_strategies
+_internal/lazy.py:unwrap_strategies:31: def unwrap_strategies(s):
+Captured nested call to unwrap_strategies with return value: integers()
+_internal/lazy.py:unwrap_strategies:36: return s
+Tracing nested call to __setitem__
+Lib/weakref.py:__setitem__:427: def __setitem__(self, key, value):
+Captured nested call to __setitem__ with return value: None
+Lib/weakref.py:__setitem__:428: self.data[ref(key, self._remove)] = value
+Tracing nested call to clear
+<frozen _collections_abc>:clear:933: 
+Tracing nested call to popitem
+Lib/weakref.py:popitem:495: def popitem(self):
+Captured nested call to popitem with return value: (integers(), integers())
+Lib/weakref.py:popitem:501: return o, value
+Tracing nested call to popitem
+Lib/weakref.py:popitem:495: def popitem(self):
+Captured nested call to popitem with return value: None
+Lib/weakref.py:popitem:498: key, value = self.data.popitem()
+Captured nested call to clear with return value: None
+<frozen _collections_abc>:clear:939: 
+Captured nested call to unwrap_strategies with return value: integers()
+_internal/lazy.py:unwrap_strategies:65: assert unwrap_depth >= 0
+Tracing nested call to label
+_internal/strategies.py:label:502: @property
+Tracing nested call to cast
+Lib/typing.py:cast:2216: def cast(typ, val):
+Captured nested call to cast with return value: 15101551161751157077
+Lib/typing.py:cast:2224: return val
+Captured nested call to label with return value: 15101551161751157077
+_internal/strategies.py:label:509: return cast(int, self.__label)
+Tracing nested call to start_span
+conjecture/data.py:start_span:1156: def start_span(self, label: int) -> None:
+Tracing nested call to span_start
+conjecture/providers.py:span_start:412: def span_start(self, label: int, /) -> None:  # noqa: B027  # non-abstract noop
+Captured nested call to span_start with return value: None
+conjecture/providers.py:span_start:412: def span_start(self, label: int, /) -> None:  # noqa: B027  # non-abstract noop
+Tracing nested call to __assert_not_frozen
+conjecture/data.py:__assert_not_frozen:1078: def __assert_not_frozen(self, name: str) -> None:
+Captured nested call to __assert_not_frozen with return value: None
+conjecture/data.py:__assert_not_frozen:1079: if self.frozen:
+Tracing nested call to start_span
+conjecture/data.py:start_span:330: def start_span(self, label: int) -> None:
+Tracing nested call to append
+conjecture/junkdrawer.py:append:142: def append(self, n: int) -> None:
+Tracing nested call to __len__
+conjecture/junkdrawer.py:__len__:103: def __len__(self) -> int:
+Captured nested call to __len__ with return value: 1
+conjecture/junkdrawer.py:__len__:104: return len(self.__underlying)
+Tracing nested call to __setitem__
+conjecture/junkdrawer.py:__setitem__:147: def __setitem__(self, i: int, n: int) -> None:
+Captured nested call to __setitem__ with return value: None
+conjecture/junkdrawer.py:__setitem__:151: return
+Captured nested call to append with return value: None
+conjecture/junkdrawer.py:append:145: self[i] = n
+Captured nested call to start_span with return value: None
+conjecture/data.py:start_span:337: self.trail.append(TrailType.START_SPAN + i)
+Captured nested call to start_span with return value: None
+conjecture/data.py:start_span:1169: self.labels_for_structure_stack.append({label})
+Tracing nested call to do_draw
+_internal/numbers.py:do_draw:68: def do_draw(self, data: ConjectureData) -> int:
+Tracing nested call to draw_integer
+conjecture/data.py:draw_integer:807: def draw_integer(
+Tracing nested call to _pooled_constraints
+conjecture/data.py:_pooled_constraints:943: def _pooled_constraints(self, choice_type, constraints):
+Tracing nested call to choice_constraints_key
+conjecture/choice.py:choice_constraints_key:604: def choice_constraints_key(choice_type, constraints):
+Captured nested call to choice_constraints_key with return value: (None, None, None, 0)
+conjecture/choice.py:choice_constraints_key:613: return (
+Tracing nested call to __getitem__
+internal/cache.py:__getitem__:334: def __getitem__(self, key: K) -> V:
+Tracing nested call to cache
+internal/cache.py:cache:319: @property
+Captured nested call to cache with return value: OrderedDict([(('integer', None, None, None, 0), {'min_value': None, 'max_value': None, 'weights': None, 'shrink_towards': 0})])
+internal/cache.py:cache:322: return self._threadlocal.cache
+Tracing nested call to cache
+internal/cache.py:cache:319: @property
+Captured nested call to cache with return value: OrderedDict([(('integer', None, None, None, 0), {'min_value': None, 'max_value': None, 'weights': None, 'shrink_towards': 0})])
+internal/cache.py:cache:322: return self._threadlocal.cache
+Captured nested call to __getitem__ with return value: {'min_value': None, 'max_value': None, 'weights': None, 'shrink_towards': 0}
+internal/cache.py:__getitem__:337: return val
+Captured nested call to _pooled_constraints with return value: {'min_value': None, 'max_value': None, 'weights': None, 'shrink_towards': 0}
+conjecture/data.py:_pooled_constraints:951: return POOLED_CONSTRAINTS_CACHE[key]
+Tracing nested call to _draw
+conjecture/data.py:_draw:740: def _draw(self, choice_type, constraints, *, observe, forced):
+Tracing nested call to _pop_choice
+conjecture/data.py:_pop_choice:956: def _pop_choice(
+Tracing nested call to choice_permitted
+conjecture/choice.py:choice_permitted:531: def choice_permitted(choice: ChoiceT, constraints: ChoiceConstraintsT) -> bool:
+Tracing nested call to cast
+Lib/typing.py:cast:2216: def cast(typ, val):
+Captured nested call to cast with return value: {'min_value': None, 'max_value': None, 'weights': None, 'shrink_towards': 0}
+Lib/typing.py:cast:2224: return val
+Captured nested call to choice_permitted with return value: True
+conjecture/choice.py:choice_permitted:538: return not (max_value is not None and choice > max_value)
+Captured nested call to _pop_choice with return value: 0
+conjecture/data.py:_pop_choice:1043: return choice
+Tracing nested call to draw_integer
+conjecture/datatree.py:draw_integer:1004: def draw_integer(
+Tracing nested call to draw_value
+conjecture/datatree.py:draw_value:1033: def draw_value(
+Captured nested call to draw_value with return value: None
+conjecture/datatree.py:draw_value:1117: if self._trail[-1] is not self._current_node:
+Captured nested call to draw_integer with return value: None
+conjecture/datatree.py:draw_integer:1007: self.draw_value(
+Tracing nested call to choices_size
+conjecture/choice.py:choices_size:622: def choices_size(choices: Iterable[ChoiceT]) -> int:
+Tracing nested call to choices_to_bytes
+hypothesis/database.py:choices_to_bytes:1170: def choices_to_bytes(choices: Iterable[ChoiceT], /) -> bytes:
+Captured nested call to choices_to_bytes with return value: b'A\x00'
+hypothesis/database.py:choices_to_bytes:1207: return b"".join(parts)
+Captured nested call to choices_size with return value: 2
+conjecture/choice.py:choices_size:625: return len(choices_to_bytes(choices))
+Tracing nested call to __init__
+<attrs generated init hypothesis.internal.conjecture.choice.ChoiceNode>:__init__:1: def __init__(self, type, value, constraints, was_forced, index=attr_dict['index'].default):
+Captured nested call to __init__ with return value: None
+<attrs generated init hypothesis.internal.conjecture.choice.ChoiceNode>:__init__:6: self.index = index
+Tracing nested call to record_choice
+conjecture/data.py:record_choice:327: def record_choice(self) -> None:
+Tracing nested call to append
+conjecture/junkdrawer.py:append:142: def append(self, n: int) -> None:
+Tracing nested call to __len__
+conjecture/junkdrawer.py:__len__:103: def __len__(self) -> int:
+Captured nested call to __len__ with return value: 2
+conjecture/junkdrawer.py:__len__:104: return len(self.__underlying)
+Tracing nested call to __setitem__
+conjecture/junkdrawer.py:__setitem__:147: def __setitem__(self, i: int, n: int) -> None:
+Tracing nested call to __upgrade
+conjecture/junkdrawer.py:__upgrade:160: def __upgrade(self) -> None:
+Tracing nested call to array_or_list
+conjecture/junkdrawer.py:array_or_list:33: def array_or_list(
+Captured nested call to array_or_list with return value: array('H', [3, 4, 0])
+conjecture/junkdrawer.py:array_or_list:38: return array.array(code, contents)
+Captured nested call to __upgrade with return value: None
+conjecture/junkdrawer.py:__upgrade:163: self.__underlying = array_or_list(code, self.__underlying)
+Tracing nested call to __upgrade
+conjecture/junkdrawer.py:__upgrade:160: def __upgrade(self) -> None:
+Tracing nested call to array_or_list
+conjecture/junkdrawer.py:array_or_list:33: def array_or_list(
+Captured nested call to array_or_list with return value: array('I', [3, 4, 0])
+conjecture/junkdrawer.py:array_or_list:38: return array.array(code, contents)
+Captured nested call to __upgrade with return value: None
+conjecture/junkdrawer.py:__upgrade:163: self.__underlying = array_or_list(code, self.__underlying)
+Tracing nested call to __upgrade
+conjecture/junkdrawer.py:__upgrade:160: def __upgrade(self) -> None:
+Tracing nested call to array_or_list
+conjecture/junkdrawer.py:array_or_list:33: def array_or_list(
+Captured nested call to array_or_list with return value: array('L', [3, 4, 0])
+conjecture/junkdrawer.py:array_or_list:38: return array.array(code, contents)
+Captured nested call to __upgrade with return value: None
+conjecture/junkdrawer.py:__upgrade:163: self.__underlying = array_or_list(code, self.__underlying)
+Tracing nested call to __upgrade
+conjecture/junkdrawer.py:__upgrade:160: def __upgrade(self) -> None:
+Tracing nested call to array_or_list
+conjecture/junkdrawer.py:array_or_list:33: def array_or_list(
+Captured nested call to array_or_list with return value: array('Q', [3, 4, 0])
+conjecture/junkdrawer.py:array_or_list:38: return array.array(code, contents)
+Captured nested call to __upgrade with return value: None
+conjecture/junkdrawer.py:__upgrade:163: self.__underlying = array_or_list(code, self.__underlying)
+Captured nested call to __setitem__ with return value: None
+conjecture/junkdrawer.py:__setitem__:151: return
+Captured nested call to append with return value: None
+conjecture/junkdrawer.py:append:145: self[i] = n
+Captured nested call to record_choice with return value: None
+conjecture/data.py:record_choice:328: self.trail.append(TrailType.CHOICE)
+Captured nested call to _draw with return value: 0
+conjecture/data.py:_draw:805: return value
+Captured nested call to draw_integer with return value: 0
+conjecture/data.py:draw_integer:844: return self._draw("integer", constraints, observe=observe, forced=forced)
+Captured nested call to do_draw with return value: 0
+_internal/numbers.py:do_draw:83: return data.draw_integer(
+Tracing nested call to gc_cumulative_time
+conjecture/junkdrawer.py:gc_cumulative_time:412: def gc_cumulative_time() -> float:
+Captured nested call to gc_cumulative_time with return value: 0
+conjecture/junkdrawer.py:gc_cumulative_time:455: return _gc_cumulative_time
+Tracing nested call to stop_span
+conjecture/data.py:stop_span:1171: def stop_span(self, *, discard: bool = False) -> None:
+Tracing nested call to span_end
+conjecture/providers.py:span_end:423: def span_end(self, discard: bool, /) -> None:  # noqa: B027, FBT001
+Captured nested call to span_end with return value: None
+conjecture/providers.py:span_end:423: def span_end(self, discard: bool, /) -> None:  # noqa: B027, FBT001
+Tracing nested call to stop_span
+conjecture/data.py:stop_span:339: def stop_span(self, *, discard: bool) -> None:
+Tracing nested call to append
+conjecture/junkdrawer.py:append:142: def append(self, n: int) -> None:
+Tracing nested call to __len__
+conjecture/junkdrawer.py:__len__:103: def __len__(self) -> int:
+Captured nested call to __len__ with return value: 3
+conjecture/junkdrawer.py:__len__:104: return len(self.__underlying)
+Tracing nested call to __setitem__
+conjecture/junkdrawer.py:__setitem__:147: def __setitem__(self, i: int, n: int) -> None:
+Captured nested call to __setitem__ with return value: None
+conjecture/junkdrawer.py:__setitem__:151: return
+Captured nested call to append with return value: None
+conjecture/junkdrawer.py:append:145: self[i] = n
+Captured nested call to stop_span with return value: None
+conjecture/data.py:stop_span:343: self.trail.append(TrailType.STOP_SPAN_NO_DISCARD)
+Captured nested call to stop_span with return value: None
+conjecture/data.py:stop_span:1189: if discard:
+Captured draw return value: 0
+Finished tracing draw calls
+Started tracing draw calls
+conjecture/data.py:draw:1088: def draw(
+Tracing nested call to gc_cumulative_time
+conjecture/junkdrawer.py:gc_cumulative_time:412: def gc_cumulative_time() -> float:
+Captured nested call to gc_cumulative_time with return value: 0
+conjecture/junkdrawer.py:gc_cumulative_time:455: return _gc_cumulative_time
+Tracing nested call to validate
+_internal/strategies.py:validate:473: def validate(self) -> None:
+Captured nested call to validate with return value: None
+_internal/strategies.py:validate:479: return
+Tracing nested call to is_empty
+_internal/strategies.py:is_empty:243: @property
+Tracing nested call to recursive_property
+_internal/strategies.py:recursive_property:81: def recursive_property(strategy: "SearchStrategy", name: str, default: object) -> Any:
+Tracing nested call to forced_value
+_internal/strategies.py:forced_value:111: def forced_value(target: SearchStrategy) -> Any:
+Captured nested call to forced_value with return value: False
+_internal/strategies.py:forced_value:115: return getattr(target, cache_key)
+Captured nested call to recursive_property with return value: False
+_internal/strategies.py:recursive_property:118: return forced_value(strategy)
+Captured nested call to is_empty with return value: False
+_internal/strategies.py:is_empty:250: return recursive_property(self, "is_empty", True)
+Tracing nested call to unwrap_strategies
+_internal/lazy.py:unwrap_strategies:31: def unwrap_strategies(s):
+Tracing nested call to __getitem__
+Lib/weakref.py:__getitem__:414: def __getitem__(self, key):
+Captured nested call to __getitem__ with return value: None
+Lib/weakref.py:__getitem__:415: return self.data[ref(key)]
+Tracing nested call to __setitem__
+Lib/weakref.py:__setitem__:427: def __setitem__(self, key, value):
+Captured nested call to __setitem__ with return value: None
+Lib/weakref.py:__setitem__:428: self.data[ref(key, self._remove)] = value
+Tracing nested call to wrapped_strategy
+_internal/lazy.py:wrapped_strategy:112: @property
+Captured nested call to wrapped_strategy with return value: integers()
+_internal/lazy.py:wrapped_strategy:132: return self.__wrapped_strategy
+Tracing nested call to unwrap_strategies
+_internal/lazy.py:unwrap_strategies:31: def unwrap_strategies(s):
+Captured nested call to unwrap_strategies with return value: integers()
+_internal/lazy.py:unwrap_strategies:36: return s
+Tracing nested call to __setitem__
+Lib/weakref.py:__setitem__:427: def __setitem__(self, key, value):
+Captured nested call to __setitem__ with return value: None
+Lib/weakref.py:__setitem__:428: self.data[ref(key, self._remove)] = value
+Tracing nested call to clear
+<frozen _collections_abc>:clear:933: 
+Tracing nested call to popitem
+Lib/weakref.py:popitem:495: def popitem(self):
+Captured nested call to popitem with return value: (integers(), integers())
+Lib/weakref.py:popitem:501: return o, value
+Tracing nested call to popitem
+Lib/weakref.py:popitem:495: def popitem(self):
+Captured nested call to popitem with return value: None
+Lib/weakref.py:popitem:498: key, value = self.data.popitem()
+Captured nested call to clear with return value: None
+<frozen _collections_abc>:clear:939: 
+Captured nested call to unwrap_strategies with return value: integers()
+_internal/lazy.py:unwrap_strategies:65: assert unwrap_depth >= 0
+Tracing nested call to label
+_internal/strategies.py:label:502: @property
+Tracing nested call to cast
+Lib/typing.py:cast:2216: def cast(typ, val):
+Captured nested call to cast with return value: 15101551161751157077
+Lib/typing.py:cast:2224: return val
+Captured nested call to label with return value: 15101551161751157077
+_internal/strategies.py:label:509: return cast(int, self.__label)
+Tracing nested call to start_span
+conjecture/data.py:start_span:1156: def start_span(self, label: int) -> None:
+Tracing nested call to span_start
+conjecture/providers.py:span_start:412: def span_start(self, label: int, /) -> None:  # noqa: B027  # non-abstract noop
+Captured nested call to span_start with return value: None
+conjecture/providers.py:span_start:412: def span_start(self, label: int, /) -> None:  # noqa: B027  # non-abstract noop
+Tracing nested call to __assert_not_frozen
+conjecture/data.py:__assert_not_frozen:1078: def __assert_not_frozen(self, name: str) -> None:
+Captured nested call to __assert_not_frozen with return value: None
+conjecture/data.py:__assert_not_frozen:1079: if self.frozen:
+Tracing nested call to start_span
+conjecture/data.py:start_span:330: def start_span(self, label: int) -> None:
+Tracing nested call to append
+conjecture/junkdrawer.py:append:142: def append(self, n: int) -> None:
+Tracing nested call to __len__
+conjecture/junkdrawer.py:__len__:103: def __len__(self) -> int:
+Captured nested call to __len__ with return value: 4
+conjecture/junkdrawer.py:__len__:104: return len(self.__underlying)
+Tracing nested call to __setitem__
+conjecture/junkdrawer.py:__setitem__:147: def __setitem__(self, i: int, n: int) -> None:
+Captured nested call to __setitem__ with return value: None
+conjecture/junkdrawer.py:__setitem__:151: return
+Captured nested call to append with return value: None
+conjecture/junkdrawer.py:append:145: self[i] = n
+Captured nested call to start_span with return value: None
+conjecture/data.py:start_span:337: self.trail.append(TrailType.START_SPAN + i)
+Captured nested call to start_span with return value: None
+conjecture/data.py:start_span:1169: self.labels_for_structure_stack.append({label})
+Tracing nested call to do_draw
+_internal/numbers.py:do_draw:68: def do_draw(self, data: ConjectureData) -> int:
+Tracing nested call to draw_integer
+conjecture/data.py:draw_integer:807: def draw_integer(
+Tracing nested call to _pooled_constraints
+conjecture/data.py:_pooled_constraints:943: def _pooled_constraints(self, choice_type, constraints):
+Tracing nested call to choice_constraints_key
+conjecture/choice.py:choice_constraints_key:604: def choice_constraints_key(choice_type, constraints):
+Captured nested call to choice_constraints_key with return value: (None, None, None, 0)
+conjecture/choice.py:choice_constraints_key:613: return (
+Tracing nested call to __getitem__
+internal/cache.py:__getitem__:334: def __getitem__(self, key: K) -> V:
+Tracing nested call to cache
+internal/cache.py:cache:319: @property
+Captured nested call to cache with return value: OrderedDict([(('integer', None, None, None, 0), {'min_value': None, 'max_value': None, 'weights': None, 'shrink_towards': 0})])
+internal/cache.py:cache:322: return self._threadlocal.cache
+Tracing nested call to cache
+internal/cache.py:cache:319: @property
+Captured nested call to cache with return value: OrderedDict([(('integer', None, None, None, 0), {'min_value': None, 'max_value': None, 'weights': None, 'shrink_towards': 0})])
+internal/cache.py:cache:322: return self._threadlocal.cache
+Captured nested call to __getitem__ with return value: {'min_value': None, 'max_value': None, 'weights': None, 'shrink_towards': 0}
+internal/cache.py:__getitem__:337: return val
+Captured nested call to _pooled_constraints with return value: {'min_value': None, 'max_value': None, 'weights': None, 'shrink_towards': 0}
+conjecture/data.py:_pooled_constraints:951: return POOLED_CONSTRAINTS_CACHE[key]
+Tracing nested call to _draw
+conjecture/data.py:_draw:740: def _draw(self, choice_type, constraints, *, observe, forced):
+Tracing nested call to _pop_choice
+conjecture/data.py:_pop_choice:956: def _pop_choice(
+Tracing nested call to choice_permitted
+conjecture/choice.py:choice_permitted:531: def choice_permitted(choice: ChoiceT, constraints: ChoiceConstraintsT) -> bool:
+Tracing nested call to cast
+Lib/typing.py:cast:2216: def cast(typ, val):
+Captured nested call to cast with return value: {'min_value': None, 'max_value': None, 'weights': None, 'shrink_towards': 0}
+Lib/typing.py:cast:2224: return val
+Captured nested call to choice_permitted with return value: True
+conjecture/choice.py:choice_permitted:538: return not (max_value is not None and choice > max_value)
+Captured nested call to _pop_choice with return value: 0
+conjecture/data.py:_pop_choice:1043: return choice
+Tracing nested call to draw_integer
+conjecture/datatree.py:draw_integer:1004: def draw_integer(
+Tracing nested call to draw_value
+conjecture/datatree.py:draw_value:1033: def draw_value(
+Captured nested call to draw_value with return value: None
+conjecture/datatree.py:draw_value:1117: if self._trail[-1] is not self._current_node:
+Captured nested call to draw_integer with return value: None
+conjecture/datatree.py:draw_integer:1007: self.draw_value(
+Tracing nested call to choices_size
+conjecture/choice.py:choices_size:622: def choices_size(choices: Iterable[ChoiceT]) -> int:
+Tracing nested call to choices_to_bytes
+hypothesis/database.py:choices_to_bytes:1170: def choices_to_bytes(choices: Iterable[ChoiceT], /) -> bytes:
+Captured nested call to choices_to_bytes with return value: b'A\x00'
+hypothesis/database.py:choices_to_bytes:1207: return b"".join(parts)
+Captured nested call to choices_size with return value: 2
+conjecture/choice.py:choices_size:625: return len(choices_to_bytes(choices))
+Tracing nested call to __init__
+<attrs generated init hypothesis.internal.conjecture.choice.ChoiceNode>:__init__:1: def __init__(self, type, value, constraints, was_forced, index=attr_dict['index'].default):
+Captured nested call to __init__ with return value: None
+<attrs generated init hypothesis.internal.conjecture.choice.ChoiceNode>:__init__:6: self.index = index
+Tracing nested call to record_choice
+conjecture/data.py:record_choice:327: def record_choice(self) -> None:
+Tracing nested call to append
+conjecture/junkdrawer.py:append:142: def append(self, n: int) -> None:
+Tracing nested call to __len__
+conjecture/junkdrawer.py:__len__:103: def __len__(self) -> int:
+Captured nested call to __len__ with return value: 5
+conjecture/junkdrawer.py:__len__:104: return len(self.__underlying)
+Tracing nested call to __setitem__
+conjecture/junkdrawer.py:__setitem__:147: def __setitem__(self, i: int, n: int) -> None:
+Captured nested call to __setitem__ with return value: None
+conjecture/junkdrawer.py:__setitem__:151: return
+Captured nested call to append with return value: None
+conjecture/junkdrawer.py:append:145: self[i] = n
+Captured nested call to record_choice with return value: None
+conjecture/data.py:record_choice:328: self.trail.append(TrailType.CHOICE)
+Captured nested call to _draw with return value: 0
+conjecture/data.py:_draw:805: return value
+Captured nested call to draw_integer with return value: 0
+conjecture/data.py:draw_integer:844: return self._draw("integer", constraints, observe=observe, forced=forced)
+Captured nested call to do_draw with return value: 0
+_internal/numbers.py:do_draw:83: return data.draw_integer(
+Tracing nested call to gc_cumulative_time
+conjecture/junkdrawer.py:gc_cumulative_time:412: def gc_cumulative_time() -> float:
+Captured nested call to gc_cumulative_time with return value: 0
+conjecture/junkdrawer.py:gc_cumulative_time:455: return _gc_cumulative_time
+Tracing nested call to stop_span
+conjecture/data.py:stop_span:1171: def stop_span(self, *, discard: bool = False) -> None:
+Tracing nested call to span_end
+conjecture/providers.py:span_end:423: def span_end(self, discard: bool, /) -> None:  # noqa: B027, FBT001
+Captured nested call to span_end with return value: None
+conjecture/providers.py:span_end:423: def span_end(self, discard: bool, /) -> None:  # noqa: B027, FBT001
+Tracing nested call to stop_span
+conjecture/data.py:stop_span:339: def stop_span(self, *, discard: bool) -> None:
+Tracing nested call to append
+conjecture/junkdrawer.py:append:142: def append(self, n: int) -> None:
+Tracing nested call to __len__
+conjecture/junkdrawer.py:__len__:103: def __len__(self) -> int:
+Captured nested call to __len__ with return value: 6
+conjecture/junkdrawer.py:__len__:104: return len(self.__underlying)
+Tracing nested call to __setitem__
+conjecture/junkdrawer.py:__setitem__:147: def __setitem__(self, i: int, n: int) -> None:
+Captured nested call to __setitem__ with return value: None
+conjecture/junkdrawer.py:__setitem__:151: return
+Captured nested call to append with return value: None
+conjecture/junkdrawer.py:append:145: self[i] = n
+Captured nested call to stop_span with return value: None
+conjecture/data.py:stop_span:343: self.trail.append(TrailType.STOP_SPAN_NO_DISCARD)
+Captured nested call to stop_span with return value: None
+conjecture/data.py:stop_span:1189: if discard:
+Captured draw return value: 0
+Finished tracing draw calls
+Started tracing draw calls
+conjecture/data.py:draw:1088: def draw(
+Tracing nested call to gc_cumulative_time
+conjecture/junkdrawer.py:gc_cumulative_time:412: def gc_cumulative_time() -> float:
+Captured nested call to gc_cumulative_time with return value: 0
+conjecture/junkdrawer.py:gc_cumulative_time:455: return _gc_cumulative_time
+Tracing nested call to validate
+_internal/strategies.py:validate:473: def validate(self) -> None:
+Captured nested call to validate with return value: None
+_internal/strategies.py:validate:479: return
+Tracing nested call to is_empty
+_internal/strategies.py:is_empty:243: @property
+Tracing nested call to recursive_property
+_internal/strategies.py:recursive_property:81: def recursive_property(strategy: "SearchStrategy", name: str, default: object) -> Any:
+Tracing nested call to forced_value
+_internal/strategies.py:forced_value:111: def forced_value(target: SearchStrategy) -> Any:
+Captured nested call to forced_value with return value: False
+_internal/strategies.py:forced_value:115: return getattr(target, cache_key)
+Captured nested call to recursive_property with return value: False
+_internal/strategies.py:recursive_property:118: return forced_value(strategy)
+Captured nested call to is_empty with return value: False
+_internal/strategies.py:is_empty:250: return recursive_property(self, "is_empty", True)
+Tracing nested call to unwrap_strategies
+_internal/lazy.py:unwrap_strategies:31: def unwrap_strategies(s):
+Captured nested call to unwrap_strategies with return value: integers()
+_internal/lazy.py:unwrap_strategies:36: return s
+Tracing nested call to label
+_internal/strategies.py:label:502: @property
+Tracing nested call to cast
+Lib/typing.py:cast:2216: def cast(typ, val):
+Captured nested call to cast with return value: 15101551161751157077
+Lib/typing.py:cast:2224: return val
+Captured nested call to label with return value: 15101551161751157077
+_internal/strategies.py:label:509: return cast(int, self.__label)
+Tracing nested call to start_span
+conjecture/data.py:start_span:1156: def start_span(self, label: int) -> None:
+Tracing nested call to span_start
+conjecture/providers.py:span_start:412: def span_start(self, label: int, /) -> None:  # noqa: B027  # non-abstract noop
+Captured nested call to span_start with return value: None
+conjecture/providers.py:span_start:412: def span_start(self, label: int, /) -> None:  # noqa: B027  # non-abstract noop
+Tracing nested call to __assert_not_frozen
+conjecture/data.py:__assert_not_frozen:1078: def __assert_not_frozen(self, name: str) -> None:
+Captured nested call to __assert_not_frozen with return value: None
+conjecture/data.py:__assert_not_frozen:1079: if self.frozen:
+Tracing nested call to start_span
+conjecture/data.py:start_span:330: def start_span(self, label: int) -> None:
+Tracing nested call to append
+conjecture/junkdrawer.py:append:142: def append(self, n: int) -> None:
+Tracing nested call to __len__
+conjecture/junkdrawer.py:__len__:103: def __len__(self) -> int:
+Captured nested call to __len__ with return value: 1
+conjecture/junkdrawer.py:__len__:104: return len(self.__underlying)
+Tracing nested call to __setitem__
+conjecture/junkdrawer.py:__setitem__:147: def __setitem__(self, i: int, n: int) -> None:
+Captured nested call to __setitem__ with return value: None
+conjecture/junkdrawer.py:__setitem__:151: return
+Captured nested call to append with return value: None
+conjecture/junkdrawer.py:append:145: self[i] = n
+Captured nested call to start_span with return value: None
+conjecture/data.py:start_span:337: self.trail.append(TrailType.START_SPAN + i)
+Captured nested call to start_span with return value: None
+conjecture/data.py:start_span:1169: self.labels_for_structure_stack.append({label})
+Tracing nested call to do_draw
+_internal/numbers.py:do_draw:68: def do_draw(self, data: ConjectureData) -> int:
+Tracing nested call to draw_integer
+conjecture/data.py:draw_integer:807: def draw_integer(
+Tracing nested call to _pooled_constraints
+conjecture/data.py:_pooled_constraints:943: def _pooled_constraints(self, choice_type, constraints):
+Tracing nested call to choice_constraints_key
+conjecture/choice.py:choice_constraints_key:604: def choice_constraints_key(choice_type, constraints):
+Captured nested call to choice_constraints_key with return value: (None, None, None, 0)
+conjecture/choice.py:choice_constraints_key:613: return (
+Tracing nested call to __getitem__
+internal/cache.py:__getitem__:334: def __getitem__(self, key: K) -> V:
+Tracing nested call to cache
+internal/cache.py:cache:319: @property
+Captured nested call to cache with return value: OrderedDict([(('integer', None, None, None, 0), {'min_value': None, 'max_value': None, 'weights': None, 'shrink_towards': 0})])
+internal/cache.py:cache:322: return self._threadlocal.cache
+Tracing nested call to cache
+internal/cache.py:cache:319: @property
+Captured nested call to cache with return value: OrderedDict([(('integer', None, None, None, 0), {'min_value': None, 'max_value': None, 'weights': None, 'shrink_towards': 0})])
+internal/cache.py:cache:322: return self._threadlocal.cache
+Captured nested call to __getitem__ with return value: {'min_value': None, 'max_value': None, 'weights': None, 'shrink_towards': 0}
+internal/cache.py:__getitem__:337: return val
+Captured nested call to _pooled_constraints with return value: {'min_value': None, 'max_value': None, 'weights': None, 'shrink_towards': 0}
+conjecture/data.py:_pooled_constraints:951: return POOLED_CONSTRAINTS_CACHE[key]
+Tracing nested call to _draw
+conjecture/data.py:_draw:740: def _draw(self, choice_type, constraints, *, observe, forced):
+Tracing nested call to _pop_choice
+conjecture/data.py:_pop_choice:956: def _pop_choice(
+Tracing nested call to choice_permitted
+conjecture/choice.py:choice_permitted:531: def choice_permitted(choice: ChoiceT, constraints: ChoiceConstraintsT) -> bool:
+Tracing nested call to cast
+Lib/typing.py:cast:2216: def cast(typ, val):
+Captured nested call to cast with return value: {'min_value': None, 'max_value': None, 'weights': None, 'shrink_towards': 0}
+Lib/typing.py:cast:2224: return val
+Captured nested call to choice_permitted with return value: True
+conjecture/choice.py:choice_permitted:538: return not (max_value is not None and choice > max_value)
+Captured nested call to _pop_choice with return value: 0
+conjecture/data.py:_pop_choice:1043: return choice
+Tracing nested call to draw_integer
+conjecture/data.py:draw_integer:548: def draw_integer(
+Captured nested call to draw_integer with return value: None
+conjecture/data.py:draw_integer:551: pass
+Tracing nested call to choices_size
+conjecture/choice.py:choices_size:622: def choices_size(choices: Iterable[ChoiceT]) -> int:
+Tracing nested call to choices_to_bytes
+hypothesis/database.py:choices_to_bytes:1170: def choices_to_bytes(choices: Iterable[ChoiceT], /) -> bytes:
+Captured nested call to choices_to_bytes with return value: b'A\x00'
+hypothesis/database.py:choices_to_bytes:1207: return b"".join(parts)
+Captured nested call to choices_size with return value: 2
+conjecture/choice.py:choices_size:625: return len(choices_to_bytes(choices))
+Tracing nested call to __init__
+<attrs generated init hypothesis.internal.conjecture.choice.ChoiceNode>:__init__:1: def __init__(self, type, value, constraints, was_forced, index=attr_dict['index'].default):
+Captured nested call to __init__ with return value: None
+<attrs generated init hypothesis.internal.conjecture.choice.ChoiceNode>:__init__:6: self.index = index
+Tracing nested call to record_choice
+conjecture/data.py:record_choice:327: def record_choice(self) -> None:
+Tracing nested call to append
+conjecture/junkdrawer.py:append:142: def append(self, n: int) -> None:
+Tracing nested call to __len__
+conjecture/junkdrawer.py:__len__:103: def __len__(self) -> int:
+Captured nested call to __len__ with return value: 2
+conjecture/junkdrawer.py:__len__:104: return len(self.__underlying)
+Tracing nested call to __setitem__
+conjecture/junkdrawer.py:__setitem__:147: def __setitem__(self, i: int, n: int) -> None:
+Tracing nested call to __upgrade
+conjecture/junkdrawer.py:__upgrade:160: def __upgrade(self) -> None:
+Tracing nested call to array_or_list
+conjecture/junkdrawer.py:array_or_list:33: def array_or_list(
+Captured nested call to array_or_list with return value: array('H', [3, 4, 0])
+conjecture/junkdrawer.py:array_or_list:38: return array.array(code, contents)
+Captured nested call to __upgrade with return value: None
+conjecture/junkdrawer.py:__upgrade:163: self.__underlying = array_or_list(code, self.__underlying)
+Tracing nested call to __upgrade
+conjecture/junkdrawer.py:__upgrade:160: def __upgrade(self) -> None:
+Tracing nested call to array_or_list
+conjecture/junkdrawer.py:array_or_list:33: def array_or_list(
+Captured nested call to array_or_list with return value: array('I', [3, 4, 0])
+conjecture/junkdrawer.py:array_or_list:38: return array.array(code, contents)
+Captured nested call to __upgrade with return value: None
+conjecture/junkdrawer.py:__upgrade:163: self.__underlying = array_or_list(code, self.__underlying)
+Tracing nested call to __upgrade
+conjecture/junkdrawer.py:__upgrade:160: def __upgrade(self) -> None:
+Tracing nested call to array_or_list
+conjecture/junkdrawer.py:array_or_list:33: def array_or_list(
+Captured nested call to array_or_list with return value: array('L', [3, 4, 0])
+conjecture/junkdrawer.py:array_or_list:38: return array.array(code, contents)
+Captured nested call to __upgrade with return value: None
+conjecture/junkdrawer.py:__upgrade:163: self.__underlying = array_or_list(code, self.__underlying)
+Tracing nested call to __upgrade
+conjecture/junkdrawer.py:__upgrade:160: def __upgrade(self) -> None:
+Tracing nested call to array_or_list
+conjecture/junkdrawer.py:array_or_list:33: def array_or_list(
+Captured nested call to array_or_list with return value: array('Q', [3, 4, 0])
+conjecture/junkdrawer.py:array_or_list:38: return array.array(code, contents)
+Captured nested call to __upgrade with return value: None
+conjecture/junkdrawer.py:__upgrade:163: self.__underlying = array_or_list(code, self.__underlying)
+Captured nested call to __setitem__ with return value: None
+conjecture/junkdrawer.py:__setitem__:151: return
+Captured nested call to append with return value: None
+conjecture/junkdrawer.py:append:145: self[i] = n
+Captured nested call to record_choice with return value: None
+conjecture/data.py:record_choice:328: self.trail.append(TrailType.CHOICE)
+Captured nested call to _draw with return value: 0
+conjecture/data.py:_draw:805: return value
+Captured nested call to draw_integer with return value: 0
+conjecture/data.py:draw_integer:844: return self._draw("integer", constraints, observe=observe, forced=forced)
+Captured nested call to do_draw with return value: 0
+_internal/numbers.py:do_draw:83: return data.draw_integer(
+Tracing nested call to gc_cumulative_time
+conjecture/junkdrawer.py:gc_cumulative_time:412: def gc_cumulative_time() -> float:
+Captured nested call to gc_cumulative_time with return value: 0
+conjecture/junkdrawer.py:gc_cumulative_time:455: return _gc_cumulative_time
+Tracing nested call to stop_span
+conjecture/data.py:stop_span:1171: def stop_span(self, *, discard: bool = False) -> None:
+Tracing nested call to span_end
+conjecture/providers.py:span_end:423: def span_end(self, discard: bool, /) -> None:  # noqa: B027, FBT001
+Captured nested call to span_end with return value: None
+conjecture/providers.py:span_end:423: def span_end(self, discard: bool, /) -> None:  # noqa: B027, FBT001
+Tracing nested call to stop_span
+conjecture/data.py:stop_span:339: def stop_span(self, *, discard: bool) -> None:
+Tracing nested call to append
+conjecture/junkdrawer.py:append:142: def append(self, n: int) -> None:
+Tracing nested call to __len__
+conjecture/junkdrawer.py:__len__:103: def __len__(self) -> int:
+Captured nested call to __len__ with return value: 3
+conjecture/junkdrawer.py:__len__:104: return len(self.__underlying)
+Tracing nested call to __setitem__
+conjecture/junkdrawer.py:__setitem__:147: def __setitem__(self, i: int, n: int) -> None:
+Captured nested call to __setitem__ with return value: None
+conjecture/junkdrawer.py:__setitem__:151: return
+Captured nested call to append with return value: None
+conjecture/junkdrawer.py:append:145: self[i] = n
+Captured nested call to stop_span with return value: None
+conjecture/data.py:stop_span:343: self.trail.append(TrailType.STOP_SPAN_NO_DISCARD)
+Captured nested call to stop_span with return value: None
+conjecture/data.py:stop_span:1189: if discard:
+Captured draw return value: 0
+Finished tracing draw calls
+Started tracing draw calls
+conjecture/data.py:draw:1088: def draw(
+Tracing nested call to gc_cumulative_time
+conjecture/junkdrawer.py:gc_cumulative_time:412: def gc_cumulative_time() -> float:
+Captured nested call to gc_cumulative_time with return value: 0
+conjecture/junkdrawer.py:gc_cumulative_time:455: return _gc_cumulative_time
+Tracing nested call to validate
+_internal/strategies.py:validate:473: def validate(self) -> None:
+Captured nested call to validate with return value: None
+_internal/strategies.py:validate:479: return
+Tracing nested call to is_empty
+_internal/strategies.py:is_empty:243: @property
+Tracing nested call to recursive_property
+_internal/strategies.py:recursive_property:81: def recursive_property(strategy: "SearchStrategy", name: str, default: object) -> Any:
+Tracing nested call to forced_value
+_internal/strategies.py:forced_value:111: def forced_value(target: SearchStrategy) -> Any:
+Captured nested call to forced_value with return value: False
+_internal/strategies.py:forced_value:115: return getattr(target, cache_key)
+Captured nested call to recursive_property with return value: False
+_internal/strategies.py:recursive_property:118: return forced_value(strategy)
+Captured nested call to is_empty with return value: False
+_internal/strategies.py:is_empty:250: return recursive_property(self, "is_empty", True)
+Tracing nested call to unwrap_strategies
+_internal/lazy.py:unwrap_strategies:31: def unwrap_strategies(s):
+Captured nested call to unwrap_strategies with return value: integers()
+_internal/lazy.py:unwrap_strategies:36: return s
+Tracing nested call to label
+_internal/strategies.py:label:502: @property
+Tracing nested call to cast
+Lib/typing.py:cast:2216: def cast(typ, val):
+Captured nested call to cast with return value: 15101551161751157077
+Lib/typing.py:cast:2224: return val
+Captured nested call to label with return value: 15101551161751157077
+_internal/strategies.py:label:509: return cast(int, self.__label)
+Tracing nested call to start_span
+conjecture/data.py:start_span:1156: def start_span(self, label: int) -> None:
+Tracing nested call to span_start
+conjecture/providers.py:span_start:412: def span_start(self, label: int, /) -> None:  # noqa: B027  # non-abstract noop
+Captured nested call to span_start with return value: None
+conjecture/providers.py:span_start:412: def span_start(self, label: int, /) -> None:  # noqa: B027  # non-abstract noop
+Tracing nested call to __assert_not_frozen
+conjecture/data.py:__assert_not_frozen:1078: def __assert_not_frozen(self, name: str) -> None:
+Captured nested call to __assert_not_frozen with return value: None
+conjecture/data.py:__assert_not_frozen:1079: if self.frozen:
+Tracing nested call to start_span
+conjecture/data.py:start_span:330: def start_span(self, label: int) -> None:
+Tracing nested call to append
+conjecture/junkdrawer.py:append:142: def append(self, n: int) -> None:
+Tracing nested call to __len__
+conjecture/junkdrawer.py:__len__:103: def __len__(self) -> int:
+Captured nested call to __len__ with return value: 4
+conjecture/junkdrawer.py:__len__:104: return len(self.__underlying)
+Tracing nested call to __setitem__
+conjecture/junkdrawer.py:__setitem__:147: def __setitem__(self, i: int, n: int) -> None:
+Captured nested call to __setitem__ with return value: None
+conjecture/junkdrawer.py:__setitem__:151: return
+Captured nested call to append with return value: None
+conjecture/junkdrawer.py:append:145: self[i] = n
+Captured nested call to start_span with return value: None
+conjecture/data.py:start_span:337: self.trail.append(TrailType.START_SPAN + i)
+Captured nested call to start_span with return value: None
+conjecture/data.py:start_span:1169: self.labels_for_structure_stack.append({label})
+Tracing nested call to do_draw
+_internal/numbers.py:do_draw:68: def do_draw(self, data: ConjectureData) -> int:
+Tracing nested call to draw_integer
+conjecture/data.py:draw_integer:807: def draw_integer(
+Tracing nested call to _pooled_constraints
+conjecture/data.py:_pooled_constraints:943: def _pooled_constraints(self, choice_type, constraints):
+Tracing nested call to choice_constraints_key
+conjecture/choice.py:choice_constraints_key:604: def choice_constraints_key(choice_type, constraints):
+Captured nested call to choice_constraints_key with return value: (None, None, None, 0)
+conjecture/choice.py:choice_constraints_key:613: return (
+Tracing nested call to __getitem__
+internal/cache.py:__getitem__:334: def __getitem__(self, key: K) -> V:
+Tracing nested call to cache
+internal/cache.py:cache:319: @property
+Captured nested call to cache with return value: OrderedDict([(('integer', None, None, None, 0), {'min_value': None, 'max_value': None, 'weights': None, 'shrink_towards': 0})])
+internal/cache.py:cache:322: return self._threadlocal.cache
+Tracing nested call to cache
+internal/cache.py:cache:319: @property
+Captured nested call to cache with return value: OrderedDict([(('integer', None, None, None, 0), {'min_value': None, 'max_value': None, 'weights': None, 'shrink_towards': 0})])
+internal/cache.py:cache:322: return self._threadlocal.cache
+Captured nested call to __getitem__ with return value: {'min_value': None, 'max_value': None, 'weights': None, 'shrink_towards': 0}
+internal/cache.py:__getitem__:337: return val
+Captured nested call to _pooled_constraints with return value: {'min_value': None, 'max_value': None, 'weights': None, 'shrink_towards': 0}
+conjecture/data.py:_pooled_constraints:951: return POOLED_CONSTRAINTS_CACHE[key]
+Tracing nested call to _draw
+conjecture/data.py:_draw:740: def _draw(self, choice_type, constraints, *, observe, forced):
+Tracing nested call to _pop_choice
+conjecture/data.py:_pop_choice:956: def _pop_choice(
+Tracing nested call to choice_permitted
+conjecture/choice.py:choice_permitted:531: def choice_permitted(choice: ChoiceT, constraints: ChoiceConstraintsT) -> bool:
+Tracing nested call to cast
+Lib/typing.py:cast:2216: def cast(typ, val):
+Captured nested call to cast with return value: {'min_value': None, 'max_value': None, 'weights': None, 'shrink_towards': 0}
+Lib/typing.py:cast:2224: return val
+Captured nested call to choice_permitted with return value: True
+conjecture/choice.py:choice_permitted:538: return not (max_value is not None and choice > max_value)
+Captured nested call to _pop_choice with return value: 0
+conjecture/data.py:_pop_choice:1043: return choice
+Tracing nested call to draw_integer
+conjecture/data.py:draw_integer:548: def draw_integer(
+Captured nested call to draw_integer with return value: None
+conjecture/data.py:draw_integer:551: pass
+Tracing nested call to choices_size
+conjecture/choice.py:choices_size:622: def choices_size(choices: Iterable[ChoiceT]) -> int:
+Tracing nested call to choices_to_bytes
+hypothesis/database.py:choices_to_bytes:1170: def choices_to_bytes(choices: Iterable[ChoiceT], /) -> bytes:
+Captured nested call to choices_to_bytes with return value: b'A\x00'
+hypothesis/database.py:choices_to_bytes:1207: return b"".join(parts)
+Captured nested call to choices_size with return value: 2
+conjecture/choice.py:choices_size:625: return len(choices_to_bytes(choices))
+Tracing nested call to __init__
+<attrs generated init hypothesis.internal.conjecture.choice.ChoiceNode>:__init__:1: def __init__(self, type, value, constraints, was_forced, index=attr_dict['index'].default):
+Captured nested call to __init__ with return value: None
+<attrs generated init hypothesis.internal.conjecture.choice.ChoiceNode>:__init__:6: self.index = index
+Tracing nested call to record_choice
+conjecture/data.py:record_choice:327: def record_choice(self) -> None:
+Tracing nested call to append
+conjecture/junkdrawer.py:append:142: def append(self, n: int) -> None:
+Tracing nested call to __len__
+conjecture/junkdrawer.py:__len__:103: def __len__(self) -> int:
+Captured nested call to __len__ with return value: 5
+conjecture/junkdrawer.py:__len__:104: return len(self.__underlying)
+Tracing nested call to __setitem__
+conjecture/junkdrawer.py:__setitem__:147: def __setitem__(self, i: int, n: int) -> None:
+Captured nested call to __setitem__ with return value: None
+conjecture/junkdrawer.py:__setitem__:151: return
+Captured nested call to append with return value: None
+conjecture/junkdrawer.py:append:145: self[i] = n
+Captured nested call to record_choice with return value: None
+conjecture/data.py:record_choice:328: self.trail.append(TrailType.CHOICE)
+Captured nested call to _draw with return value: 0
+conjecture/data.py:_draw:805: return value
+Captured nested call to draw_integer with return value: 0
+conjecture/data.py:draw_integer:844: return self._draw("integer", constraints, observe=observe, forced=forced)
+Captured nested call to do_draw with return value: 0
+_internal/numbers.py:do_draw:83: return data.draw_integer(
+Tracing nested call to gc_cumulative_time
+conjecture/junkdrawer.py:gc_cumulative_time:412: def gc_cumulative_time() -> float:
+Captured nested call to gc_cumulative_time with return value: 0
+conjecture/junkdrawer.py:gc_cumulative_time:455: return _gc_cumulative_time
+Tracing nested call to stop_span
+conjecture/data.py:stop_span:1171: def stop_span(self, *, discard: bool = False) -> None:
+Tracing nested call to span_end
+conjecture/providers.py:span_end:423: def span_end(self, discard: bool, /) -> None:  # noqa: B027, FBT001
+Captured nested call to span_end with return value: None
+conjecture/providers.py:span_end:423: def span_end(self, discard: bool, /) -> None:  # noqa: B027, FBT001
+Tracing nested call to stop_span
+conjecture/data.py:stop_span:339: def stop_span(self, *, discard: bool) -> None:
+Tracing nested call to append
+conjecture/junkdrawer.py:append:142: def append(self, n: int) -> None:
+Tracing nested call to __len__
+conjecture/junkdrawer.py:__len__:103: def __len__(self) -> int:
+Captured nested call to __len__ with return value: 6
+conjecture/junkdrawer.py:__len__:104: return len(self.__underlying)
+Tracing nested call to __setitem__
+conjecture/junkdrawer.py:__setitem__:147: def __setitem__(self, i: int, n: int) -> None:
+Captured nested call to __setitem__ with return value: None
+conjecture/junkdrawer.py:__setitem__:151: return
+Captured nested call to append with return value: None
+conjecture/junkdrawer.py:append:145: self[i] = n
+Captured nested call to stop_span with return value: None
+conjecture/data.py:stop_span:343: self.trail.append(TrailType.STOP_SPAN_NO_DISCARD)
+Captured nested call to stop_span with return value: None
+conjecture/data.py:stop_span:1189: if discard:
+Captured draw return value: 0
+Finished tracing draw calls

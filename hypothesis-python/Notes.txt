@@ -1,0 +1,7 @@
+In conjecture runner there is the run and _run functions, look at them.
+I put a label in core.py, it might help with tracing only the last call.
+
+I put another label in unit_test.py, that is the last call to the draws. The question is if that is the good version or not.
+If it isn't good, we should discard it(maybe by disabling the tracing before it), and the place where we do start the tracing
+is pretty good.
+If it is good, we should move the start of the tracing to there.

@@ -1,0 +1,1385 @@
+
+==================================================
+----------------Started tracing draw calls
+----------------conjecture/data.py:draw:1088: def draw(
+----------------Tracing nested call to gc_cumulative_time
+----------------conjecture/junkdrawer.py:gc_cumulative_time:412: def gc_cumulative_time() -> float:
+----------------Captured nested call to gc_cumulative_time with return value: 0.00038679991848766804
+----------------conjecture/junkdrawer.py:gc_cumulative_time:455: return _gc_cumulative_time
+----------------Tracing nested call to validate
+----------------_internal/strategies.py:validate:473: def validate(self) -> None:
+----------------Captured nested call to validate with return value: None
+----------------_internal/strategies.py:validate:479: return
+----------------Tracing nested call to is_empty
+----------------_internal/strategies.py:is_empty:243: @property
+----------------Tracing nested call to recursive_property
+----------------_internal/strategies.py:recursive_property:81: def recursive_property(strategy: "SearchStrategy", name: str, default: object) -> Any:
+----------------Tracing nested call to forced_value
+----------------_internal/strategies.py:forced_value:111: def forced_value(target: SearchStrategy) -> Any:
+----------------Captured nested call to forced_value with return value: False
+----------------_internal/strategies.py:forced_value:115: return getattr(target, cache_key)
+----------------Captured nested call to recursive_property with return value: False
+----------------_internal/strategies.py:recursive_property:118: return forced_value(strategy)
+----------------Captured nested call to is_empty with return value: False
+----------------_internal/strategies.py:is_empty:250: return recursive_property(self, "is_empty", True)
+----------------Tracing nested call to unwrap_strategies
+----------------_internal/lazy.py:unwrap_strategies:31: def unwrap_strategies(s):
+----------------Tracing nested call to __getitem__
+----------------Lib/weakref.py:__getitem__:414: def __getitem__(self, key):
+----------------Captured nested call to __getitem__ with return value: None
+----------------Lib/weakref.py:__getitem__:415: return self.data[ref(key)]
+----------------Tracing nested call to __setitem__
+----------------Lib/weakref.py:__setitem__:427: def __setitem__(self, key, value):
+----------------Captured nested call to __setitem__ with return value: None
+----------------Lib/weakref.py:__setitem__:428: self.data[ref(key, self._remove)] = value
+----------------Tracing nested call to wrapped_strategy
+----------------_internal/lazy.py:wrapped_strategy:112: @property
+----------------Captured nested call to wrapped_strategy with return value: booleans()
+----------------_internal/lazy.py:wrapped_strategy:132: return self.__wrapped_strategy
+----------------Tracing nested call to unwrap_strategies
+----------------_internal/lazy.py:unwrap_strategies:31: def unwrap_strategies(s):
+----------------Captured nested call to unwrap_strategies with return value: booleans()
+----------------_internal/lazy.py:unwrap_strategies:36: return s
+----------------Tracing nested call to __setitem__
+----------------Lib/weakref.py:__setitem__:427: def __setitem__(self, key, value):
+----------------Captured nested call to __setitem__ with return value: None
+----------------Lib/weakref.py:__setitem__:428: self.data[ref(key, self._remove)] = value
+----------------Tracing nested call to clear
+----------------<frozen _collections_abc>:clear:966: 
+----------------Tracing nested call to popitem
+----------------Lib/weakref.py:popitem:495: def popitem(self):
+----------------Captured nested call to popitem with return value: (booleans(), booleans())
+----------------Lib/weakref.py:popitem:501: return o, value
+----------------Tracing nested call to popitem
+----------------Lib/weakref.py:popitem:495: def popitem(self):
+----------------Captured nested call to popitem with return value: None
+----------------Lib/weakref.py:popitem:498: key, value = self.data.popitem()
+----------------Captured nested call to clear with return value: None
+----------------<frozen _collections_abc>:clear:972: 
+----------------Captured nested call to unwrap_strategies with return value: booleans()
+----------------_internal/lazy.py:unwrap_strategies:65: assert unwrap_depth >= 0
+----------------Tracing nested call to label
+----------------_internal/strategies.py:label:502: @property
+----------------Tracing nested call to cast
+----------------Lib/typing.py:cast:2187: def cast(typ, val):
+----------------Captured nested call to cast with return value: 15859467114405719213
+----------------Lib/typing.py:cast:2195: return val
+----------------Captured nested call to label with return value: 15859467114405719213
+----------------_internal/strategies.py:label:509: return cast(int, self.__label)
+----------------Tracing nested call to start_span
+----------------conjecture/data.py:start_span:1156: def start_span(self, label: int) -> None:
+----------------Tracing nested call to span_start
+----------------conjecture/providers.py:span_start:412: def span_start(self, label: int, /) -> None:  # noqa: B027  # non-abstract noop
+----------------Captured nested call to span_start with return value: None
+----------------conjecture/providers.py:span_start:412: def span_start(self, label: int, /) -> None:  # noqa: B027  # non-abstract noop
+----------------Tracing nested call to __assert_not_frozen
+----------------conjecture/data.py:__assert_not_frozen:1078: def __assert_not_frozen(self, name: str) -> None:
+----------------Captured nested call to __assert_not_frozen with return value: None
+----------------conjecture/data.py:__assert_not_frozen:1079: if self.frozen:
+----------------Tracing nested call to start_span
+----------------conjecture/data.py:start_span:330: def start_span(self, label: int) -> None:
+----------------Tracing nested call to append
+----------------conjecture/junkdrawer.py:append:142: def append(self, n: int) -> None:
+----------------Tracing nested call to __len__
+----------------conjecture/junkdrawer.py:__len__:103: def __len__(self) -> int:
+----------------Captured nested call to __len__ with return value: 1
+----------------conjecture/junkdrawer.py:__len__:104: return len(self.__underlying)
+----------------Tracing nested call to __setitem__
+----------------conjecture/junkdrawer.py:__setitem__:147: def __setitem__(self, i: int, n: int) -> None:
+----------------Captured nested call to __setitem__ with return value: None
+----------------conjecture/junkdrawer.py:__setitem__:151: return
+----------------Captured nested call to append with return value: None
+----------------conjecture/junkdrawer.py:append:145: self[i] = n
+----------------Captured nested call to start_span with return value: None
+----------------conjecture/data.py:start_span:337: self.trail.append(TrailType.START_SPAN + i)
+----------------Captured nested call to start_span with return value: None
+----------------conjecture/data.py:start_span:1169: self.labels_for_structure_stack.append({label})
+----------------Tracing nested call to do_draw
+----------------_internal/misc.py:do_draw:133: def do_draw(self, data: ConjectureData) -> bool:
+----------------Tracing nested call to draw_boolean
+----------------conjecture/data.py:draw_boolean:930: def draw_boolean(
+----------------Tracing nested call to _pooled_constraints
+----------------conjecture/data.py:_pooled_constraints:943: def _pooled_constraints(self, choice_type, constraints):
+----------------Tracing nested call to choice_constraints_key
+----------------conjecture/choice.py:choice_constraints_key:604: def choice_constraints_key(choice_type, constraints):
+----------------Tracing nested call to <genexpr>
+----------------conjecture/choice.py:<genexpr>:619: return tuple(constraints[key] for key in sorted(constraints))
+----------------Captured nested call to <genexpr> with return value: 0.5
+----------------conjecture/choice.py:<genexpr>:619: return tuple(constraints[key] for key in sorted(constraints))
+----------------Tracing nested call to <genexpr>
+----------------conjecture/choice.py:<genexpr>:619: return tuple(constraints[key] for key in sorted(constraints))
+----------------Captured nested call to <genexpr> with return value: None
+----------------conjecture/choice.py:<genexpr>:619: return tuple(constraints[key] for key in sorted(constraints))
+----------------Captured nested call to choice_constraints_key with return value: (0.5,)
+----------------conjecture/choice.py:choice_constraints_key:619: return tuple(constraints[key] for key in sorted(constraints))
+----------------Tracing nested call to __getitem__
+----------------internal/cache.py:__getitem__:334: def __getitem__(self, key: K) -> V:
+----------------Tracing nested call to cache
+----------------internal/cache.py:cache:319: @property
+----------------Captured nested call to cache with return value: OrderedDict({('integer', 1, 99, None, 0): {'min_value': 1, 'max_value': 99, 'weights': None, 'shrink_towards': 0}, ('boolean', 0.5): {'p': 0.5}})
+----------------internal/cache.py:cache:322: return self._threadlocal.cache
+----------------Tracing nested call to cache
+----------------internal/cache.py:cache:319: @property
+----------------Captured nested call to cache with return value: OrderedDict({('integer', 1, 99, None, 0): {'min_value': 1, 'max_value': 99, 'weights': None, 'shrink_towards': 0}, ('boolean', 0.5): {'p': 0.5}})
+----------------internal/cache.py:cache:322: return self._threadlocal.cache
+----------------Captured nested call to __getitem__ with return value: {'p': 0.5}
+----------------internal/cache.py:__getitem__:337: return val
+----------------Captured nested call to _pooled_constraints with return value: {'p': 0.5}
+----------------conjecture/data.py:_pooled_constraints:951: return POOLED_CONSTRAINTS_CACHE[key]
+----------------Tracing nested call to _draw
+----------------conjecture/data.py:_draw:740: def _draw(self, choice_type, constraints, *, observe, forced):
+----------------Tracing nested call to _pop_choice
+----------------conjecture/data.py:_pop_choice:956: def _pop_choice(
+----------------Tracing nested call to choice_permitted
+----------------conjecture/choice.py:choice_permitted:531: def choice_permitted(choice: ChoiceT, constraints: ChoiceConstraintsT) -> bool:
+----------------Tracing nested call to cast
+----------------Lib/typing.py:cast:2187: def cast(typ, val):
+----------------Captured nested call to cast with return value: {'p': 0.5}
+----------------Lib/typing.py:cast:2195: return val
+----------------Captured nested call to choice_permitted with return value: True
+----------------conjecture/choice.py:choice_permitted:569: return True
+----------------Captured nested call to _pop_choice with return value: False
+----------------conjecture/data.py:_pop_choice:1043: return choice
+----------------Tracing nested call to draw_boolean
+----------------conjecture/data.py:draw_boolean:568: def draw_boolean(
+----------------Captured nested call to draw_boolean with return value: None
+----------------conjecture/data.py:draw_boolean:571: pass
+----------------Tracing nested call to choices_size
+----------------conjecture/choice.py:choices_size:622: def choices_size(choices: Iterable[ChoiceT]) -> int:
+----------------Tracing nested call to choices_to_bytes
+----------------hypothesis/database.py:choices_to_bytes:1170: def choices_to_bytes(choices: Iterable[ChoiceT], /) -> bytes:
+----------------Captured nested call to choices_to_bytes with return value: b'\x00'
+----------------hypothesis/database.py:choices_to_bytes:1207: return b"".join(parts)
+----------------Captured nested call to choices_size with return value: 1
+----------------conjecture/choice.py:choices_size:625: return len(choices_to_bytes(choices))
+----------------Tracing nested call to __init__
+----------------<attrs generated methods hypothesis.internal.conjecture.choice.ChoiceNode>:__init__:1: def __init__(self, type, value, constraints, was_forced, index=attr_dict['index'].default):
+----------------Captured nested call to __init__ with return value: None
+----------------<attrs generated methods hypothesis.internal.conjecture.choice.ChoiceNode>:__init__:6: self.index = index
+----------------Tracing nested call to record_choice
+----------------conjecture/data.py:record_choice:327: def record_choice(self) -> None:
+----------------Tracing nested call to append
+----------------conjecture/junkdrawer.py:append:142: def append(self, n: int) -> None:
+----------------Tracing nested call to __len__
+----------------conjecture/junkdrawer.py:__len__:103: def __len__(self) -> int:
+----------------Captured nested call to __len__ with return value: 2
+----------------conjecture/junkdrawer.py:__len__:104: return len(self.__underlying)
+----------------Tracing nested call to __setitem__
+----------------conjecture/junkdrawer.py:__setitem__:147: def __setitem__(self, i: int, n: int) -> None:
+----------------Tracing nested call to __upgrade
+----------------conjecture/junkdrawer.py:__upgrade:160: def __upgrade(self) -> None:
+----------------Tracing nested call to array_or_list
+----------------conjecture/junkdrawer.py:array_or_list:33: def array_or_list(
+----------------Captured nested call to array_or_list with return value: array('H', [3, 4, 0])
+----------------conjecture/junkdrawer.py:array_or_list:38: return array.array(code, contents)
+----------------Captured nested call to __upgrade with return value: None
+----------------conjecture/junkdrawer.py:__upgrade:163: self.__underlying = array_or_list(code, self.__underlying)
+----------------Tracing nested call to __upgrade
+----------------conjecture/junkdrawer.py:__upgrade:160: def __upgrade(self) -> None:
+----------------Tracing nested call to array_or_list
+----------------conjecture/junkdrawer.py:array_or_list:33: def array_or_list(
+----------------Captured nested call to array_or_list with return value: array('I', [3, 4, 0])
+----------------conjecture/junkdrawer.py:array_or_list:38: return array.array(code, contents)
+----------------Captured nested call to __upgrade with return value: None
+----------------conjecture/junkdrawer.py:__upgrade:163: self.__underlying = array_or_list(code, self.__underlying)
+----------------Tracing nested call to __upgrade
+----------------conjecture/junkdrawer.py:__upgrade:160: def __upgrade(self) -> None:
+----------------Tracing nested call to array_or_list
+----------------conjecture/junkdrawer.py:array_or_list:33: def array_or_list(
+----------------Captured nested call to array_or_list with return value: array('L', [3, 4, 0])
+----------------conjecture/junkdrawer.py:array_or_list:38: return array.array(code, contents)
+----------------Captured nested call to __upgrade with return value: None
+----------------conjecture/junkdrawer.py:__upgrade:163: self.__underlying = array_or_list(code, self.__underlying)
+----------------Tracing nested call to __upgrade
+----------------conjecture/junkdrawer.py:__upgrade:160: def __upgrade(self) -> None:
+----------------Tracing nested call to array_or_list
+----------------conjecture/junkdrawer.py:array_or_list:33: def array_or_list(
+----------------Captured nested call to array_or_list with return value: array('Q', [3, 4, 0])
+----------------conjecture/junkdrawer.py:array_or_list:38: return array.array(code, contents)
+----------------Captured nested call to __upgrade with return value: None
+----------------conjecture/junkdrawer.py:__upgrade:163: self.__underlying = array_or_list(code, self.__underlying)
+----------------Captured nested call to __setitem__ with return value: None
+----------------conjecture/junkdrawer.py:__setitem__:151: return
+----------------Captured nested call to append with return value: None
+----------------conjecture/junkdrawer.py:append:145: self[i] = n
+----------------Captured nested call to record_choice with return value: None
+----------------conjecture/data.py:record_choice:328: self.trail.append(TrailType.CHOICE)
+----------------Captured nested call to _draw with return value: False
+----------------conjecture/data.py:_draw:805: return value
+----------------Captured nested call to draw_boolean with return value: False
+----------------conjecture/data.py:draw_boolean:941: return self._draw("boolean", constraints, observe=observe, forced=forced)
+----------------Captured nested call to do_draw with return value: False
+----------------_internal/misc.py:do_draw:134: return data.draw_boolean()
+----------------Tracing nested call to gc_cumulative_time
+----------------conjecture/junkdrawer.py:gc_cumulative_time:412: def gc_cumulative_time() -> float:
+----------------Captured nested call to gc_cumulative_time with return value: 0.00038679991848766804
+----------------conjecture/junkdrawer.py:gc_cumulative_time:455: return _gc_cumulative_time
+----------------Tracing nested call to stop_span
+----------------conjecture/data.py:stop_span:1171: def stop_span(self, *, discard: bool = False) -> None:
+----------------Tracing nested call to span_end
+----------------conjecture/providers.py:span_end:423: def span_end(self, discard: bool, /) -> None:  # noqa: B027, FBT001
+----------------Captured nested call to span_end with return value: None
+----------------conjecture/providers.py:span_end:423: def span_end(self, discard: bool, /) -> None:  # noqa: B027, FBT001
+----------------Tracing nested call to stop_span
+----------------conjecture/data.py:stop_span:339: def stop_span(self, *, discard: bool) -> None:
+----------------Tracing nested call to append
+----------------conjecture/junkdrawer.py:append:142: def append(self, n: int) -> None:
+----------------Tracing nested call to __len__
+----------------conjecture/junkdrawer.py:__len__:103: def __len__(self) -> int:
+----------------Captured nested call to __len__ with return value: 3
+----------------conjecture/junkdrawer.py:__len__:104: return len(self.__underlying)
+----------------Tracing nested call to __setitem__
+----------------conjecture/junkdrawer.py:__setitem__:147: def __setitem__(self, i: int, n: int) -> None:
+----------------Captured nested call to __setitem__ with return value: None
+----------------conjecture/junkdrawer.py:__setitem__:151: return
+----------------Captured nested call to append with return value: None
+----------------conjecture/junkdrawer.py:append:145: self[i] = n
+----------------Captured nested call to stop_span with return value: None
+----------------conjecture/data.py:stop_span:343: self.trail.append(TrailType.STOP_SPAN_NO_DISCARD)
+----------------Captured nested call to stop_span with return value: None
+----------------conjecture/data.py:stop_span:1189: if discard:
+----------------Captured draw return value: False
+----------------Finished tracing draw calls
+----------------Started tracing draw calls
+----------------conjecture/data.py:draw:1088: def draw(
+----------------Tracing nested call to gc_cumulative_time
+----------------conjecture/junkdrawer.py:gc_cumulative_time:412: def gc_cumulative_time() -> float:
+----------------Captured nested call to gc_cumulative_time with return value: 0.00038679991848766804
+----------------conjecture/junkdrawer.py:gc_cumulative_time:455: return _gc_cumulative_time
+----------------Tracing nested call to validate
+----------------_internal/strategies.py:validate:473: def validate(self) -> None:
+----------------Captured nested call to validate with return value: None
+----------------_internal/strategies.py:validate:479: return
+----------------Tracing nested call to is_empty
+----------------_internal/strategies.py:is_empty:243: @property
+----------------Tracing nested call to recursive_property
+----------------_internal/strategies.py:recursive_property:81: def recursive_property(strategy: "SearchStrategy", name: str, default: object) -> Any:
+----------------Tracing nested call to forced_value
+----------------_internal/strategies.py:forced_value:111: def forced_value(target: SearchStrategy) -> Any:
+----------------Captured nested call to forced_value with return value: False
+----------------_internal/strategies.py:forced_value:115: return getattr(target, cache_key)
+----------------Captured nested call to recursive_property with return value: False
+----------------_internal/strategies.py:recursive_property:118: return forced_value(strategy)
+----------------Captured nested call to is_empty with return value: False
+----------------_internal/strategies.py:is_empty:250: return recursive_property(self, "is_empty", True)
+----------------Tracing nested call to unwrap_strategies
+----------------_internal/lazy.py:unwrap_strategies:31: def unwrap_strategies(s):
+----------------Tracing nested call to __getitem__
+----------------Lib/weakref.py:__getitem__:414: def __getitem__(self, key):
+----------------Captured nested call to __getitem__ with return value: None
+----------------Lib/weakref.py:__getitem__:415: return self.data[ref(key)]
+----------------Tracing nested call to __setitem__
+----------------Lib/weakref.py:__setitem__:427: def __setitem__(self, key, value):
+----------------Captured nested call to __setitem__ with return value: None
+----------------Lib/weakref.py:__setitem__:428: self.data[ref(key, self._remove)] = value
+----------------Tracing nested call to wrapped_strategy
+----------------_internal/lazy.py:wrapped_strategy:112: @property
+----------------Captured nested call to wrapped_strategy with return value: integers(1, 99)
+----------------_internal/lazy.py:wrapped_strategy:132: return self.__wrapped_strategy
+----------------Tracing nested call to unwrap_strategies
+----------------_internal/lazy.py:unwrap_strategies:31: def unwrap_strategies(s):
+----------------Captured nested call to unwrap_strategies with return value: integers(1, 99)
+----------------_internal/lazy.py:unwrap_strategies:36: return s
+----------------Tracing nested call to __setitem__
+----------------Lib/weakref.py:__setitem__:427: def __setitem__(self, key, value):
+----------------Captured nested call to __setitem__ with return value: None
+----------------Lib/weakref.py:__setitem__:428: self.data[ref(key, self._remove)] = value
+----------------Tracing nested call to clear
+----------------<frozen _collections_abc>:clear:966: 
+----------------Tracing nested call to popitem
+----------------Lib/weakref.py:popitem:495: def popitem(self):
+----------------Captured nested call to popitem with return value: (integers(min_value=1, max_value=99), integers(1, 99))
+----------------Lib/weakref.py:popitem:501: return o, value
+----------------Tracing nested call to popitem
+----------------Lib/weakref.py:popitem:495: def popitem(self):
+----------------Captured nested call to popitem with return value: None
+----------------Lib/weakref.py:popitem:498: key, value = self.data.popitem()
+----------------Captured nested call to clear with return value: None
+----------------<frozen _collections_abc>:clear:972: 
+----------------Captured nested call to unwrap_strategies with return value: integers(1, 99)
+----------------_internal/lazy.py:unwrap_strategies:65: assert unwrap_depth >= 0
+----------------Tracing nested call to label
+----------------_internal/strategies.py:label:502: @property
+----------------Tracing nested call to cast
+----------------Lib/typing.py:cast:2187: def cast(typ, val):
+----------------Captured nested call to cast with return value: 15101551161751157077
+----------------Lib/typing.py:cast:2195: return val
+----------------Captured nested call to label with return value: 15101551161751157077
+----------------_internal/strategies.py:label:509: return cast(int, self.__label)
+----------------Tracing nested call to start_span
+----------------conjecture/data.py:start_span:1156: def start_span(self, label: int) -> None:
+----------------Tracing nested call to span_start
+----------------conjecture/providers.py:span_start:412: def span_start(self, label: int, /) -> None:  # noqa: B027  # non-abstract noop
+----------------Captured nested call to span_start with return value: None
+----------------conjecture/providers.py:span_start:412: def span_start(self, label: int, /) -> None:  # noqa: B027  # non-abstract noop
+----------------Tracing nested call to __assert_not_frozen
+----------------conjecture/data.py:__assert_not_frozen:1078: def __assert_not_frozen(self, name: str) -> None:
+----------------Captured nested call to __assert_not_frozen with return value: None
+----------------conjecture/data.py:__assert_not_frozen:1079: if self.frozen:
+----------------Tracing nested call to start_span
+----------------conjecture/data.py:start_span:330: def start_span(self, label: int) -> None:
+----------------Tracing nested call to append
+----------------conjecture/junkdrawer.py:append:142: def append(self, n: int) -> None:
+----------------Tracing nested call to __len__
+----------------conjecture/junkdrawer.py:__len__:103: def __len__(self) -> int:
+----------------Captured nested call to __len__ with return value: 4
+----------------conjecture/junkdrawer.py:__len__:104: return len(self.__underlying)
+----------------Tracing nested call to __setitem__
+----------------conjecture/junkdrawer.py:__setitem__:147: def __setitem__(self, i: int, n: int) -> None:
+----------------Captured nested call to __setitem__ with return value: None
+----------------conjecture/junkdrawer.py:__setitem__:151: return
+----------------Captured nested call to append with return value: None
+----------------conjecture/junkdrawer.py:append:145: self[i] = n
+----------------Captured nested call to start_span with return value: None
+----------------conjecture/data.py:start_span:337: self.trail.append(TrailType.START_SPAN + i)
+----------------Captured nested call to start_span with return value: None
+----------------conjecture/data.py:start_span:1169: self.labels_for_structure_stack.append({label})
+----------------Tracing nested call to do_draw
+----------------_internal/numbers.py:do_draw:68: def do_draw(self, data: ConjectureData) -> int:
+----------------Tracing nested call to draw_integer
+----------------conjecture/data.py:draw_integer:807: def draw_integer(
+----------------Tracing nested call to _pooled_constraints
+----------------conjecture/data.py:_pooled_constraints:943: def _pooled_constraints(self, choice_type, constraints):
+----------------Tracing nested call to choice_constraints_key
+----------------conjecture/choice.py:choice_constraints_key:604: def choice_constraints_key(choice_type, constraints):
+----------------Captured nested call to choice_constraints_key with return value: (1, 99, None, 0)
+----------------conjecture/choice.py:choice_constraints_key:613: return (
+----------------Tracing nested call to __getitem__
+----------------internal/cache.py:__getitem__:334: def __getitem__(self, key: K) -> V:
+----------------Tracing nested call to cache
+----------------internal/cache.py:cache:319: @property
+----------------Captured nested call to cache with return value: OrderedDict({('integer', 1, 99, None, 0): {'min_value': 1, 'max_value': 99, 'weights': None, 'shrink_towards': 0}, ('boolean', 0.5): {'p': 0.5}})
+----------------internal/cache.py:cache:322: return self._threadlocal.cache
+----------------Tracing nested call to cache
+----------------internal/cache.py:cache:319: @property
+----------------Captured nested call to cache with return value: OrderedDict({('integer', 1, 99, None, 0): {'min_value': 1, 'max_value': 99, 'weights': None, 'shrink_towards': 0}, ('boolean', 0.5): {'p': 0.5}})
+----------------internal/cache.py:cache:322: return self._threadlocal.cache
+----------------Captured nested call to __getitem__ with return value: {'min_value': 1, 'max_value': 99, 'weights': None, 'shrink_towards': 0}
+----------------internal/cache.py:__getitem__:337: return val
+----------------Captured nested call to _pooled_constraints with return value: {'min_value': 1, 'max_value': 99, 'weights': None, 'shrink_towards': 0}
+----------------conjecture/data.py:_pooled_constraints:951: return POOLED_CONSTRAINTS_CACHE[key]
+----------------Tracing nested call to _draw
+----------------conjecture/data.py:_draw:740: def _draw(self, choice_type, constraints, *, observe, forced):
+----------------Tracing nested call to _pop_choice
+----------------conjecture/data.py:_pop_choice:956: def _pop_choice(
+----------------Tracing nested call to choice_permitted
+----------------conjecture/choice.py:choice_permitted:531: def choice_permitted(choice: ChoiceT, constraints: ChoiceConstraintsT) -> bool:
+----------------Tracing nested call to cast
+----------------Lib/typing.py:cast:2187: def cast(typ, val):
+----------------Captured nested call to cast with return value: {'min_value': 1, 'max_value': 99, 'weights': None, 'shrink_towards': 0}
+----------------Lib/typing.py:cast:2195: return val
+----------------Captured nested call to choice_permitted with return value: True
+----------------conjecture/choice.py:choice_permitted:538: return not (max_value is not None and choice > max_value)
+----------------Captured nested call to _pop_choice with return value: 1
+----------------conjecture/data.py:_pop_choice:1043: return choice
+----------------Tracing nested call to draw_integer
+----------------conjecture/data.py:draw_integer:548: def draw_integer(
+----------------Captured nested call to draw_integer with return value: None
+----------------conjecture/data.py:draw_integer:551: pass
+----------------Tracing nested call to choices_size
+----------------conjecture/choice.py:choices_size:622: def choices_size(choices: Iterable[ChoiceT]) -> int:
+----------------Tracing nested call to choices_to_bytes
+----------------hypothesis/database.py:choices_to_bytes:1170: def choices_to_bytes(choices: Iterable[ChoiceT], /) -> bytes:
+----------------Captured nested call to choices_to_bytes with return value: b'A\x01'
+----------------hypothesis/database.py:choices_to_bytes:1207: return b"".join(parts)
+----------------Captured nested call to choices_size with return value: 2
+----------------conjecture/choice.py:choices_size:625: return len(choices_to_bytes(choices))
+----------------Tracing nested call to __init__
+----------------<attrs generated methods hypothesis.internal.conjecture.choice.ChoiceNode>:__init__:1: def __init__(self, type, value, constraints, was_forced, index=attr_dict['index'].default):
+----------------Captured nested call to __init__ with return value: None
+----------------<attrs generated methods hypothesis.internal.conjecture.choice.ChoiceNode>:__init__:6: self.index = index
+----------------Tracing nested call to record_choice
+----------------conjecture/data.py:record_choice:327: def record_choice(self) -> None:
+----------------Tracing nested call to append
+----------------conjecture/junkdrawer.py:append:142: def append(self, n: int) -> None:
+----------------Tracing nested call to __len__
+----------------conjecture/junkdrawer.py:__len__:103: def __len__(self) -> int:
+----------------Captured nested call to __len__ with return value: 5
+----------------conjecture/junkdrawer.py:__len__:104: return len(self.__underlying)
+----------------Tracing nested call to __setitem__
+----------------conjecture/junkdrawer.py:__setitem__:147: def __setitem__(self, i: int, n: int) -> None:
+----------------Captured nested call to __setitem__ with return value: None
+----------------conjecture/junkdrawer.py:__setitem__:151: return
+----------------Captured nested call to append with return value: None
+----------------conjecture/junkdrawer.py:append:145: self[i] = n
+----------------Captured nested call to record_choice with return value: None
+----------------conjecture/data.py:record_choice:328: self.trail.append(TrailType.CHOICE)
+----------------Captured nested call to _draw with return value: 1
+----------------conjecture/data.py:_draw:805: return value
+----------------Captured nested call to draw_integer with return value: 1
+----------------conjecture/data.py:draw_integer:844: return self._draw("integer", constraints, observe=observe, forced=forced)
+----------------Captured nested call to do_draw with return value: 1
+----------------_internal/numbers.py:do_draw:83: return data.draw_integer(
+----------------Tracing nested call to gc_cumulative_time
+----------------conjecture/junkdrawer.py:gc_cumulative_time:412: def gc_cumulative_time() -> float:
+----------------Captured nested call to gc_cumulative_time with return value: 0.00038679991848766804
+----------------conjecture/junkdrawer.py:gc_cumulative_time:455: return _gc_cumulative_time
+----------------Tracing nested call to stop_span
+----------------conjecture/data.py:stop_span:1171: def stop_span(self, *, discard: bool = False) -> None:
+----------------Tracing nested call to span_end
+----------------conjecture/providers.py:span_end:423: def span_end(self, discard: bool, /) -> None:  # noqa: B027, FBT001
+----------------Captured nested call to span_end with return value: None
+----------------conjecture/providers.py:span_end:423: def span_end(self, discard: bool, /) -> None:  # noqa: B027, FBT001
+----------------Tracing nested call to stop_span
+----------------conjecture/data.py:stop_span:339: def stop_span(self, *, discard: bool) -> None:
+----------------Tracing nested call to append
+----------------conjecture/junkdrawer.py:append:142: def append(self, n: int) -> None:
+----------------Tracing nested call to __len__
+----------------conjecture/junkdrawer.py:__len__:103: def __len__(self) -> int:
+----------------Captured nested call to __len__ with return value: 6
+----------------conjecture/junkdrawer.py:__len__:104: return len(self.__underlying)
+----------------Tracing nested call to __setitem__
+----------------conjecture/junkdrawer.py:__setitem__:147: def __setitem__(self, i: int, n: int) -> None:
+----------------Captured nested call to __setitem__ with return value: None
+----------------conjecture/junkdrawer.py:__setitem__:151: return
+----------------Captured nested call to append with return value: None
+----------------conjecture/junkdrawer.py:append:145: self[i] = n
+----------------Captured nested call to stop_span with return value: None
+----------------conjecture/data.py:stop_span:343: self.trail.append(TrailType.STOP_SPAN_NO_DISCARD)
+----------------Captured nested call to stop_span with return value: None
+----------------conjecture/data.py:stop_span:1189: if discard:
+----------------Captured draw return value: 1
+----------------Finished tracing draw calls
+----------------Started tracing draw calls
+----------------conjecture/data.py:draw:1088: def draw(
+----------------Tracing nested call to gc_cumulative_time
+----------------conjecture/junkdrawer.py:gc_cumulative_time:412: def gc_cumulative_time() -> float:
+----------------Captured nested call to gc_cumulative_time with return value: 0.00038679991848766804
+----------------conjecture/junkdrawer.py:gc_cumulative_time:455: return _gc_cumulative_time
+----------------Tracing nested call to validate
+----------------_internal/strategies.py:validate:473: def validate(self) -> None:
+----------------Tracing nested call to do_validate
+----------------_internal/lazy.py:do_validate:152: def do_validate(self) -> None:
+----------------Tracing nested call to wrapped_strategy
+----------------_internal/lazy.py:wrapped_strategy:112: @property
+----------------Tracing nested call to check_sideeffect_during_initialization
+----------------hypothesis/configuration.py:check_sideeffect_during_initialization:48: def check_sideeffect_during_initialization(
+----------------Captured nested call to check_sideeffect_during_initialization with return value: None
+----------------hypothesis/configuration.py:check_sideeffect_during_initialization:63: return
+----------------Tracing nested call to <genexpr>
+----------------_internal/lazy.py:<genexpr>:117: unwrapped_args = tuple(unwrap_strategies(s) for s in self.__args)
+----------------Tracing nested call to unwrap_strategies
+----------------_internal/lazy.py:unwrap_strategies:31: def unwrap_strategies(s):
+----------------Captured nested call to unwrap_strategies with return value: 6
+----------------_internal/lazy.py:unwrap_strategies:36: return s
+----------------Captured nested call to <genexpr> with return value: 6
+----------------_internal/lazy.py:<genexpr>:117: unwrapped_args = tuple(unwrap_strategies(s) for s in self.__args)
+----------------Tracing nested call to <genexpr>
+----------------_internal/lazy.py:<genexpr>:117: unwrapped_args = tuple(unwrap_strategies(s) for s in self.__args)
+----------------Tracing nested call to unwrap_strategies
+----------------_internal/lazy.py:unwrap_strategies:31: def unwrap_strategies(s):
+----------------Captured nested call to unwrap_strategies with return value: 1
+----------------_internal/lazy.py:unwrap_strategies:36: return s
+----------------Captured nested call to <genexpr> with return value: 1
+----------------_internal/lazy.py:<genexpr>:117: unwrapped_args = tuple(unwrap_strategies(s) for s in self.__args)
+----------------Tracing nested call to <genexpr>
+----------------_internal/lazy.py:<genexpr>:117: unwrapped_args = tuple(unwrap_strategies(s) for s in self.__args)
+----------------Tracing nested call to unwrap_strategies
+----------------_internal/lazy.py:unwrap_strategies:31: def unwrap_strategies(s):
+----------------Captured nested call to unwrap_strategies with return value: 0
+----------------_internal/lazy.py:unwrap_strategies:36: return s
+----------------Captured nested call to <genexpr> with return value: 0
+----------------_internal/lazy.py:<genexpr>:117: unwrapped_args = tuple(unwrap_strategies(s) for s in self.__args)
+----------------Tracing nested call to <genexpr>
+----------------_internal/lazy.py:<genexpr>:117: unwrapped_args = tuple(unwrap_strategies(s) for s in self.__args)
+----------------Tracing nested call to unwrap_strategies
+----------------_internal/lazy.py:unwrap_strategies:31: def unwrap_strategies(s):
+----------------Captured nested call to unwrap_strategies with return value: 1
+----------------_internal/lazy.py:unwrap_strategies:36: return s
+----------------Captured nested call to <genexpr> with return value: 1
+----------------_internal/lazy.py:<genexpr>:117: unwrapped_args = tuple(unwrap_strategies(s) for s in self.__args)
+----------------Tracing nested call to <genexpr>
+----------------_internal/lazy.py:<genexpr>:117: unwrapped_args = tuple(unwrap_strategies(s) for s in self.__args)
+----------------Tracing nested call to unwrap_strategies
+----------------_internal/lazy.py:unwrap_strategies:31: def unwrap_strategies(s):
+----------------Captured nested call to unwrap_strategies with return value: None
+----------------_internal/lazy.py:unwrap_strategies:36: return s
+----------------Captured nested call to <genexpr> with return value: None
+----------------_internal/lazy.py:<genexpr>:117: unwrapped_args = tuple(unwrap_strategies(s) for s in self.__args)
+----------------Tracing nested call to <genexpr>
+----------------_internal/lazy.py:<genexpr>:117: unwrapped_args = tuple(unwrap_strategies(s) for s in self.__args)
+----------------Captured nested call to <genexpr> with return value: None
+----------------_internal/lazy.py:<genexpr>:117: unwrapped_args = tuple(unwrap_strategies(s) for s in self.__args)
+----------------Tracing nested call to rb_imperative_tree
+----------------<string>:rb_imperative_tree:4: 
+----------------Tracing nested call to accept
+----------------_internal/core.py:accept:1902: @defines_strategy()
+----------------Tracing nested call to __init__
+----------------_internal/core.py:__init__:1817: def __init__(self, definition, args, kwargs):
+----------------Captured nested call to __init__ with return value: None
+----------------_internal/core.py:__init__:1820: self.kwargs = kwargs
+----------------Captured nested call to accept with return value: <hypothesis.strategies._internal.core.CompositeStrategy object at 0x000002329EB52F30>
+----------------_internal/core.py:accept:1905: return CompositeStrategy(f, args, kwargs)
+----------------Captured nested call to rb_imperative_tree with return value: <hypothesis.strategies._internal.core.CompositeStrategy object at 0x000002329EB52F30>
+----------------<string>:rb_imperative_tree:5: 
+----------------Captured nested call to wrapped_strategy with return value: <hypothesis.strategies._internal.core.CompositeStrategy object at 0x000002329EB52F30>
+----------------_internal/lazy.py:wrapped_strategy:132: return self.__wrapped_strategy
+----------------Tracing nested call to validate
+----------------_internal/strategies.py:validate:473: def validate(self) -> None:
+----------------Tracing nested call to do_validate
+----------------_internal/strategies.py:do_validate:514: def do_validate(self) -> None:
+----------------Captured nested call to do_validate with return value: None
+----------------_internal/strategies.py:do_validate:515: pass
+----------------Tracing nested call to is_empty
+----------------_internal/strategies.py:is_empty:243: @property
+----------------Tracing nested call to recursive_property
+----------------_internal/strategies.py:recursive_property:81: def recursive_property(strategy: "SearchStrategy", name: str, default: object) -> Any:
+----------------Tracing nested call to forced_value
+----------------_internal/strategies.py:forced_value:111: def forced_value(target: SearchStrategy) -> Any:
+----------------Captured nested call to forced_value with return value: None
+----------------_internal/strategies.py:forced_value:115: return getattr(target, cache_key)
+----------------Tracing nested call to recur
+----------------_internal/strategies.py:recur:130: def recur(strat: SearchStrategy) -> Any:
+----------------Tracing nested call to forced_value
+----------------_internal/strategies.py:forced_value:111: def forced_value(target: SearchStrategy) -> Any:
+----------------Captured nested call to forced_value with return value: None
+----------------_internal/strategies.py:forced_value:115: return getattr(target, cache_key)
+----------------Tracing nested call to calc_is_empty
+----------------_internal/strategies.py:calc_is_empty:276: def calc_is_empty(self, recur: RecurT) -> bool:
+----------------Captured nested call to calc_is_empty with return value: False
+----------------_internal/strategies.py:calc_is_empty:283: return False
+----------------Captured nested call to recur with return value: False
+----------------_internal/strategies.py:recur:143: return mapping[strat]
+----------------Captured nested call to recursive_property with return value: False
+----------------_internal/strategies.py:recursive_property:216: return getattr(strategy, cache_key)
+----------------Captured nested call to is_empty with return value: False
+----------------_internal/strategies.py:is_empty:250: return recursive_property(self, "is_empty", True)
+----------------Tracing nested call to has_reusable_values
+----------------_internal/strategies.py:has_reusable_values:264: @property
+----------------Tracing nested call to recursive_property
+----------------_internal/strategies.py:recursive_property:81: def recursive_property(strategy: "SearchStrategy", name: str, default: object) -> Any:
+----------------Tracing nested call to forced_value
+----------------_internal/strategies.py:forced_value:111: def forced_value(target: SearchStrategy) -> Any:
+----------------Captured nested call to forced_value with return value: None
+----------------_internal/strategies.py:forced_value:115: return getattr(target, cache_key)
+----------------Tracing nested call to recur
+----------------_internal/strategies.py:recur:130: def recur(strat: SearchStrategy) -> Any:
+----------------Tracing nested call to forced_value
+----------------_internal/strategies.py:forced_value:111: def forced_value(target: SearchStrategy) -> Any:
+----------------Captured nested call to forced_value with return value: None
+----------------_internal/strategies.py:forced_value:115: return getattr(target, cache_key)
+----------------Tracing nested call to calc_has_reusable_values
+----------------_internal/strategies.py:calc_has_reusable_values:285: def calc_has_reusable_values(self, recur: RecurT) -> bool:
+----------------Captured nested call to calc_has_reusable_values with return value: False
+----------------_internal/strategies.py:calc_has_reusable_values:286: return False
+----------------Captured nested call to recur with return value: False
+----------------_internal/strategies.py:recur:143: return mapping[strat]
+----------------Captured nested call to recursive_property with return value: False
+----------------_internal/strategies.py:recursive_property:216: return getattr(strategy, cache_key)
+----------------Captured nested call to has_reusable_values with return value: False
+----------------_internal/strategies.py:has_reusable_values:266: return recursive_property(self, "has_reusable_values", True)
+----------------Captured nested call to validate with return value: None
+----------------_internal/strategies.py:validate:484: self.has_reusable_values
+----------------Captured nested call to do_validate with return value: None
+----------------_internal/lazy.py:do_validate:155: w.validate()
+----------------Tracing nested call to is_empty
+----------------_internal/strategies.py:is_empty:243: @property
+----------------Tracing nested call to recursive_property
+----------------_internal/strategies.py:recursive_property:81: def recursive_property(strategy: "SearchStrategy", name: str, default: object) -> Any:
+----------------Tracing nested call to forced_value
+----------------_internal/strategies.py:forced_value:111: def forced_value(target: SearchStrategy) -> Any:
+----------------Captured nested call to forced_value with return value: None
+----------------_internal/strategies.py:forced_value:115: return getattr(target, cache_key)
+----------------Tracing nested call to recur
+----------------_internal/strategies.py:recur:130: def recur(strat: SearchStrategy) -> Any:
+----------------Tracing nested call to forced_value
+----------------_internal/strategies.py:forced_value:111: def forced_value(target: SearchStrategy) -> Any:
+----------------Captured nested call to forced_value with return value: None
+----------------_internal/strategies.py:forced_value:115: return getattr(target, cache_key)
+----------------Tracing nested call to calc_is_empty
+----------------_internal/lazy.py:calc_is_empty:96: def calc_is_empty(self, recur: RecurT) -> bool:
+----------------Tracing nested call to wrapped_strategy
+----------------_internal/lazy.py:wrapped_strategy:112: @property
+----------------Captured nested call to wrapped_strategy with return value: <hypothesis.strategies._internal.core.CompositeStrategy object at 0x000002329EB52F30>
+----------------_internal/lazy.py:wrapped_strategy:132: return self.__wrapped_strategy
+----------------Tracing nested call to recur
+----------------_internal/strategies.py:recur:130: def recur(strat: SearchStrategy) -> Any:
+----------------Tracing nested call to forced_value
+----------------_internal/strategies.py:forced_value:111: def forced_value(target: SearchStrategy) -> Any:
+----------------Captured nested call to forced_value with return value: False
+----------------_internal/strategies.py:forced_value:115: return getattr(target, cache_key)
+----------------Captured nested call to recur with return value: False
+----------------_internal/strategies.py:recur:133: return forced_value(strat)
+----------------Captured nested call to calc_is_empty with return value: False
+----------------_internal/lazy.py:calc_is_empty:97: return recur(self.wrapped_strategy)
+----------------Captured nested call to recur with return value: False
+----------------_internal/strategies.py:recur:143: return mapping[strat]
+----------------Captured nested call to recursive_property with return value: False
+----------------_internal/strategies.py:recursive_property:216: return getattr(strategy, cache_key)
+----------------Captured nested call to is_empty with return value: False
+----------------_internal/strategies.py:is_empty:250: return recursive_property(self, "is_empty", True)
+----------------Tracing nested call to has_reusable_values
+----------------_internal/strategies.py:has_reusable_values:264: @property
+----------------Tracing nested call to recursive_property
+----------------_internal/strategies.py:recursive_property:81: def recursive_property(strategy: "SearchStrategy", name: str, default: object) -> Any:
+----------------Tracing nested call to forced_value
+----------------_internal/strategies.py:forced_value:111: def forced_value(target: SearchStrategy) -> Any:
+----------------Captured nested call to forced_value with return value: None
+----------------_internal/strategies.py:forced_value:115: return getattr(target, cache_key)
+----------------Tracing nested call to recur
+----------------_internal/strategies.py:recur:130: def recur(strat: SearchStrategy) -> Any:
+----------------Tracing nested call to forced_value
+----------------_internal/strategies.py:forced_value:111: def forced_value(target: SearchStrategy) -> Any:
+----------------Captured nested call to forced_value with return value: None
+----------------_internal/strategies.py:forced_value:115: return getattr(target, cache_key)
+----------------Tracing nested call to calc_has_reusable_values
+----------------_internal/lazy.py:calc_has_reusable_values:99: def calc_has_reusable_values(self, recur: RecurT) -> bool:
+----------------Tracing nested call to wrapped_strategy
+----------------_internal/lazy.py:wrapped_strategy:112: @property
+----------------Captured nested call to wrapped_strategy with return value: <hypothesis.strategies._internal.core.CompositeStrategy object at 0x000002329EB52F30>
+----------------_internal/lazy.py:wrapped_strategy:132: return self.__wrapped_strategy
+----------------Tracing nested call to recur
+----------------_internal/strategies.py:recur:130: def recur(strat: SearchStrategy) -> Any:
+----------------Tracing nested call to forced_value
+----------------_internal/strategies.py:forced_value:111: def forced_value(target: SearchStrategy) -> Any:
+----------------Captured nested call to forced_value with return value: False
+----------------_internal/strategies.py:forced_value:115: return getattr(target, cache_key)
+----------------Captured nested call to recur with return value: False
+----------------_internal/strategies.py:recur:133: return forced_value(strat)
+----------------Captured nested call to calc_has_reusable_values with return value: False
+----------------_internal/lazy.py:calc_has_reusable_values:100: return recur(self.wrapped_strategy)
+----------------Captured nested call to recur with return value: False
+----------------_internal/strategies.py:recur:143: return mapping[strat]
+----------------Captured nested call to recursive_property with return value: False
+----------------_internal/strategies.py:recursive_property:216: return getattr(strategy, cache_key)
+----------------Captured nested call to has_reusable_values with return value: False
+----------------_internal/strategies.py:has_reusable_values:266: return recursive_property(self, "has_reusable_values", True)
+----------------Captured nested call to validate with return value: None
+----------------_internal/strategies.py:validate:484: self.has_reusable_values
+----------------Tracing nested call to is_empty
+----------------_internal/strategies.py:is_empty:243: @property
+----------------Tracing nested call to recursive_property
+----------------_internal/strategies.py:recursive_property:81: def recursive_property(strategy: "SearchStrategy", name: str, default: object) -> Any:
+----------------Tracing nested call to forced_value
+----------------_internal/strategies.py:forced_value:111: def forced_value(target: SearchStrategy) -> Any:
+----------------Captured nested call to forced_value with return value: False
+----------------_internal/strategies.py:forced_value:115: return getattr(target, cache_key)
+----------------Captured nested call to recursive_property with return value: False
+----------------_internal/strategies.py:recursive_property:118: return forced_value(strategy)
+----------------Captured nested call to is_empty with return value: False
+----------------_internal/strategies.py:is_empty:250: return recursive_property(self, "is_empty", True)
+----------------Tracing nested call to unwrap_strategies
+----------------_internal/lazy.py:unwrap_strategies:31: def unwrap_strategies(s):
+----------------Tracing nested call to __getitem__
+----------------Lib/weakref.py:__getitem__:414: def __getitem__(self, key):
+----------------Captured nested call to __getitem__ with return value: None
+----------------Lib/weakref.py:__getitem__:415: return self.data[ref(key)]
+----------------Tracing nested call to __setitem__
+----------------Lib/weakref.py:__setitem__:427: def __setitem__(self, key, value):
+----------------Captured nested call to __setitem__ with return value: None
+----------------Lib/weakref.py:__setitem__:428: self.data[ref(key, self._remove)] = value
+----------------Tracing nested call to wrapped_strategy
+----------------_internal/lazy.py:wrapped_strategy:112: @property
+----------------Captured nested call to wrapped_strategy with return value: <hypothesis.strategies._internal.core.CompositeStrategy object at 0x000002329EB52F30>
+----------------_internal/lazy.py:wrapped_strategy:132: return self.__wrapped_strategy
+----------------Tracing nested call to unwrap_strategies
+----------------_internal/lazy.py:unwrap_strategies:31: def unwrap_strategies(s):
+----------------Captured nested call to unwrap_strategies with return value: <hypothesis.strategies._internal.core.CompositeStrategy object at 0x000002329EB52F30>
+----------------_internal/lazy.py:unwrap_strategies:36: return s
+----------------Tracing nested call to __setitem__
+----------------Lib/weakref.py:__setitem__:427: def __setitem__(self, key, value):
+----------------Captured nested call to __setitem__ with return value: None
+----------------Lib/weakref.py:__setitem__:428: self.data[ref(key, self._remove)] = value
+----------------Tracing nested call to clear
+----------------<frozen _collections_abc>:clear:966: 
+----------------Tracing nested call to popitem
+----------------Lib/weakref.py:popitem:495: def popitem(self):
+----------------Captured nested call to popitem with return value: (rb_imperative_tree(current_depth=1, high=1), <hypothesis.strategies._internal.core.CompositeStrategy object at 0x000002329EB52F30>)
+----------------Lib/weakref.py:popitem:501: return o, value
+----------------Tracing nested call to popitem
+----------------Lib/weakref.py:popitem:495: def popitem(self):
+----------------Captured nested call to popitem with return value: None
+----------------Lib/weakref.py:popitem:498: key, value = self.data.popitem()
+----------------Captured nested call to clear with return value: None
+----------------<frozen _collections_abc>:clear:972: 
+----------------Captured nested call to unwrap_strategies with return value: <hypothesis.strategies._internal.core.CompositeStrategy object at 0x000002329EB52F30>
+----------------_internal/lazy.py:unwrap_strategies:65: assert unwrap_depth >= 0
+----------------Tracing nested call to label
+----------------_internal/strategies.py:label:502: @property
+----------------Tracing nested call to calc_label
+----------------_internal/core.py:calc_label:1825: def calc_label(self) -> int:
+----------------Tracing nested call to calc_label_from_cls
+----------------conjecture/utils.py:calc_label_from_cls:37: def calc_label_from_cls(cls: type) -> int:
+----------------Tracing nested call to calc_label_from_name
+----------------conjecture/utils.py:calc_label_from_name:32: def calc_label_from_name(name: str) -> int:
+----------------Tracing nested call to int_from_bytes
+----------------internal/compat.py:int_from_bytes:104: def int_from_bytes(data: typing.Union[bytes, bytearray]) -> int:
+----------------Captured nested call to int_from_bytes with return value: 1824232625749056182
+----------------internal/compat.py:int_from_bytes:105: return int.from_bytes(data, "big")
+----------------Captured nested call to calc_label_from_name with return value: 1824232625749056182
+----------------conjecture/utils.py:calc_label_from_name:34: return int_from_bytes(hashed[:8])
+----------------Captured nested call to calc_label_from_cls with return value: 1824232625749056182
+----------------conjecture/utils.py:calc_label_from_cls:38: return calc_label_from_name(cls.__qualname__)
+----------------Captured nested call to calc_label with return value: 1824232625749056182
+----------------_internal/core.py:calc_label:1826: return calc_label_from_cls(self.definition)
+----------------Tracing nested call to cast
+----------------Lib/typing.py:cast:2187: def cast(typ, val):
+----------------Captured nested call to cast with return value: 1824232625749056182
+----------------Lib/typing.py:cast:2195: return val
+----------------Captured nested call to label with return value: 1824232625749056182
+----------------_internal/strategies.py:label:509: return cast(int, self.__label)
+----------------Tracing nested call to start_span
+----------------conjecture/data.py:start_span:1156: def start_span(self, label: int) -> None:
+----------------Tracing nested call to span_start
+----------------conjecture/providers.py:span_start:412: def span_start(self, label: int, /) -> None:  # noqa: B027  # non-abstract noop
+----------------Captured nested call to span_start with return value: None
+----------------conjecture/providers.py:span_start:412: def span_start(self, label: int, /) -> None:  # noqa: B027  # non-abstract noop
+----------------Tracing nested call to __assert_not_frozen
+----------------conjecture/data.py:__assert_not_frozen:1078: def __assert_not_frozen(self, name: str) -> None:
+----------------Captured nested call to __assert_not_frozen with return value: None
+----------------conjecture/data.py:__assert_not_frozen:1079: if self.frozen:
+----------------Tracing nested call to start_span
+----------------conjecture/data.py:start_span:330: def start_span(self, label: int) -> None:
+----------------Tracing nested call to append
+----------------conjecture/junkdrawer.py:append:142: def append(self, n: int) -> None:
+----------------Tracing nested call to __len__
+----------------conjecture/junkdrawer.py:__len__:103: def __len__(self) -> int:
+----------------Captured nested call to __len__ with return value: 7
+----------------conjecture/junkdrawer.py:__len__:104: return len(self.__underlying)
+----------------Tracing nested call to __setitem__
+----------------conjecture/junkdrawer.py:__setitem__:147: def __setitem__(self, i: int, n: int) -> None:
+----------------Captured nested call to __setitem__ with return value: None
+----------------conjecture/junkdrawer.py:__setitem__:151: return
+----------------Captured nested call to append with return value: None
+----------------conjecture/junkdrawer.py:append:145: self[i] = n
+----------------Captured nested call to start_span with return value: None
+----------------conjecture/data.py:start_span:337: self.trail.append(TrailType.START_SPAN + i)
+----------------Captured nested call to start_span with return value: None
+----------------conjecture/data.py:start_span:1169: self.labels_for_structure_stack.append({label})
+----------------Tracing nested call to do_draw
+----------------_internal/core.py:do_draw:1822: def do_draw(self, data):
+----------------Tracing nested call to rb_imperative_tree
+----------------src/RBTreesTest.py:rb_imperative_tree:18: @st.composite
+----------------Captured nested call to rb_imperative_tree with return value: None
+----------------src/RBTreesTest.py:rb_imperative_tree:21: return None
+----------------Captured nested call to do_draw with return value: None
+----------------_internal/core.py:do_draw:1823: return self.definition(data.draw, *self.args, **self.kwargs)
+----------------Tracing nested call to gc_cumulative_time
+----------------conjecture/junkdrawer.py:gc_cumulative_time:412: def gc_cumulative_time() -> float:
+----------------Captured nested call to gc_cumulative_time with return value: 0.00038679991848766804
+----------------conjecture/junkdrawer.py:gc_cumulative_time:455: return _gc_cumulative_time
+----------------Tracing nested call to stop_span
+----------------conjecture/data.py:stop_span:1171: def stop_span(self, *, discard: bool = False) -> None:
+----------------Tracing nested call to span_end
+----------------conjecture/providers.py:span_end:423: def span_end(self, discard: bool, /) -> None:  # noqa: B027, FBT001
+----------------Captured nested call to span_end with return value: None
+----------------conjecture/providers.py:span_end:423: def span_end(self, discard: bool, /) -> None:  # noqa: B027, FBT001
+----------------Tracing nested call to stop_span
+----------------conjecture/data.py:stop_span:339: def stop_span(self, *, discard: bool) -> None:
+----------------Tracing nested call to append
+----------------conjecture/junkdrawer.py:append:142: def append(self, n: int) -> None:
+----------------Tracing nested call to __len__
+----------------conjecture/junkdrawer.py:__len__:103: def __len__(self) -> int:
+----------------Captured nested call to __len__ with return value: 8
+----------------conjecture/junkdrawer.py:__len__:104: return len(self.__underlying)
+----------------Tracing nested call to __setitem__
+----------------conjecture/junkdrawer.py:__setitem__:147: def __setitem__(self, i: int, n: int) -> None:
+----------------Captured nested call to __setitem__ with return value: None
+----------------conjecture/junkdrawer.py:__setitem__:151: return
+----------------Captured nested call to append with return value: None
+----------------conjecture/junkdrawer.py:append:145: self[i] = n
+----------------Captured nested call to stop_span with return value: None
+----------------conjecture/data.py:stop_span:343: self.trail.append(TrailType.STOP_SPAN_NO_DISCARD)
+----------------Captured nested call to stop_span with return value: None
+----------------conjecture/data.py:stop_span:1189: if discard:
+----------------Captured draw return value: None
+----------------Finished tracing draw calls
+----------------Started tracing draw calls
+----------------conjecture/data.py:draw:1088: def draw(
+----------------Tracing nested call to gc_cumulative_time
+----------------conjecture/junkdrawer.py:gc_cumulative_time:412: def gc_cumulative_time() -> float:
+----------------Captured nested call to gc_cumulative_time with return value: 0.00038679991848766804
+----------------conjecture/junkdrawer.py:gc_cumulative_time:455: return _gc_cumulative_time
+----------------Tracing nested call to validate
+----------------_internal/strategies.py:validate:473: def validate(self) -> None:
+----------------Tracing nested call to do_validate
+----------------_internal/lazy.py:do_validate:152: def do_validate(self) -> None:
+----------------Tracing nested call to wrapped_strategy
+----------------_internal/lazy.py:wrapped_strategy:112: @property
+----------------Tracing nested call to check_sideeffect_during_initialization
+----------------hypothesis/configuration.py:check_sideeffect_during_initialization:48: def check_sideeffect_during_initialization(
+----------------Captured nested call to check_sideeffect_during_initialization with return value: None
+----------------hypothesis/configuration.py:check_sideeffect_during_initialization:63: return
+----------------Tracing nested call to <genexpr>
+----------------_internal/lazy.py:<genexpr>:117: unwrapped_args = tuple(unwrap_strategies(s) for s in self.__args)
+----------------Tracing nested call to unwrap_strategies
+----------------_internal/lazy.py:unwrap_strategies:31: def unwrap_strategies(s):
+----------------Captured nested call to unwrap_strategies with return value: 6
+----------------_internal/lazy.py:unwrap_strategies:36: return s
+----------------Captured nested call to <genexpr> with return value: 6
+----------------_internal/lazy.py:<genexpr>:117: unwrapped_args = tuple(unwrap_strategies(s) for s in self.__args)
+----------------Tracing nested call to <genexpr>
+----------------_internal/lazy.py:<genexpr>:117: unwrapped_args = tuple(unwrap_strategies(s) for s in self.__args)
+----------------Tracing nested call to unwrap_strategies
+----------------_internal/lazy.py:unwrap_strategies:31: def unwrap_strategies(s):
+----------------Captured nested call to unwrap_strategies with return value: 1
+----------------_internal/lazy.py:unwrap_strategies:36: return s
+----------------Captured nested call to <genexpr> with return value: 1
+----------------_internal/lazy.py:<genexpr>:117: unwrapped_args = tuple(unwrap_strategies(s) for s in self.__args)
+----------------Tracing nested call to <genexpr>
+----------------_internal/lazy.py:<genexpr>:117: unwrapped_args = tuple(unwrap_strategies(s) for s in self.__args)
+----------------Tracing nested call to unwrap_strategies
+----------------_internal/lazy.py:unwrap_strategies:31: def unwrap_strategies(s):
+----------------Captured nested call to unwrap_strategies with return value: 1
+----------------_internal/lazy.py:unwrap_strategies:36: return s
+----------------Captured nested call to <genexpr> with return value: 1
+----------------_internal/lazy.py:<genexpr>:117: unwrapped_args = tuple(unwrap_strategies(s) for s in self.__args)
+----------------Tracing nested call to <genexpr>
+----------------_internal/lazy.py:<genexpr>:117: unwrapped_args = tuple(unwrap_strategies(s) for s in self.__args)
+----------------Tracing nested call to unwrap_strategies
+----------------_internal/lazy.py:unwrap_strategies:31: def unwrap_strategies(s):
+----------------Captured nested call to unwrap_strategies with return value: 100
+----------------_internal/lazy.py:unwrap_strategies:36: return s
+----------------Captured nested call to <genexpr> with return value: 100
+----------------_internal/lazy.py:<genexpr>:117: unwrapped_args = tuple(unwrap_strategies(s) for s in self.__args)
+----------------Tracing nested call to <genexpr>
+----------------_internal/lazy.py:<genexpr>:117: unwrapped_args = tuple(unwrap_strategies(s) for s in self.__args)
+----------------Tracing nested call to unwrap_strategies
+----------------_internal/lazy.py:unwrap_strategies:31: def unwrap_strategies(s):
+----------------Captured nested call to unwrap_strategies with return value: None
+----------------_internal/lazy.py:unwrap_strategies:36: return s
+----------------Captured nested call to <genexpr> with return value: None
+----------------_internal/lazy.py:<genexpr>:117: unwrapped_args = tuple(unwrap_strategies(s) for s in self.__args)
+----------------Tracing nested call to <genexpr>
+----------------_internal/lazy.py:<genexpr>:117: unwrapped_args = tuple(unwrap_strategies(s) for s in self.__args)
+----------------Captured nested call to <genexpr> with return value: None
+----------------_internal/lazy.py:<genexpr>:117: unwrapped_args = tuple(unwrap_strategies(s) for s in self.__args)
+----------------Tracing nested call to rb_imperative_tree
+----------------<string>:rb_imperative_tree:4: 
+----------------Tracing nested call to accept
+----------------_internal/core.py:accept:1902: @defines_strategy()
+----------------Tracing nested call to __init__
+----------------_internal/core.py:__init__:1817: def __init__(self, definition, args, kwargs):
+----------------Captured nested call to __init__ with return value: None
+----------------_internal/core.py:__init__:1820: self.kwargs = kwargs
+----------------Captured nested call to accept with return value: <hypothesis.strategies._internal.core.CompositeStrategy object at 0x000002329EBF19A0>
+----------------_internal/core.py:accept:1905: return CompositeStrategy(f, args, kwargs)
+----------------Captured nested call to rb_imperative_tree with return value: <hypothesis.strategies._internal.core.CompositeStrategy object at 0x000002329EBF19A0>
+----------------<string>:rb_imperative_tree:5: 
+----------------Captured nested call to wrapped_strategy with return value: <hypothesis.strategies._internal.core.CompositeStrategy object at 0x000002329EBF19A0>
+----------------_internal/lazy.py:wrapped_strategy:132: return self.__wrapped_strategy
+----------------Tracing nested call to validate
+----------------_internal/strategies.py:validate:473: def validate(self) -> None:
+----------------Tracing nested call to do_validate
+----------------_internal/strategies.py:do_validate:514: def do_validate(self) -> None:
+----------------Captured nested call to do_validate with return value: None
+----------------_internal/strategies.py:do_validate:515: pass
+----------------Tracing nested call to is_empty
+----------------_internal/strategies.py:is_empty:243: @property
+----------------Tracing nested call to recursive_property
+----------------_internal/strategies.py:recursive_property:81: def recursive_property(strategy: "SearchStrategy", name: str, default: object) -> Any:
+----------------Tracing nested call to forced_value
+----------------_internal/strategies.py:forced_value:111: def forced_value(target: SearchStrategy) -> Any:
+----------------Captured nested call to forced_value with return value: None
+----------------_internal/strategies.py:forced_value:115: return getattr(target, cache_key)
+----------------Tracing nested call to recur
+----------------_internal/strategies.py:recur:130: def recur(strat: SearchStrategy) -> Any:
+----------------Tracing nested call to forced_value
+----------------_internal/strategies.py:forced_value:111: def forced_value(target: SearchStrategy) -> Any:
+----------------Captured nested call to forced_value with return value: None
+----------------_internal/strategies.py:forced_value:115: return getattr(target, cache_key)
+----------------Tracing nested call to calc_is_empty
+----------------_internal/strategies.py:calc_is_empty:276: def calc_is_empty(self, recur: RecurT) -> bool:
+----------------Captured nested call to calc_is_empty with return value: False
+----------------_internal/strategies.py:calc_is_empty:283: return False
+----------------Captured nested call to recur with return value: False
+----------------_internal/strategies.py:recur:143: return mapping[strat]
+----------------Captured nested call to recursive_property with return value: False
+----------------_internal/strategies.py:recursive_property:216: return getattr(strategy, cache_key)
+----------------Captured nested call to is_empty with return value: False
+----------------_internal/strategies.py:is_empty:250: return recursive_property(self, "is_empty", True)
+----------------Tracing nested call to has_reusable_values
+----------------_internal/strategies.py:has_reusable_values:264: @property
+----------------Tracing nested call to recursive_property
+----------------_internal/strategies.py:recursive_property:81: def recursive_property(strategy: "SearchStrategy", name: str, default: object) -> Any:
+----------------Tracing nested call to forced_value
+----------------_internal/strategies.py:forced_value:111: def forced_value(target: SearchStrategy) -> Any:
+----------------Captured nested call to forced_value with return value: None
+----------------_internal/strategies.py:forced_value:115: return getattr(target, cache_key)
+----------------Tracing nested call to recur
+----------------_internal/strategies.py:recur:130: def recur(strat: SearchStrategy) -> Any:
+----------------Tracing nested call to forced_value
+----------------_internal/strategies.py:forced_value:111: def forced_value(target: SearchStrategy) -> Any:
+----------------Captured nested call to forced_value with return value: None
+----------------_internal/strategies.py:forced_value:115: return getattr(target, cache_key)
+----------------Tracing nested call to calc_has_reusable_values
+----------------_internal/strategies.py:calc_has_reusable_values:285: def calc_has_reusable_values(self, recur: RecurT) -> bool:
+----------------Captured nested call to calc_has_reusable_values with return value: False
+----------------_internal/strategies.py:calc_has_reusable_values:286: return False
+----------------Captured nested call to recur with return value: False
+----------------_internal/strategies.py:recur:143: return mapping[strat]
+----------------Captured nested call to recursive_property with return value: False
+----------------_internal/strategies.py:recursive_property:216: return getattr(strategy, cache_key)
+----------------Captured nested call to has_reusable_values with return value: False
+----------------_internal/strategies.py:has_reusable_values:266: return recursive_property(self, "has_reusable_values", True)
+----------------Captured nested call to validate with return value: None
+----------------_internal/strategies.py:validate:484: self.has_reusable_values
+----------------Captured nested call to do_validate with return value: None
+----------------_internal/lazy.py:do_validate:155: w.validate()
+----------------Tracing nested call to is_empty
+----------------_internal/strategies.py:is_empty:243: @property
+----------------Tracing nested call to recursive_property
+----------------_internal/strategies.py:recursive_property:81: def recursive_property(strategy: "SearchStrategy", name: str, default: object) -> Any:
+----------------Tracing nested call to forced_value
+----------------_internal/strategies.py:forced_value:111: def forced_value(target: SearchStrategy) -> Any:
+----------------Captured nested call to forced_value with return value: None
+----------------_internal/strategies.py:forced_value:115: return getattr(target, cache_key)
+----------------Tracing nested call to recur
+----------------_internal/strategies.py:recur:130: def recur(strat: SearchStrategy) -> Any:
+----------------Tracing nested call to forced_value
+----------------_internal/strategies.py:forced_value:111: def forced_value(target: SearchStrategy) -> Any:
+----------------Captured nested call to forced_value with return value: None
+----------------_internal/strategies.py:forced_value:115: return getattr(target, cache_key)
+----------------Tracing nested call to calc_is_empty
+----------------_internal/lazy.py:calc_is_empty:96: def calc_is_empty(self, recur: RecurT) -> bool:
+----------------Tracing nested call to wrapped_strategy
+----------------_internal/lazy.py:wrapped_strategy:112: @property
+----------------Captured nested call to wrapped_strategy with return value: <hypothesis.strategies._internal.core.CompositeStrategy object at 0x000002329EBF19A0>
+----------------_internal/lazy.py:wrapped_strategy:132: return self.__wrapped_strategy
+----------------Tracing nested call to recur
+----------------_internal/strategies.py:recur:130: def recur(strat: SearchStrategy) -> Any:
+----------------Tracing nested call to forced_value
+----------------_internal/strategies.py:forced_value:111: def forced_value(target: SearchStrategy) -> Any:
+----------------Captured nested call to forced_value with return value: False
+----------------_internal/strategies.py:forced_value:115: return getattr(target, cache_key)
+----------------Captured nested call to recur with return value: False
+----------------_internal/strategies.py:recur:133: return forced_value(strat)
+----------------Captured nested call to calc_is_empty with return value: False
+----------------_internal/lazy.py:calc_is_empty:97: return recur(self.wrapped_strategy)
+----------------Captured nested call to recur with return value: False
+----------------_internal/strategies.py:recur:143: return mapping[strat]
+----------------Captured nested call to recursive_property with return value: False
+----------------_internal/strategies.py:recursive_property:216: return getattr(strategy, cache_key)
+----------------Captured nested call to is_empty with return value: False
+----------------_internal/strategies.py:is_empty:250: return recursive_property(self, "is_empty", True)
+----------------Tracing nested call to has_reusable_values
+----------------_internal/strategies.py:has_reusable_values:264: @property
+----------------Tracing nested call to recursive_property
+----------------_internal/strategies.py:recursive_property:81: def recursive_property(strategy: "SearchStrategy", name: str, default: object) -> Any:
+----------------Tracing nested call to forced_value
+----------------_internal/strategies.py:forced_value:111: def forced_value(target: SearchStrategy) -> Any:
+----------------Captured nested call to forced_value with return value: None
+----------------_internal/strategies.py:forced_value:115: return getattr(target, cache_key)
+----------------Tracing nested call to recur
+----------------_internal/strategies.py:recur:130: def recur(strat: SearchStrategy) -> Any:
+----------------Tracing nested call to forced_value
+----------------_internal/strategies.py:forced_value:111: def forced_value(target: SearchStrategy) -> Any:
+----------------Captured nested call to forced_value with return value: None
+----------------_internal/strategies.py:forced_value:115: return getattr(target, cache_key)
+----------------Tracing nested call to calc_has_reusable_values
+----------------_internal/lazy.py:calc_has_reusable_values:99: def calc_has_reusable_values(self, recur: RecurT) -> bool:
+----------------Tracing nested call to wrapped_strategy
+----------------_internal/lazy.py:wrapped_strategy:112: @property
+----------------Captured nested call to wrapped_strategy with return value: <hypothesis.strategies._internal.core.CompositeStrategy object at 0x000002329EBF19A0>
+----------------_internal/lazy.py:wrapped_strategy:132: return self.__wrapped_strategy
+----------------Tracing nested call to recur
+----------------_internal/strategies.py:recur:130: def recur(strat: SearchStrategy) -> Any:
+----------------Tracing nested call to forced_value
+----------------_internal/strategies.py:forced_value:111: def forced_value(target: SearchStrategy) -> Any:
+----------------Captured nested call to forced_value with return value: False
+----------------_internal/strategies.py:forced_value:115: return getattr(target, cache_key)
+----------------Captured nested call to recur with return value: False
+----------------_internal/strategies.py:recur:133: return forced_value(strat)
+----------------Captured nested call to calc_has_reusable_values with return value: False
+----------------_internal/lazy.py:calc_has_reusable_values:100: return recur(self.wrapped_strategy)
+----------------Captured nested call to recur with return value: False
+----------------_internal/strategies.py:recur:143: return mapping[strat]
+----------------Captured nested call to recursive_property with return value: False
+----------------_internal/strategies.py:recursive_property:216: return getattr(strategy, cache_key)
+----------------Captured nested call to has_reusable_values with return value: False
+----------------_internal/strategies.py:has_reusable_values:266: return recursive_property(self, "has_reusable_values", True)
+----------------Captured nested call to validate with return value: None
+----------------_internal/strategies.py:validate:484: self.has_reusable_values
+----------------Tracing nested call to is_empty
+----------------_internal/strategies.py:is_empty:243: @property
+----------------Tracing nested call to recursive_property
+----------------_internal/strategies.py:recursive_property:81: def recursive_property(strategy: "SearchStrategy", name: str, default: object) -> Any:
+----------------Tracing nested call to forced_value
+----------------_internal/strategies.py:forced_value:111: def forced_value(target: SearchStrategy) -> Any:
+----------------Captured nested call to forced_value with return value: False
+----------------_internal/strategies.py:forced_value:115: return getattr(target, cache_key)
+----------------Captured nested call to recursive_property with return value: False
+----------------_internal/strategies.py:recursive_property:118: return forced_value(strategy)
+----------------Captured nested call to is_empty with return value: False
+----------------_internal/strategies.py:is_empty:250: return recursive_property(self, "is_empty", True)
+----------------Tracing nested call to unwrap_strategies
+----------------_internal/lazy.py:unwrap_strategies:31: def unwrap_strategies(s):
+----------------Tracing nested call to __getitem__
+----------------Lib/weakref.py:__getitem__:414: def __getitem__(self, key):
+----------------Captured nested call to __getitem__ with return value: None
+----------------Lib/weakref.py:__getitem__:415: return self.data[ref(key)]
+----------------Tracing nested call to __setitem__
+----------------Lib/weakref.py:__setitem__:427: def __setitem__(self, key, value):
+----------------Captured nested call to __setitem__ with return value: None
+----------------Lib/weakref.py:__setitem__:428: self.data[ref(key, self._remove)] = value
+----------------Tracing nested call to wrapped_strategy
+----------------_internal/lazy.py:wrapped_strategy:112: @property
+----------------Captured nested call to wrapped_strategy with return value: <hypothesis.strategies._internal.core.CompositeStrategy object at 0x000002329EBF19A0>
+----------------_internal/lazy.py:wrapped_strategy:132: return self.__wrapped_strategy
+----------------Tracing nested call to unwrap_strategies
+----------------_internal/lazy.py:unwrap_strategies:31: def unwrap_strategies(s):
+----------------Captured nested call to unwrap_strategies with return value: <hypothesis.strategies._internal.core.CompositeStrategy object at 0x000002329EBF19A0>
+----------------_internal/lazy.py:unwrap_strategies:36: return s
+----------------Tracing nested call to __setitem__
+----------------Lib/weakref.py:__setitem__:427: def __setitem__(self, key, value):
+----------------Captured nested call to __setitem__ with return value: None
+----------------Lib/weakref.py:__setitem__:428: self.data[ref(key, self._remove)] = value
+----------------Tracing nested call to clear
+----------------<frozen _collections_abc>:clear:966: 
+----------------Tracing nested call to popitem
+----------------Lib/weakref.py:popitem:495: def popitem(self):
+----------------Captured nested call to popitem with return value: (rb_imperative_tree(current_depth=1, low=1), <hypothesis.strategies._internal.core.CompositeStrategy object at 0x000002329EBF19A0>)
+----------------Lib/weakref.py:popitem:501: return o, value
+----------------Tracing nested call to popitem
+----------------Lib/weakref.py:popitem:495: def popitem(self):
+----------------Captured nested call to popitem with return value: None
+----------------Lib/weakref.py:popitem:498: key, value = self.data.popitem()
+----------------Captured nested call to clear with return value: None
+----------------<frozen _collections_abc>:clear:972: 
+----------------Captured nested call to unwrap_strategies with return value: <hypothesis.strategies._internal.core.CompositeStrategy object at 0x000002329EBF19A0>
+----------------_internal/lazy.py:unwrap_strategies:65: assert unwrap_depth >= 0
+----------------Tracing nested call to label
+----------------_internal/strategies.py:label:502: @property
+----------------Tracing nested call to calc_label
+----------------_internal/core.py:calc_label:1825: def calc_label(self) -> int:
+----------------Tracing nested call to calc_label_from_cls
+----------------conjecture/utils.py:calc_label_from_cls:37: def calc_label_from_cls(cls: type) -> int:
+----------------Tracing nested call to calc_label_from_name
+----------------conjecture/utils.py:calc_label_from_name:32: def calc_label_from_name(name: str) -> int:
+----------------Tracing nested call to int_from_bytes
+----------------internal/compat.py:int_from_bytes:104: def int_from_bytes(data: typing.Union[bytes, bytearray]) -> int:
+----------------Captured nested call to int_from_bytes with return value: 1824232625749056182
+----------------internal/compat.py:int_from_bytes:105: return int.from_bytes(data, "big")
+----------------Captured nested call to calc_label_from_name with return value: 1824232625749056182
+----------------conjecture/utils.py:calc_label_from_name:34: return int_from_bytes(hashed[:8])
+----------------Captured nested call to calc_label_from_cls with return value: 1824232625749056182
+----------------conjecture/utils.py:calc_label_from_cls:38: return calc_label_from_name(cls.__qualname__)
+----------------Captured nested call to calc_label with return value: 1824232625749056182
+----------------_internal/core.py:calc_label:1826: return calc_label_from_cls(self.definition)
+----------------Tracing nested call to cast
+----------------Lib/typing.py:cast:2187: def cast(typ, val):
+----------------Captured nested call to cast with return value: 1824232625749056182
+----------------Lib/typing.py:cast:2195: return val
+----------------Captured nested call to label with return value: 1824232625749056182
+----------------_internal/strategies.py:label:509: return cast(int, self.__label)
+----------------Tracing nested call to start_span
+----------------conjecture/data.py:start_span:1156: def start_span(self, label: int) -> None:
+----------------Tracing nested call to span_start
+----------------conjecture/providers.py:span_start:412: def span_start(self, label: int, /) -> None:  # noqa: B027  # non-abstract noop
+----------------Captured nested call to span_start with return value: None
+----------------conjecture/providers.py:span_start:412: def span_start(self, label: int, /) -> None:  # noqa: B027  # non-abstract noop
+----------------Tracing nested call to __assert_not_frozen
+----------------conjecture/data.py:__assert_not_frozen:1078: def __assert_not_frozen(self, name: str) -> None:
+----------------Captured nested call to __assert_not_frozen with return value: None
+----------------conjecture/data.py:__assert_not_frozen:1079: if self.frozen:
+----------------Tracing nested call to start_span
+----------------conjecture/data.py:start_span:330: def start_span(self, label: int) -> None:
+----------------Tracing nested call to append
+----------------conjecture/junkdrawer.py:append:142: def append(self, n: int) -> None:
+----------------Tracing nested call to __len__
+----------------conjecture/junkdrawer.py:__len__:103: def __len__(self) -> int:
+----------------Captured nested call to __len__ with return value: 9
+----------------conjecture/junkdrawer.py:__len__:104: return len(self.__underlying)
+----------------Tracing nested call to __setitem__
+----------------conjecture/junkdrawer.py:__setitem__:147: def __setitem__(self, i: int, n: int) -> None:
+----------------Captured nested call to __setitem__ with return value: None
+----------------conjecture/junkdrawer.py:__setitem__:151: return
+----------------Captured nested call to append with return value: None
+----------------conjecture/junkdrawer.py:append:145: self[i] = n
+----------------Captured nested call to start_span with return value: None
+----------------conjecture/data.py:start_span:337: self.trail.append(TrailType.START_SPAN + i)
+----------------Captured nested call to start_span with return value: None
+----------------conjecture/data.py:start_span:1169: self.labels_for_structure_stack.append({label})
+----------------Tracing nested call to do_draw
+----------------_internal/core.py:do_draw:1822: def do_draw(self, data):
+----------------Tracing nested call to rb_imperative_tree
+----------------src/RBTreesTest.py:rb_imperative_tree:18: @st.composite
+----------------Tracing nested call to booleans
+----------------_internal/core.py:booleans:154: @cacheable
+----------------Tracing nested call to cached_strategy
+----------------_internal/utils.py:cached_strategy:71: @proxies(fn)
+----------------Tracing nested call to value
+----------------utils/dynamicvariables.py:value:24: @property
+----------------Captured nested call to value with return value: <hypothesis.control.BuildContext object at 0x000002329EB52F90>
+----------------utils/dynamicvariables.py:value:26: return getattr(self.data, "value", self.default)
+----------------Tracing nested call to get_cache
+----------------_internal/utils.py:get_cache:54: def get_cache() -> LRUReusedCache:
+----------------Captured nested call to get_cache with return value: {(<function characters at 0x000002329EA745E0>, (), frozenset({('categories', (<class 'NoneType'>, None)), ('codec', (<class 'str'>, 'utf-8')), ('exclude_characters', (<class 'NoneType'>, None)), ('max_codepoint', (<class 'NoneType'>, None)), ('exclude_categories', (<class 'NoneType'>, None)), ('blacklist_characters', (<class 'NoneType'>, None)), ('whitelist_characters', (<class 'NoneType'>, None)), ('min_codepoint', (<class 'NoneType'>, None)), ('include_characters', (<class 'NoneType'>, None)), ('blacklist_categories', (<class 'NoneType'>, None)), ('whitelist_categories', (<class 'NoneType'>, None))})): characters(codec='utf-8'), (<function integers at 0x000002329EA5C180>, ((<class 'int'>, 1), (<class 'int'>, 99)), frozenset()): integers(min_value=1, max_value=99), (<function booleans at 0x000002329EA5E660>, (), frozenset()): booleans()}
+----------------_internal/utils.py:get_cache:56: return _CACHE.STRATEGY_CACHE
+----------------Tracing nested call to __contains__
+----------------internal/cache.py:__contains__:99: def __contains__(self, key: K) -> bool:
+----------------Tracing nested call to keys_to_indices
+----------------internal/cache.py:keys_to_indices:79: @property
+----------------Captured nested call to keys_to_indices with return value: {(<function characters at 0x000002329EA745E0>, (), frozenset({('categories', (<class 'NoneType'>, None)), ('codec', (<class 'str'>, 'utf-8')), ('exclude_characters', (<class 'NoneType'>, None)), ('max_codepoint', (<class 'NoneType'>, None)), ('exclude_categories', (<class 'NoneType'>, None)), ('blacklist_characters', (<class 'NoneType'>, None)), ('whitelist_characters', (<class 'NoneType'>, None)), ('min_codepoint', (<class 'NoneType'>, None)), ('include_characters', (<class 'NoneType'>, None)), ('blacklist_categories', (<class 'NoneType'>, None)), ('whitelist_categories', (<class 'NoneType'>, None))})): 0, (<function booleans at 0x000002329EA5E660>, (), frozenset()): 2, (<function integers at 0x000002329EA5C180>, ((<class 'int'>, 1), (<class 'int'>, 99)), frozenset()): 1}
+----------------internal/cache.py:keys_to_indices:82: return self._threadlocal.keys_to_indices
+----------------Captured nested call to __contains__ with return value: True
+----------------internal/cache.py:__contains__:100: return key in self.keys_to_indices
+----------------Tracing nested call to __getitem__
+----------------internal/cache.py:__getitem__:102: def __getitem__(self, key: K) -> V:
+----------------Tracing nested call to keys_to_indices
+----------------internal/cache.py:keys_to_indices:79: @property
+----------------Captured nested call to keys_to_indices with return value: {(<function characters at 0x000002329EA745E0>, (), frozenset({('categories', (<class 'NoneType'>, None)), ('codec', (<class 'str'>, 'utf-8')), ('exclude_characters', (<class 'NoneType'>, None)), ('max_codepoint', (<class 'NoneType'>, None)), ('exclude_categories', (<class 'NoneType'>, None)), ('blacklist_characters', (<class 'NoneType'>, None)), ('whitelist_characters', (<class 'NoneType'>, None)), ('min_codepoint', (<class 'NoneType'>, None)), ('include_characters', (<class 'NoneType'>, None)), ('blacklist_categories', (<class 'NoneType'>, None)), ('whitelist_categories', (<class 'NoneType'>, None))})): 0, (<function booleans at 0x000002329EA5E660>, (), frozenset()): 2, (<function integers at 0x000002329EA5C180>, ((<class 'int'>, 1), (<class 'int'>, 99)), frozenset()): 1}
+----------------internal/cache.py:keys_to_indices:82: return self._threadlocal.keys_to_indices
+----------------Tracing nested call to data
+----------------internal/cache.py:data:87: @property
+----------------Captured nested call to data with return value: [Entry(key=(<function characters at 0x000002329EA745E0>, (), frozenset({('categories', (<class 'NoneType'>, None)), ('codec', (<class 'str'>, 'utf-8')), ('exclude_characters', (<class 'NoneType'>, None)), ('max_codepoint', (<class 'NoneType'>, None)), ('exclude_categories', (<class 'NoneType'>, None)), ('blacklist_characters', (<class 'NoneType'>, None)), ('whitelist_characters', (<class 'NoneType'>, None)), ('min_codepoint', (<class 'NoneType'>, None)), ('include_characters', (<class 'NoneType'>, None)), ('blacklist_categories', (<class 'NoneType'>, None)), ('whitelist_categories', (<class 'NoneType'>, None))})), value=characters(codec='utf-8'), score=(2, 2), pins=0), Entry(key=(<function integers at 0x000002329EA5C180>, ((<class 'int'>, 1), (<class 'int'>, 99)), frozenset()), value=integers(min_value=1, max_value=99), score=(2, 16), pins=0), Entry(key=(<function booleans at 0x000002329EA5E660>, (), frozenset()), value=booleans(), score=(2, 15), pins=0)]
+----------------internal/cache.py:data:90: return self._threadlocal.data
+----------------Tracing nested call to __entry_was_accessed
+----------------internal/cache.py:__entry_was_accessed:213: def __entry_was_accessed(self, i: int) -> None:
+----------------Tracing nested call to data
+----------------internal/cache.py:data:87: @property
+----------------Captured nested call to data with return value: [Entry(key=(<function characters at 0x000002329EA745E0>, (), frozenset({('categories', (<class 'NoneType'>, None)), ('codec', (<class 'str'>, 'utf-8')), ('exclude_characters', (<class 'NoneType'>, None)), ('max_codepoint', (<class 'NoneType'>, None)), ('exclude_categories', (<class 'NoneType'>, None)), ('blacklist_characters', (<class 'NoneType'>, None)), ('whitelist_characters', (<class 'NoneType'>, None)), ('min_codepoint', (<class 'NoneType'>, None)), ('include_characters', (<class 'NoneType'>, None)), ('blacklist_categories', (<class 'NoneType'>, None)), ('whitelist_categories', (<class 'NoneType'>, None))})), value=characters(codec='utf-8'), score=(2, 2), pins=0), Entry(key=(<function integers at 0x000002329EA5C180>, ((<class 'int'>, 1), (<class 'int'>, 99)), frozenset()), value=integers(min_value=1, max_value=99), score=(2, 16), pins=0), Entry(key=(<function booleans at 0x000002329EA5E660>, (), frozenset()), value=booleans(), score=(2, 15), pins=0)]
+----------------internal/cache.py:data:90: return self._threadlocal.data
+----------------Tracing nested call to on_access
+----------------internal/cache.py:on_access:288: def on_access(self, key: K, value: V, score: Any) -> Any:
+----------------Tracing nested call to tick
+----------------internal/cache.py:tick:281: def tick(self) -> int:
+----------------Captured nested call to tick with return value: 17
+----------------internal/cache.py:tick:283: return self.__tick
+----------------Captured nested call to on_access with return value: (2, 17)
+----------------internal/cache.py:on_access:289: return (2, self.tick())
+----------------Tracing nested call to __balance
+----------------internal/cache.py:__balance:230: def __balance(self, i: int) -> None:
+----------------Tracing nested call to __out_of_order
+----------------internal/cache.py:__out_of_order:251: def __out_of_order(self, i: int, j: int) -> bool:
+----------------Tracing nested call to data
+----------------internal/cache.py:data:87: @property
+----------------Captured nested call to data with return value: [Entry(key=(<function characters at 0x000002329EA745E0>, (), frozenset({('categories', (<class 'NoneType'>, None)), ('codec', (<class 'str'>, 'utf-8')), ('exclude_characters', (<class 'NoneType'>, None)), ('max_codepoint', (<class 'NoneType'>, None)), ('exclude_categories', (<class 'NoneType'>, None)), ('blacklist_characters', (<class 'NoneType'>, None)), ('whitelist_characters', (<class 'NoneType'>, None)), ('min_codepoint', (<class 'NoneType'>, None)), ('include_characters', (<class 'NoneType'>, None)), ('blacklist_categories', (<class 'NoneType'>, None)), ('whitelist_categories', (<class 'NoneType'>, None))})), value=characters(codec='utf-8'), score=(2, 2), pins=0), Entry(key=(<function integers at 0x000002329EA5C180>, ((<class 'int'>, 1), (<class 'int'>, 99)), frozenset()), value=integers(min_value=1, max_value=99), score=(2, 16), pins=0), Entry(key=(<function booleans at 0x000002329EA5E660>, (), frozenset()), value=booleans(), score=(2, 17), pins=0)]
+----------------internal/cache.py:data:90: return self._threadlocal.data
+----------------Tracing nested call to sort_key
+----------------internal/cache.py:sort_key:30: @property
+----------------Captured nested call to sort_key with return value: (0, (2, 17))
+----------------internal/cache.py:sort_key:34: return (0, self.score)
+----------------Tracing nested call to data
+----------------internal/cache.py:data:87: @property
+----------------Captured nested call to data with return value: [Entry(key=(<function characters at 0x000002329EA745E0>, (), frozenset({('categories', (<class 'NoneType'>, None)), ('codec', (<class 'str'>, 'utf-8')), ('exclude_characters', (<class 'NoneType'>, None)), ('max_codepoint', (<class 'NoneType'>, None)), ('exclude_categories', (<class 'NoneType'>, None)), ('blacklist_characters', (<class 'NoneType'>, None)), ('whitelist_characters', (<class 'NoneType'>, None)), ('min_codepoint', (<class 'NoneType'>, None)), ('include_characters', (<class 'NoneType'>, None)), ('blacklist_categories', (<class 'NoneType'>, None)), ('whitelist_categories', (<class 'NoneType'>, None))})), value=characters(codec='utf-8'), score=(2, 2), pins=0), Entry(key=(<function integers at 0x000002329EA5C180>, ((<class 'int'>, 1), (<class 'int'>, 99)), frozenset()), value=integers(min_value=1, max_value=99), score=(2, 16), pins=0), Entry(key=(<function booleans at 0x000002329EA5E660>, (), frozenset()), value=booleans(), score=(2, 17), pins=0)]
+----------------internal/cache.py:data:90: return self._threadlocal.data
+----------------Tracing nested call to sort_key
+----------------internal/cache.py:sort_key:30: @property
+----------------Captured nested call to sort_key with return value: (0, (2, 2))
+----------------internal/cache.py:sort_key:34: return (0, self.score)
+----------------Captured nested call to __out_of_order with return value: False
+----------------internal/cache.py:__out_of_order:257: return self.data[j].sort_key < self.data[i].sort_key
+----------------Tracing nested call to data
+----------------internal/cache.py:data:87: @property
+----------------Captured nested call to data with return value: [Entry(key=(<function characters at 0x000002329EA745E0>, (), frozenset({('categories', (<class 'NoneType'>, None)), ('codec', (<class 'str'>, 'utf-8')), ('exclude_characters', (<class 'NoneType'>, None)), ('max_codepoint', (<class 'NoneType'>, None)), ('exclude_categories', (<class 'NoneType'>, None)), ('blacklist_characters', (<class 'NoneType'>, None)), ('whitelist_characters', (<class 'NoneType'>, None)), ('min_codepoint', (<class 'NoneType'>, None)), ('include_characters', (<class 'NoneType'>, None)), ('blacklist_categories', (<class 'NoneType'>, None)), ('whitelist_categories', (<class 'NoneType'>, None))})), value=characters(codec='utf-8'), score=(2, 2), pins=0), Entry(key=(<function integers at 0x000002329EA5C180>, ((<class 'int'>, 1), (<class 'int'>, 99)), frozenset()), value=integers(min_value=1, max_value=99), score=(2, 16), pins=0), Entry(key=(<function booleans at 0x000002329EA5E660>, (), frozenset()), value=booleans(), score=(2, 17), pins=0)]
+----------------internal/cache.py:data:90: return self._threadlocal.data
+----------------Tracing nested call to data
+----------------internal/cache.py:data:87: @property
+----------------Captured nested call to data with return value: [Entry(key=(<function characters at 0x000002329EA745E0>, (), frozenset({('categories', (<class 'NoneType'>, None)), ('codec', (<class 'str'>, 'utf-8')), ('exclude_characters', (<class 'NoneType'>, None)), ('max_codepoint', (<class 'NoneType'>, None)), ('exclude_categories', (<class 'NoneType'>, None)), ('blacklist_characters', (<class 'NoneType'>, None)), ('whitelist_characters', (<class 'NoneType'>, None)), ('min_codepoint', (<class 'NoneType'>, None)), ('include_characters', (<class 'NoneType'>, None)), ('blacklist_categories', (<class 'NoneType'>, None)), ('whitelist_categories', (<class 'NoneType'>, None))})), value=characters(codec='utf-8'), score=(2, 2), pins=0), Entry(key=(<function integers at 0x000002329EA5C180>, ((<class 'int'>, 1), (<class 'int'>, 99)), frozenset()), value=integers(min_value=1, max_value=99), score=(2, 16), pins=0), Entry(key=(<function booleans at 0x000002329EA5E660>, (), frozenset()), value=booleans(), score=(2, 17), pins=0)]
+----------------internal/cache.py:data:90: return self._threadlocal.data
+----------------Captured nested call to __balance with return value: None
+----------------internal/cache.py:__balance:243: while children := [j for j in (2 * i + 1, 2 * i + 2) if j < len(self.data)]:
+----------------Captured nested call to __entry_was_accessed with return value: None
+----------------internal/cache.py:__entry_was_accessed:221: self.__balance(i)
+----------------Captured nested call to __getitem__ with return value: booleans()
+----------------internal/cache.py:__getitem__:106: return result.value
+----------------Captured nested call to cached_strategy with return value: booleans()
+----------------_internal/utils.py:cached_strategy:85: return cache[cache_key]
+----------------Captured nested call to booleans with return value: booleans()
+----------------_internal/core.py:booleans:155: @defines_strategy(force_reusable_values=True)
+----------------Tracing nested call to instrumented_draw
+----------------src/tracing.py:instrumented_draw:134: def instrumented_draw(self, strategy, label=None, observe_as=None):
+----------------Started tracing draw calls
+----------------conjecture/data.py:draw:1088: def draw(
+----------------Tracing nested call to validate
+----------------_internal/strategies.py:validate:473: def validate(self) -> None:
+----------------Captured nested call to validate with return value: None
+----------------_internal/strategies.py:validate:479: return
+----------------Tracing nested call to is_empty
+----------------_internal/strategies.py:is_empty:243: @property
+----------------Tracing nested call to recursive_property
+----------------_internal/strategies.py:recursive_property:81: def recursive_property(strategy: "SearchStrategy", name: str, default: object) -> Any:
+----------------Tracing nested call to forced_value
+----------------_internal/strategies.py:forced_value:111: def forced_value(target: SearchStrategy) -> Any:
+----------------Captured nested call to forced_value with return value: False
+----------------_internal/strategies.py:forced_value:115: return getattr(target, cache_key)
+----------------Captured nested call to recursive_property with return value: False
+----------------_internal/strategies.py:recursive_property:118: return forced_value(strategy)
+----------------Captured nested call to is_empty with return value: False
+----------------_internal/strategies.py:is_empty:250: return recursive_property(self, "is_empty", True)
+----------------Tracing nested call to unwrap_strategies
+----------------_internal/lazy.py:unwrap_strategies:31: def unwrap_strategies(s):
+----------------Tracing nested call to __getitem__
+----------------Lib/weakref.py:__getitem__:414: def __getitem__(self, key):
+----------------Captured nested call to __getitem__ with return value: None
+----------------Lib/weakref.py:__getitem__:415: return self.data[ref(key)]
+----------------Tracing nested call to __setitem__
+----------------Lib/weakref.py:__setitem__:427: def __setitem__(self, key, value):
+----------------Captured nested call to __setitem__ with return value: None
+----------------Lib/weakref.py:__setitem__:428: self.data[ref(key, self._remove)] = value
+----------------Tracing nested call to wrapped_strategy
+----------------_internal/lazy.py:wrapped_strategy:112: @property
+----------------Captured nested call to wrapped_strategy with return value: booleans()
+----------------_internal/lazy.py:wrapped_strategy:132: return self.__wrapped_strategy
+----------------Tracing nested call to unwrap_strategies
+----------------_internal/lazy.py:unwrap_strategies:31: def unwrap_strategies(s):
+----------------Captured nested call to unwrap_strategies with return value: booleans()
+----------------_internal/lazy.py:unwrap_strategies:36: return s
+----------------Tracing nested call to __setitem__
+----------------Lib/weakref.py:__setitem__:427: def __setitem__(self, key, value):
+----------------Captured nested call to __setitem__ with return value: None
+----------------Lib/weakref.py:__setitem__:428: self.data[ref(key, self._remove)] = value
+----------------Tracing nested call to clear
+----------------<frozen _collections_abc>:clear:966: 
+----------------Tracing nested call to popitem
+----------------Lib/weakref.py:popitem:495: def popitem(self):
+----------------Captured nested call to popitem with return value: (booleans(), booleans())
+----------------Lib/weakref.py:popitem:501: return o, value
+----------------Tracing nested call to popitem
+----------------Lib/weakref.py:popitem:495: def popitem(self):
+----------------Captured nested call to popitem with return value: None
+----------------Lib/weakref.py:popitem:498: key, value = self.data.popitem()
+----------------Captured nested call to clear with return value: None
+----------------<frozen _collections_abc>:clear:972: 
+----------------Captured nested call to unwrap_strategies with return value: booleans()
+----------------_internal/lazy.py:unwrap_strategies:65: assert unwrap_depth >= 0
+----------------Tracing nested call to label
+----------------_internal/strategies.py:label:502: @property
+----------------Tracing nested call to cast
+----------------Lib/typing.py:cast:2187: def cast(typ, val):
+----------------Captured nested call to cast with return value: 15859467114405719213
+----------------Lib/typing.py:cast:2195: return val
+----------------Captured nested call to label with return value: 15859467114405719213
+----------------_internal/strategies.py:label:509: return cast(int, self.__label)
+----------------Tracing nested call to start_span
+----------------conjecture/data.py:start_span:1156: def start_span(self, label: int) -> None:
+----------------Tracing nested call to span_start
+----------------conjecture/providers.py:span_start:412: def span_start(self, label: int, /) -> None:  # noqa: B027  # non-abstract noop
+----------------Captured nested call to span_start with return value: None
+----------------conjecture/providers.py:span_start:412: def span_start(self, label: int, /) -> None:  # noqa: B027  # non-abstract noop
+----------------Tracing nested call to __assert_not_frozen
+----------------conjecture/data.py:__assert_not_frozen:1078: def __assert_not_frozen(self, name: str) -> None:
+----------------Captured nested call to __assert_not_frozen with return value: None
+----------------conjecture/data.py:__assert_not_frozen:1079: if self.frozen:
+----------------Tracing nested call to start_span
+----------------conjecture/data.py:start_span:330: def start_span(self, label: int) -> None:
+----------------Tracing nested call to append
+----------------conjecture/junkdrawer.py:append:142: def append(self, n: int) -> None:
+----------------Tracing nested call to __len__
+----------------conjecture/junkdrawer.py:__len__:103: def __len__(self) -> int:
+----------------Captured nested call to __len__ with return value: 10
+----------------conjecture/junkdrawer.py:__len__:104: return len(self.__underlying)
+----------------Tracing nested call to __setitem__
+----------------conjecture/junkdrawer.py:__setitem__:147: def __setitem__(self, i: int, n: int) -> None:
+----------------Captured nested call to __setitem__ with return value: None
+----------------conjecture/junkdrawer.py:__setitem__:151: return
+----------------Captured nested call to append with return value: None
+----------------conjecture/junkdrawer.py:append:145: self[i] = n
+----------------Captured nested call to start_span with return value: None
+----------------conjecture/data.py:start_span:337: self.trail.append(TrailType.START_SPAN + i)
+----------------Captured nested call to start_span with return value: None
+----------------conjecture/data.py:start_span:1169: self.labels_for_structure_stack.append({label})
+----------------Tracing nested call to do_draw
+----------------_internal/misc.py:do_draw:133: def do_draw(self, data: ConjectureData) -> bool:
+----------------Tracing nested call to draw_boolean
+----------------conjecture/data.py:draw_boolean:930: def draw_boolean(
+----------------Tracing nested call to _pooled_constraints
+----------------conjecture/data.py:_pooled_constraints:943: def _pooled_constraints(self, choice_type, constraints):
+----------------Tracing nested call to choice_constraints_key
+----------------conjecture/choice.py:choice_constraints_key:604: def choice_constraints_key(choice_type, constraints):
+----------------Tracing nested call to <genexpr>
+----------------conjecture/choice.py:<genexpr>:619: return tuple(constraints[key] for key in sorted(constraints))
+----------------Captured nested call to <genexpr> with return value: 0.5
+----------------conjecture/choice.py:<genexpr>:619: return tuple(constraints[key] for key in sorted(constraints))
+----------------Tracing nested call to <genexpr>
+----------------conjecture/choice.py:<genexpr>:619: return tuple(constraints[key] for key in sorted(constraints))
+----------------Captured nested call to <genexpr> with return value: None
+----------------conjecture/choice.py:<genexpr>:619: return tuple(constraints[key] for key in sorted(constraints))
+----------------Captured nested call to choice_constraints_key with return value: (0.5,)
+----------------conjecture/choice.py:choice_constraints_key:619: return tuple(constraints[key] for key in sorted(constraints))
+----------------Tracing nested call to __getitem__
+----------------internal/cache.py:__getitem__:334: def __getitem__(self, key: K) -> V:
+----------------Tracing nested call to cache
+----------------internal/cache.py:cache:319: @property
+----------------Captured nested call to cache with return value: OrderedDict({('boolean', 0.5): {'p': 0.5}, ('integer', 1, 99, None, 0): {'min_value': 1, 'max_value': 99, 'weights': None, 'shrink_towards': 0}})
+----------------internal/cache.py:cache:322: return self._threadlocal.cache
+----------------Tracing nested call to cache
+----------------internal/cache.py:cache:319: @property
+----------------Captured nested call to cache with return value: OrderedDict({('boolean', 0.5): {'p': 0.5}, ('integer', 1, 99, None, 0): {'min_value': 1, 'max_value': 99, 'weights': None, 'shrink_towards': 0}})
+----------------internal/cache.py:cache:322: return self._threadlocal.cache
+----------------Captured nested call to __getitem__ with return value: {'p': 0.5}
+----------------internal/cache.py:__getitem__:337: return val
+----------------Captured nested call to _pooled_constraints with return value: {'p': 0.5}
+----------------conjecture/data.py:_pooled_constraints:951: return POOLED_CONSTRAINTS_CACHE[key]
+----------------Tracing nested call to _draw
+----------------conjecture/data.py:_draw:740: def _draw(self, choice_type, constraints, *, observe, forced):
+----------------Tracing nested call to _pop_choice
+----------------conjecture/data.py:_pop_choice:956: def _pop_choice(
+----------------Tracing nested call to choice_permitted
+----------------conjecture/choice.py:choice_permitted:531: def choice_permitted(choice: ChoiceT, constraints: ChoiceConstraintsT) -> bool:
+----------------Tracing nested call to cast
+----------------Lib/typing.py:cast:2187: def cast(typ, val):
+----------------Captured nested call to cast with return value: {'p': 0.5}
+----------------Lib/typing.py:cast:2195: return val
+----------------Captured nested call to choice_permitted with return value: True
+----------------conjecture/choice.py:choice_permitted:569: return True
+----------------Captured nested call to _pop_choice with return value: True
+----------------conjecture/data.py:_pop_choice:1043: return choice
+----------------Tracing nested call to draw_boolean
+----------------conjecture/data.py:draw_boolean:568: def draw_boolean(
+----------------Captured nested call to draw_boolean with return value: None
+----------------conjecture/data.py:draw_boolean:571: pass
+----------------Tracing nested call to choices_size
+----------------conjecture/choice.py:choices_size:622: def choices_size(choices: Iterable[ChoiceT]) -> int:
+----------------Tracing nested call to choices_to_bytes
+----------------hypothesis/database.py:choices_to_bytes:1170: def choices_to_bytes(choices: Iterable[ChoiceT], /) -> bytes:
+----------------Captured nested call to choices_to_bytes with return value: b'\x01'
+----------------hypothesis/database.py:choices_to_bytes:1207: return b"".join(parts)
+----------------Captured nested call to choices_size with return value: 1
+----------------conjecture/choice.py:choices_size:625: return len(choices_to_bytes(choices))
+----------------Tracing nested call to __init__
+----------------<attrs generated methods hypothesis.internal.conjecture.choice.ChoiceNode>:__init__:1: def __init__(self, type, value, constraints, was_forced, index=attr_dict['index'].default):
+----------------Captured nested call to __init__ with return value: None
+----------------<attrs generated methods hypothesis.internal.conjecture.choice.ChoiceNode>:__init__:6: self.index = index
+----------------Tracing nested call to record_choice
+----------------conjecture/data.py:record_choice:327: def record_choice(self) -> None:
+----------------Tracing nested call to append
+----------------conjecture/junkdrawer.py:append:142: def append(self, n: int) -> None:
+----------------Tracing nested call to __len__
+----------------conjecture/junkdrawer.py:__len__:103: def __len__(self) -> int:
+----------------Captured nested call to __len__ with return value: 11
+----------------conjecture/junkdrawer.py:__len__:104: return len(self.__underlying)
+----------------Tracing nested call to __setitem__
+----------------conjecture/junkdrawer.py:__setitem__:147: def __setitem__(self, i: int, n: int) -> None:
+----------------Captured nested call to __setitem__ with return value: None
+----------------conjecture/junkdrawer.py:__setitem__:151: return
+----------------Captured nested call to append with return value: None
+----------------conjecture/junkdrawer.py:append:145: self[i] = n
+----------------Captured nested call to record_choice with return value: None
+----------------conjecture/data.py:record_choice:328: self.trail.append(TrailType.CHOICE)
+----------------Captured nested call to _draw with return value: True
+----------------conjecture/data.py:_draw:805: return value
+----------------Captured nested call to draw_boolean with return value: True
+----------------conjecture/data.py:draw_boolean:941: return self._draw("boolean", constraints, observe=observe, forced=forced)
+----------------Captured nested call to do_draw with return value: True
+----------------_internal/misc.py:do_draw:134: return data.draw_boolean()
+----------------Tracing nested call to stop_span
+----------------conjecture/data.py:stop_span:1171: def stop_span(self, *, discard: bool = False) -> None:
+----------------Tracing nested call to span_end
+----------------conjecture/providers.py:span_end:423: def span_end(self, discard: bool, /) -> None:  # noqa: B027, FBT001
+----------------Captured nested call to span_end with return value: None
+----------------conjecture/providers.py:span_end:423: def span_end(self, discard: bool, /) -> None:  # noqa: B027, FBT001
+----------------Tracing nested call to stop_span
+----------------conjecture/data.py:stop_span:339: def stop_span(self, *, discard: bool) -> None:
+----------------Tracing nested call to append
+----------------conjecture/junkdrawer.py:append:142: def append(self, n: int) -> None:
+----------------Tracing nested call to __len__
+----------------conjecture/junkdrawer.py:__len__:103: def __len__(self) -> int:
+----------------Captured nested call to __len__ with return value: 12
+----------------conjecture/junkdrawer.py:__len__:104: return len(self.__underlying)
+----------------Tracing nested call to __setitem__
+----------------conjecture/junkdrawer.py:__setitem__:147: def __setitem__(self, i: int, n: int) -> None:
+----------------Captured nested call to __setitem__ with return value: None
+----------------conjecture/junkdrawer.py:__setitem__:151: return
+----------------Captured nested call to append with return value: None
+----------------conjecture/junkdrawer.py:append:145: self[i] = n
+----------------Captured nested call to stop_span with return value: None
+----------------conjecture/data.py:stop_span:343: self.trail.append(TrailType.STOP_SPAN_NO_DISCARD)
+----------------Captured nested call to stop_span with return value: None
+----------------conjecture/data.py:stop_span:1189: if discard:
+----------------Captured draw return value: True
+----------------Finished tracing draw calls
+----------------Captured draw return value: None
+----------------Finished tracing draw calls
+==================================================

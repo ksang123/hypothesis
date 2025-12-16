@@ -8,6 +8,13 @@ from pathlib import Path
 import inspect
 import ast
 
+from pathlib import Path
+import sys
+
+sys.path.append(str(Path(__file__).resolve().parents[2]))
+from tracing import trace_calls, captured_values
+
+
 class UnitTestGenerator:
     _instance = None
 
@@ -69,10 +76,6 @@ class UnitTestGenerator:
         with BuildContext(data) as ctx:
             with open("hypothesis_trace.log", "a") as f:
                 print("=" * 50, file=f)
-            from pathlib import Path
-            import sys
-            sys.path.append(str(Path(__file__).resolve().parents[2]))
-            from tracing import trace_calls
             sys.setprofile(trace_calls)
             for name, strat in given_kwargs.items():
                 st = strat._LazyStrategy__wrapped_strategy
@@ -114,7 +117,16 @@ class UnitTestGenerator:
                 and node.func.id == "draw"
                 and self.idx < len(self.draws)
             ):
-                val = self.draws[self.idx]
+                if self.draws[self.idx].result is not None:
+                    val = captured_values[self.idx].result # Todo: swap recursively
+                else:
+                    name = node.args[0].func.id
+                    keywords = node.args[0].keywords
+                    args = node.args[0].args
+                    val = ast.Call(func=ast.Name(id=f"inner_{name}", ctx=ast.Load()), args=args, keywords=keywords)
+                    self.idx += 1
+                    return val
+                    # val = f"Need to copy {name} into here and call it with {args}"#self.draws[self.idx]
                 self.idx += 1
                 return ast.copy_location(ast.Constant(value=val), node)
             return self.generic_visit(node)
@@ -134,14 +146,14 @@ class UnitTestGenerator:
                 new_name = prefix + orig
                 mapping[orig] = new_name
                 value = self._Prefixer(mapping).visit(stmt.value)
-                lines.append(f"    {new_name} = {ast.unparse(value)}")
+                lines.append(f"\t{new_name} = {ast.unparse(value)}") # Todo: define a new function and replace the entries
             elif isinstance(stmt, ast.Return):
                 value = self._Prefixer(mapping).visit(stmt.value)
-                lines.append(f"    {var_name} = {ast.unparse(value)}")
+                lines.append(f"\t{var_name} = {ast.unparse(value)}")
             else:
                 value = self._Prefixer(mapping).visit(stmt)
                 for l in ast.unparse(value).split("\n"):
-                    lines.append(f"    {l}")
+                    lines.append(f"\t{l}")
         return lines
 
     def _generate_test_body(self, test_name, test):
@@ -158,9 +170,9 @@ class UnitTestGenerator:
         values, draws = self._eval_strategies(given_kwargs, test.get("choices", []))
 
         if self._PRINT_SOURCE:
-            lines.append('    """')
+            lines.append('\t"""')
             for var_name, strat in given_kwargs.items():
-                lines.append(f"    {var_name}:")
+                lines.append(f"\t{var_name}:")
                 st = strat._LazyStrategy__wrapped_strategy  # private? nah
                 if isinstance(st, CompositeStrategy):
                     df = st.definition
@@ -172,28 +184,30 @@ class UnitTestGenerator:
                     if "(" in name:
                         name = name.split("(")[0] + "()"
                     value = values.get(var_name)
-                    lines.append(f"    {name} -> {value!r}")
-            lines.append('    """')
+                    lines.append(f"\t{name} -> {value!r}")
+            lines.append('\t"""')
 
         for var_name, strat in given_kwargs.items():
             st = strat._LazyStrategy__wrapped_strategy  # private? nah
             if isinstance(st, CompositeStrategy):
-                lines.extend(self._render_strategy_lines(st.definition, draws[var_name], var_name))
+                for default in zip(ast.parse(self._extract_source_code(st.definition)).body[0].args.args[1:], st.args):
+                    lines.append(f"\t{default[0].arg}={default[1]}")
+                lines.extend(self._render_strategy_lines(st.definition, captured_values, var_name))
             else:
-                lines.append(f"    {var_name} = {values[var_name]!r}")
+                lines.append(f"\t{var_name} = {values[var_name]!r}")
 
         if self._COPY_CODE:
-            lines.append(f"    {test['func_name']}(")
+            lines.append(f"\t{test['func_name']}(")
         else:
-            lines.append(f"    {test['func_name']}.hypothesis.inner_test(")
+            lines.append(f"\t{test['func_name']}.hypothesis.inner_test(")
         for arg in test["args"]:
             lines.append(f"        {arg!r},")
         for k, v in test["kwargs"].items():
             if k in given_kwargs:
-                lines.append(f"        {k}={k},")
+                lines.append(f"\t\t{k}={k},")
             else:
-                lines.append(f"        {k}={v!r},")
-        lines.append("    )")
+                lines.append(f"\t\t{k}={v!r},")
+        lines.append("\t)")
         with open("hypothesis_trace.log", "a") as f:
             print("=" * 50, file=f)
         return "\n".join(lines) + "\n"

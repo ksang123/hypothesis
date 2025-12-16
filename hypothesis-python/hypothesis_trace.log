@@ -64,7 +64,7 @@ DrawResult(result=<This will swapped out>, innerBody=
 	[DrawResult(result=False, innerBody=None), DrawResult(result=0, innerBody=None), DrawResult(result=None, innerBody=
 	[DrawResult(result=True, innerBody=None)]), DrawResult(result=None, innerBody=
 	[DrawResult(result=True, innerBody=None)])])
------------------Returned from draw with <RBtrees.RBTreeFunctional object at 0x00000158C7511430>
+-----------------Returned from draw with <RBtrees.RBTreeFunctional object at 0x000001B9CD2D1160>
 -----------------===================Not composite
 -----------------Now the list is DrawResult(result=False, innerBody=None)
 DrawResult(result=0, innerBody=None)

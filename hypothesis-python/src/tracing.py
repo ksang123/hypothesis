@@ -106,6 +106,9 @@ def clear():
     global captured_values
     clearStrats()
     captured_values = []
+
+def getDraws():
+    return captured_values
 def clearStrats():
     global strats
     strats = []

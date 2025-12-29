@@ -12,7 +12,7 @@ from pathlib import Path
 import sys
 
 sys.path.append(str(Path(__file__).resolve().parents[2]))
-from tracing import trace_calls, captured_values, open_recording, close_recording, clear
+from tracing import trace_calls, getDraws, open_recording, close_recording, clear
 
 
 class UnitTestGenerator:
@@ -253,7 +253,7 @@ class UnitTestGenerator:
                 for default in zip(ast.parse(self._extract_source_code(st.definition)).body[0].args.args[1:], st.args):
                     lines.append(f"\t{default[0].arg}={default[1]}")
                 # lines.extend(self._render_strategy_lines(st.definition, captured_values, var_name))
-                self._render_strategy_lines(st.definition, captured_values, var_name, lines)
+                self._render_strategy_lines(st.definition, getDraws(), var_name, lines)
             else:
                 lines.append(f"\t{var_name} = {values[var_name]!r}")
 

@@ -101,6 +101,15 @@ def add_strat(s):
     if recordStarts:
         strats.append(s)
         # myLog(f"Strats is {strats}", "")
+
+def clear():
+    global captured_values
+    clearStrats()
+    captured_values = []
+def clearStrats():
+    global strats
+    strats = []
+    last = None
 strats = []
 
 last = None

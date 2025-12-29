@@ -12,7 +12,7 @@ from pathlib import Path
 import sys
 
 sys.path.append(str(Path(__file__).resolve().parents[2]))
-from tracing import trace_calls, captured_values, open_recording, close_recording
+from tracing import trace_calls, captured_values, open_recording, close_recording, clear
 
 
 class UnitTestGenerator:
@@ -107,9 +107,12 @@ class UnitTestGenerator:
             return node
 
     class _DrawReplacer(ast.NodeTransformer):
-        def __init__(self, draws):
+        def __init__(self, draws, unitTestGen, lines, n):
             super().__init__()
             self.draws = draws
+            self.unitTestGenerator = unitTestGen
+            self.lines = lines
+            self.var_name = n
             self.idx = 0
 
         def visit_Call(self, node):
@@ -118,15 +121,22 @@ class UnitTestGenerator:
                 and node.func.id == "draw"
                 and self.idx < len(self.draws)
             ):
-                if self.draws[self.idx].result is not None:
+                if self.draws[self.idx].result is not None or self.draws[self.idx].innerBody is None:
                     val = self.draws[self.idx].result # Todo: swap recursively but not inside function
                 else:
-                    val = ast.Call(func=ast.Name(id=f"Some random shit"), args=[], keywords=[])
+                    self.lines.append(f"#{"+"*50}")
+                    newName = f"{self.var_name}_composite_strat{self.idx}"
+                    self.unitTestGenerator._render_strategy_lines(self.draws[self.idx].strategy.wrapped_strategy.definition, self.draws[self.idx].innerBody, newName, self.lines)
+                    self.lines.append(f"#{"-"*50}")
+                    val = ast.Name(newName)#ast.Call(func=ast.Name(id=f"Strat from: {self.draws[self.idx].strategy}"), args=[], keywords=[])
                     self.idx += 1
                     return val
                     # val = f"Need to copy {name} into here and call it with {args}"#self.draws[self.idx]
                 self.idx += 1
                 return ast.copy_location(ast.Constant(value=val), node)
+            elif node.func.id == "draw":
+                self.lines += ["#The next thing is null because it is out of bounds"]
+                return ast.Constant(value=None)
             return self.generic_visit(node)
 
 
@@ -193,18 +203,18 @@ class UnitTestGenerator:
         for l in ast.unparse(value).split("\n"):
             lines.append(f"{indent_str}{l}")
 
-    def _render_strategy_lines(self, df, draws, var_name):
+    def _render_strategy_lines(self, df, draws, var_name, lines):
         source = self._extract_source_code(df)
         tree = ast.parse(source)
         body = tree.body[0].body
         prefix = f"{var_name}_"
         mapping = {}
-        lines = []
-        replacer = self._DrawReplacer(draws)
+        # lines = []
+        replacer = self._DrawReplacer(draws, self, lines, var_name)
         for stmt in body:
             stmt = replacer.visit(stmt)
             self.swap(stmt, prefix, var_name, mapping, lines)
-        return lines
+        # return lines
 
     def _generate_test_body(self, test_name, test):
 
@@ -242,7 +252,8 @@ class UnitTestGenerator:
             if isinstance(st, CompositeStrategy):
                 for default in zip(ast.parse(self._extract_source_code(st.definition)).body[0].args.args[1:], st.args):
                     lines.append(f"\t{default[0].arg}={default[1]}")
-                lines.extend(self._render_strategy_lines(st.definition, captured_values, var_name))
+                # lines.extend(self._render_strategy_lines(st.definition, captured_values, var_name))
+                self._render_strategy_lines(st.definition, captured_values, var_name, lines)
             else:
                 lines.append(f"\t{var_name} = {values[var_name]!r}")
 
@@ -260,6 +271,7 @@ class UnitTestGenerator:
         lines.append("\t)")
         with open("hypothesis_trace.log", "a") as f:
             print("=" * 50, file=f)
+        clear()
         close_recording()
         return "\n".join(lines) + "\n"
 
@@ -315,6 +327,9 @@ class UnitTestGenerator:
 
         final_funcs = existing_funcs if self._KEEP_FUNCS else {}
         final_funcs.update(new_funcs)
+
+        if not new_funcs:
+            return
 
         with open(output_file, "w", encoding="utf-8") as f:
             f.write("# Failing tests extracted from Hypothesis\n\n")

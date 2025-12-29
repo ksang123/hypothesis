@@ -9,31 +9,90 @@
 -----------------==================Made a new draw
 -----------------Made a new basic draw
 -----------------Made a new basic draw
------------------Returned from draw with 1
+-----------------Returned from draw with 0
 -----------------===================Not composite
 -----------------Now the list is DrawResult(strat=booleans(), result=False, innerBody=None)
-DrawResult(strat=integers(min_value=1, max_value=99), result=1, innerBody=None)
+DrawResult(strat=integers(min_value=0, max_value=100), result=0, innerBody=None)
 -----------------==================Made a new draw
+-----------------Made a new composite draw
+-----------------Made a new basic draw
+-----------------Made a new basic draw
+-----------------Returned from draw with False
+-----------------Now the list is DrawResult(strat=booleans(), result=False, innerBody=None)
+DrawResult(strat=integers(min_value=0, max_value=100), result=0, innerBody=None)
+DrawResult(strat=rb_functional_tree(depth=1), result=<This will swapped out>, innerBody=
+	[DrawResult(strat=booleans(), result=False, innerBody=None)])
+-----------------Made a new composite draw
+-----------------Made a new basic draw
+-----------------Made a new basic draw
+-----------------Returned from draw with 0
+-----------------Now the list is DrawResult(strat=booleans(), result=False, innerBody=None)
+DrawResult(strat=integers(min_value=0, max_value=100), result=0, innerBody=None)
+DrawResult(strat=rb_functional_tree(depth=1), result=<This will swapped out>, innerBody=
+	[DrawResult(strat=booleans(), result=False, innerBody=None), DrawResult(strat=integers(min_value=0, max_value=100), result=0, innerBody=None)])
+-----------------Made a new composite draw
+-----------------Made a new composite draw
+-----------------Made a new basic draw
+-----------------Made a new basic draw
+-----------------Returned from draw with True
+-----------------Now the list is DrawResult(strat=booleans(), result=False, innerBody=None)
+DrawResult(strat=integers(min_value=0, max_value=100), result=0, innerBody=None)
+DrawResult(strat=rb_functional_tree(depth=1), result=<This will swapped out>, innerBody=
+	[DrawResult(strat=booleans(), result=False, innerBody=None), DrawResult(strat=integers(min_value=0, max_value=100), result=0, innerBody=None), DrawResult(strat=rb_functional_tree(depth=2), result=<This will swapped out>, innerBody=
+	[DrawResult(strat=booleans(), result=True, innerBody=None)])])
 -----------------Returned from draw with None
+-----------------Now the list is DrawResult(strat=booleans(), result=False, innerBody=None)
+DrawResult(strat=integers(min_value=0, max_value=100), result=0, innerBody=None)
+DrawResult(strat=rb_functional_tree(depth=1), result=<This will swapped out>, innerBody=
+	[DrawResult(strat=booleans(), result=False, innerBody=None), DrawResult(strat=integers(min_value=0, max_value=100), result=0, innerBody=None), DrawResult(strat=rb_functional_tree(depth=2), result=None, innerBody=
+	[DrawResult(strat=booleans(), result=True, innerBody=None)])])
+-----------------Made a new composite draw
+-----------------Made a new composite draw
+-----------------Made a new basic draw
+-----------------Made a new basic draw
+-----------------Returned from draw with True
+-----------------Now the list is DrawResult(strat=booleans(), result=False, innerBody=None)
+DrawResult(strat=integers(min_value=0, max_value=100), result=0, innerBody=None)
+DrawResult(strat=rb_functional_tree(depth=1), result=<This will swapped out>, innerBody=
+	[DrawResult(strat=booleans(), result=False, innerBody=None), DrawResult(strat=integers(min_value=0, max_value=100), result=0, innerBody=None), DrawResult(strat=rb_functional_tree(depth=2), result=None, innerBody=
+	[DrawResult(strat=booleans(), result=True, innerBody=None)]), DrawResult(strat=rb_functional_tree(depth=2), result=<This will swapped out>, innerBody=
+	[DrawResult(strat=booleans(), result=True, innerBody=None)])])
+-----------------Returned from draw with None
+-----------------Now the list is DrawResult(strat=booleans(), result=False, innerBody=None)
+DrawResult(strat=integers(min_value=0, max_value=100), result=0, innerBody=None)
+DrawResult(strat=rb_functional_tree(depth=1), result=<This will swapped out>, innerBody=
+	[DrawResult(strat=booleans(), result=False, innerBody=None), DrawResult(strat=integers(min_value=0, max_value=100), result=0, innerBody=None), DrawResult(strat=rb_functional_tree(depth=2), result=None, innerBody=
+	[DrawResult(strat=booleans(), result=True, innerBody=None)]), DrawResult(strat=rb_functional_tree(depth=2), result=None, innerBody=
+	[DrawResult(strat=booleans(), result=True, innerBody=None)])])
+-----------------Returned from draw with <RBtrees.RBTreeFunctional object at 0x0000019F14389B20>
 -----------------===================Not composite
 -----------------Now the list is DrawResult(strat=booleans(), result=False, innerBody=None)
-DrawResult(strat=integers(min_value=1, max_value=99), result=1, innerBody=None)
-DrawResult(strat=rb_imperative_tree(current_depth=1, high=1), result=None, innerBody=None)
+DrawResult(strat=integers(min_value=0, max_value=100), result=0, innerBody=None)
+DrawResult(strat=rb_functional_tree(depth=1), result=None, innerBody=
+	[DrawResult(strat=booleans(), result=False, innerBody=None), DrawResult(strat=integers(min_value=0, max_value=100), result=0, innerBody=None), DrawResult(strat=rb_functional_tree(depth=2), result=None, innerBody=
+	[DrawResult(strat=booleans(), result=True, innerBody=None)]), DrawResult(strat=rb_functional_tree(depth=2), result=None, innerBody=
+	[DrawResult(strat=booleans(), result=True, innerBody=None)])])
 -----------------==================Made a new draw
 -----------------Made a new composite draw
 -----------------Made a new basic draw
 -----------------Made a new basic draw
 -----------------Returned from draw with True
 -----------------Now the list is DrawResult(strat=booleans(), result=False, innerBody=None)
-DrawResult(strat=integers(min_value=1, max_value=99), result=1, innerBody=None)
-DrawResult(strat=rb_imperative_tree(current_depth=1, high=1), result=None, innerBody=None)
-DrawResult(strat=rb_imperative_tree(current_depth=1, low=1), result=<This will swapped out>, innerBody=
+DrawResult(strat=integers(min_value=0, max_value=100), result=0, innerBody=None)
+DrawResult(strat=rb_functional_tree(depth=1), result=None, innerBody=
+	[DrawResult(strat=booleans(), result=False, innerBody=None), DrawResult(strat=integers(min_value=0, max_value=100), result=0, innerBody=None), DrawResult(strat=rb_functional_tree(depth=2), result=None, innerBody=
+	[DrawResult(strat=booleans(), result=True, innerBody=None)]), DrawResult(strat=rb_functional_tree(depth=2), result=None, innerBody=
+	[DrawResult(strat=booleans(), result=True, innerBody=None)])])
+DrawResult(strat=rb_functional_tree(depth=1), result=<This will swapped out>, innerBody=
 	[DrawResult(strat=booleans(), result=True, innerBody=None)])
 -----------------Returned from draw with None
 -----------------===================Not composite
 -----------------Now the list is DrawResult(strat=booleans(), result=False, innerBody=None)
-DrawResult(strat=integers(min_value=1, max_value=99), result=1, innerBody=None)
-DrawResult(strat=rb_imperative_tree(current_depth=1, high=1), result=None, innerBody=None)
-DrawResult(strat=rb_imperative_tree(current_depth=1, low=1), result=None, innerBody=
+DrawResult(strat=integers(min_value=0, max_value=100), result=0, innerBody=None)
+DrawResult(strat=rb_functional_tree(depth=1), result=None, innerBody=
+	[DrawResult(strat=booleans(), result=False, innerBody=None), DrawResult(strat=integers(min_value=0, max_value=100), result=0, innerBody=None), DrawResult(strat=rb_functional_tree(depth=2), result=None, innerBody=
+	[DrawResult(strat=booleans(), result=True, innerBody=None)]), DrawResult(strat=rb_functional_tree(depth=2), result=None, innerBody=
+	[DrawResult(strat=booleans(), result=True, innerBody=None)])])
+DrawResult(strat=rb_functional_tree(depth=1), result=None, innerBody=
 	[DrawResult(strat=booleans(), result=True, innerBody=None)])
 ==================================================

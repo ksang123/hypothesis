@@ -12,7 +12,7 @@ from pathlib import Path
 import sys
 
 sys.path.append(str(Path(__file__).resolve().parents[2]))
-from tracing import trace_calls, captured_values
+from tracing import trace_calls, captured_values, open_recording, close_recording
 
 
 class UnitTestGenerator:
@@ -76,6 +76,7 @@ class UnitTestGenerator:
         with BuildContext(data) as ctx:
             with open("hypothesis_trace.log", "a") as f:
                 print("=" * 50, file=f)
+            open_recording()
             sys.setprofile(trace_calls)
             for name, strat in given_kwargs.items():
                 st = strat._LazyStrategy__wrapped_strategy
@@ -118,18 +119,79 @@ class UnitTestGenerator:
                 and self.idx < len(self.draws)
             ):
                 if self.draws[self.idx].result is not None:
-                    val = captured_values[self.idx].result # Todo: swap recursively
+                    val = self.draws[self.idx].result # Todo: swap recursively but not inside function
                 else:
-                    name = node.args[0].func.id
-                    keywords = node.args[0].keywords
-                    args = node.args[0].args
-                    val = ast.Call(func=ast.Name(id=f"inner_{name}", ctx=ast.Load()), args=args, keywords=keywords)
+                    val = ast.Call(func=ast.Name(id=f"Some random shit"), args=[], keywords=[])
                     self.idx += 1
                     return val
                     # val = f"Need to copy {name} into here and call it with {args}"#self.draws[self.idx]
                 self.idx += 1
                 return ast.copy_location(ast.Constant(value=val), node)
             return self.generic_visit(node)
+
+
+    def swap(self, stmt, prefix, var_name, mapping, lines, indent=1):
+        indent_str = "\t" * indent
+
+        # Keep names replaced
+        if isinstance(stmt, ast.Assign) and len(stmt.targets) == 1 and isinstance(stmt.targets[0], ast.Name):
+            orig = stmt.targets[0].id
+            new_name = prefix + orig
+            mapping[orig] = new_name
+            value = self._Prefixer(mapping).visit(stmt.value)
+            src = ast.unparse(value)
+            for l in src.split("\n"):
+                lines.append(f"{indent_str}{new_name} = {l}")
+            return
+
+        # Treat return uniformly no matter where it appears
+        if isinstance(stmt, ast.Return):
+            value = self._Prefixer(mapping).visit(stmt.value) if stmt.value is not None else ast.Constant(value=None)
+            src = ast.unparse(value)
+            for l in src.split("\n"):
+                lines.append(f"{indent_str}{var_name} = {l}")
+            return
+
+        # Recurse into blocks (if/for/while/with) so inner returns are handled the same
+        if isinstance(stmt, ast.If):
+            test = self._Prefixer(mapping).visit(stmt.test)
+            lines.append(f"{indent_str}if {ast.unparse(test)}:")
+            for s in stmt.body:
+                self.swap(s, prefix, var_name, mapping, lines, indent + 1)
+            if stmt.orelse:
+                lines.append(f"{indent_str}else:")
+                for s in stmt.orelse:
+                    self.swap(s, prefix, var_name, mapping, lines, indent + 1)
+            return
+
+        if isinstance(stmt, (ast.For, ast.While)):
+            node = stmt
+            # Prefix target and iter/test
+            node = self._Prefixer(mapping).visit(node)
+            header = ast.unparse(node).split(":", 1)[0] + ":"
+            lines.append(f"{indent_str}{header}")
+            body = node.body
+            orelse = node.orelse
+            for s in body:
+                self.swap(s, prefix, var_name, mapping, lines, indent + 1)
+            if orelse:
+                lines.append(f"{indent_str}else:")
+                for s in orelse:
+                    self.swap(s, prefix, var_name, mapping, lines, indent + 1)
+            return
+
+        if isinstance(stmt, ast.With):
+            node = self._Prefixer(mapping).visit(stmt)
+            header = ast.unparse(node).split(":", 1)[0] + ":"
+            lines.append(f"{indent_str}{header}")
+            for s in node.body:
+                self.swap(s, prefix, var_name, mapping, lines, indent + 1)
+            return
+
+        # Fallback: apply prefixer and unparse, preserving indentation for multi-line output
+        value = self._Prefixer(mapping).visit(stmt)
+        for l in ast.unparse(value).split("\n"):
+            lines.append(f"{indent_str}{l}")
 
     def _render_strategy_lines(self, df, draws, var_name):
         source = self._extract_source_code(df)
@@ -141,19 +203,7 @@ class UnitTestGenerator:
         replacer = self._DrawReplacer(draws)
         for stmt in body:
             stmt = replacer.visit(stmt)
-            if isinstance(stmt, ast.Assign) and len(stmt.targets) == 1 and isinstance(stmt.targets[0], ast.Name):
-                orig = stmt.targets[0].id
-                new_name = prefix + orig
-                mapping[orig] = new_name
-                value = self._Prefixer(mapping).visit(stmt.value)
-                lines.append(f"\t{new_name} = {ast.unparse(value)}") # Todo: define a new function and replace the entries
-            elif isinstance(stmt, ast.Return):
-                value = self._Prefixer(mapping).visit(stmt.value)
-                lines.append(f"\t{var_name} = {ast.unparse(value)}")
-            else:
-                value = self._Prefixer(mapping).visit(stmt)
-                for l in ast.unparse(value).split("\n"):
-                    lines.append(f"\t{l}")
+            self.swap(stmt, prefix, var_name, mapping, lines)
         return lines
 
     def _generate_test_body(self, test_name, test):
@@ -210,6 +260,7 @@ class UnitTestGenerator:
         lines.append("\t)")
         with open("hypothesis_trace.log", "a") as f:
             print("=" * 50, file=f)
+        close_recording()
         return "\n".join(lines) + "\n"
 
     def render(self) -> None:

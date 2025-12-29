@@ -1,4 +1,6 @@
 from hypothesis import given, strategies as st
+# from shitStart import shitStuff
+import shitStart
 import random
 from RBtrees import *
 
@@ -8,6 +10,7 @@ def rb_functional_tree(draw, depth=0, max_depth=6):
         return None
 
     value = draw(st.integers(min_value=0, max_value=100))
+    shit = draw(shitStart.shitStuff())
     left = draw(rb_functional_tree(depth=depth + 1, max_depth=max_depth))
     right = draw(rb_functional_tree(depth=depth + 1, max_depth=max_depth))
 

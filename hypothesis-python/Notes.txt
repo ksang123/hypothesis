@@ -5,3 +5,6 @@ I put another label in unit_test.py, that is the last call to the draws. The que
 If it isn't good, we should discard it(maybe by disabling the tracing before it), and the place where we do start the tracing
 is pretty good.
 If it is good, we should move the start of the tracing to there.
+
+Add the strategies like we added DrawResults... started doing that already.
+And then we can easily just call the recursive shit

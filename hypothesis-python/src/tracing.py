@@ -77,17 +77,31 @@ def myLog(s: str, pre = "-----------------") -> None:
 
 
 class DrawResult:
-    def __init__(self, r = None, c = False, b = None, p = None):
+    def __init__(self, st, r = None, c = False, b = None, p = None):
         self.result = r
         # self.composite = c
         self.innerBody: List[DrawResult] = b
         self.parent = p
+        self.strategy = st
 
     def __repr__(self):
-        return f"DrawResult(result={self.result}, innerBody={"\n\t" if self.innerBody else ""}{self.innerBody})"
+        return f"DrawResult(strat={self.strategy}, result={self.result}, innerBody={"\n\t" if self.innerBody else ""}{self.innerBody})"
 
 
 captured_values: List[DrawResult] = []
+
+recordStarts = False
+def open_recording():
+    global recordStarts
+    recordStarts = True
+def close_recording():
+    global recordStarts
+    recordStarts = False
+def add_strat(s):
+    if recordStarts:
+        strats.append(s)
+        # myLog(f"Strats is {strats}", "")
+strats = []
 
 last = None
 #     {
@@ -104,14 +118,14 @@ def trace_calls(frame, event, arg):
     if event == 'call':
         if func_name == "draw":
             if not last:
-                captured_values.append(DrawResult())
+                captured_values.append(DrawResult(strats[-1]))
                 last = captured_values[-1]
                 myLog("==================Made a new draw")
             else:
                 myLog("Made a new composite draw")
                 if last.innerBody is None:
                     last.innerBody = []
-                newOne = DrawResult()
+                newOne = DrawResult(strats[-1])
                 last.innerBody.append(newOne)
                 newOne.parent = last
                 last = newOne
@@ -132,6 +146,8 @@ def trace_calls(frame, event, arg):
             if last is None:
                 myLog("===================Not composite")
             myLog(f"Now the list is {"\n".join(map(lambda x: f"{x}", captured_values))}")
+            # myLog(f"Now the strats are {strats}")
+
 
 draw_log = []
 
@@ -158,7 +174,7 @@ def instrument_hypothesis():
     def instrumented_draw(self, strategy, label=None, observe_as=None):
         # Track draw index
         draw_index = len(self.nodes)
-
+        add_strat(strategy)
         # Call original
         result = original_draw(self, strategy, label, observe_as)
 

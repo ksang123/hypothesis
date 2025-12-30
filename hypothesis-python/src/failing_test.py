@@ -23,6 +23,11 @@ def test_run_failing_test_test_is_bst_imperative():
 	tree_value = 1
 	tree_left = None
 #++++++++++++++++++++++++++++++++++++++++++++++++++
+	tree_composite_strat3_max_depth=max_depth
+	tree_composite_strat3_current_depth=current_depth + 1
+	tree_composite_strat3_low=value
+	tree_composite_strat3_high=high
+	tree_composite_strat3_parent=None
 	if current_depth >= max_depth or high - low <= 1 or True:
 		tree_composite_strat3 = None
 #The next thing is null because it is out of bounds
@@ -72,10 +77,14 @@ def test_run_failing_test_test_is_bst_functional():
 		tree = None
 	tree_value = 0
 #++++++++++++++++++++++++++++++++++++++++++++++++++
+	tree_composite_strat2_depth=depth + 1
+	tree_composite_strat2_max_depth=max_depth
 	if depth >= max_depth or False:
 		tree_composite_strat2 = None
 	tree_composite_strat2_value = 0
 #++++++++++++++++++++++++++++++++++++++++++++++++++
+	tree_composite_strat2_composite_strat2_depth=depth + 1
+	tree_composite_strat2_composite_strat2_max_depth=max_depth
 	if depth >= max_depth or True:
 		tree_composite_strat2_composite_strat2 = None
 #The next thing is null because it is out of bounds
@@ -89,6 +98,8 @@ def test_run_failing_test_test_is_bst_functional():
 #--------------------------------------------------
 	tree_composite_strat2_left = tree_composite_strat2_composite_strat2
 #++++++++++++++++++++++++++++++++++++++++++++++++++
+	tree_composite_strat2_composite_strat3_depth=depth + 1
+	tree_composite_strat2_composite_strat3_max_depth=max_depth
 	if depth >= max_depth or True:
 		tree_composite_strat2_composite_strat3 = None
 #The next thing is null because it is out of bounds
@@ -106,6 +117,8 @@ def test_run_failing_test_test_is_bst_functional():
 #--------------------------------------------------
 	tree_left = tree_composite_strat2
 #++++++++++++++++++++++++++++++++++++++++++++++++++
+	tree_composite_strat3_depth=depth + 1
+	tree_composite_strat3_max_depth=max_depth
 	if depth >= max_depth or True:
 		tree_composite_strat3 = None
 #The next thing is null because it is out of bounds

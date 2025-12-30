@@ -102,7 +102,7 @@ DrawResult(strat=rb_functional_tree(depth=1), result=<This will swapped out>, in
 	[DrawResult(strat=booleans(), result=False, innerBody=None), DrawResult(strat=integers(min_value=0, max_value=100), result=0, innerBody=None), DrawResult(strat=rb_functional_tree(depth=2), result=None, innerBody=
 	[DrawResult(strat=booleans(), result=True, innerBody=None)]), DrawResult(strat=rb_functional_tree(depth=2), result=None, innerBody=
 	[DrawResult(strat=booleans(), result=True, innerBody=None)])])
------------------Returned from draw with <RBtrees.RBTreeFunctional object at 0x0000018CC1AD0410>
+-----------------Returned from draw with <RBtrees.RBTreeFunctional object at 0x0000020FB7FB47D0>
 -----------------===================Not composite
 -----------------Now the list is DrawResult(strat=booleans(), result=False, innerBody=None)
 DrawResult(strat=integers(min_value=0, max_value=100), result=0, innerBody=None)

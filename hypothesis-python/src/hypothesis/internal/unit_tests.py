@@ -77,7 +77,7 @@ class UnitTestGenerator:
             with open("hypothesis_trace.log", "a") as f:
                 print("=" * 50, file=f)
             open_recording()
-            sys.setprofile(trace_calls)
+            sys.setprofile(trace_calls) #Todo: try swapping with settrace and track only strat lines
             for name, strat in given_kwargs.items():
                 st = strat._LazyStrategy__wrapped_strategy
                 if isinstance(st, CompositeStrategy):
@@ -107,13 +107,21 @@ class UnitTestGenerator:
             return node
 
     class _DrawReplacer(ast.NodeTransformer):
-        def __init__(self, draws, unitTestGen, lines, n):
+        def __init__(self, draws, unitTestGen, lines, n, pa):
             super().__init__()
             self.draws = draws
             self.unitTestGenerator = unitTestGen
             self.lines = lines
             self.var_name = n
+            self.prefixAll = pa
             self.idx = 0
+            self.funs = set()
+
+        def visit_Name(self, node):
+            if node.id not in self.funs:
+                pass
+                # return ast.Name(id=self.prefixAll + node.id, ctx=node.ctx)
+            return node
 
         def visit_Call(self, node):
             if (
@@ -122,11 +130,13 @@ class UnitTestGenerator:
                 and self.idx < len(self.draws)
             ):
                 if self.draws[self.idx].result is not None or self.draws[self.idx].innerBody is None:
-                    val = self.draws[self.idx].result # Todo: swap recursively but not inside function
+                    val = self.draws[self.idx].result
                 else:
                     self.lines.append(f"#{"+"*50}")
                     newName = f"{self.var_name}_composite_strat{self.idx}"
-                    self.unitTestGenerator._render_strategy_lines(self.draws[self.idx].strategy.wrapped_strategy.definition, self.draws[self.idx].innerBody, newName, self.lines)
+                    st = self.draws[self.idx].strategy.wrapped_strategy.definition
+                    self.unitTestGenerator.writeParams(st, [ast.unparse(self.visit(k.value)) for k in node.args[0].keywords], self.lines, prefix=f"{newName}_")
+                    self.unitTestGenerator._render_strategy_lines(st, self.draws[self.idx].innerBody, newName, self.lines, f"{newName}_")
                     self.lines.append(f"#{"-"*50}")
                     val = ast.Name(newName)#ast.Call(func=ast.Name(id=f"Strat from: {self.draws[self.idx].strategy}"), args=[], keywords=[])
                     self.idx += 1
@@ -137,6 +147,7 @@ class UnitTestGenerator:
             elif node.func.id == "draw":
                 self.lines += ["#The next thing is null because it is out of bounds"]
                 return ast.Constant(value=None)
+            self.funs.add(node.func.id)
             return self.generic_visit(node)
 
 
@@ -203,18 +214,22 @@ class UnitTestGenerator:
         for l in ast.unparse(value).split("\n"):
             lines.append(f"{indent_str}{l}")
 
-    def _render_strategy_lines(self, df, draws, var_name, lines):
+    def _render_strategy_lines(self, df, draws, var_name, lines, scope_prefix = ""):
         source = self._extract_source_code(df)
         tree = ast.parse(source)
         body = tree.body[0].body
         prefix = f"{var_name}_"
         mapping = {}
         # lines = []
-        replacer = self._DrawReplacer(draws, self, lines, var_name)
+        replacer = self._DrawReplacer(draws, self, lines, var_name, scope_prefix)
         for stmt in body:
             stmt = replacer.visit(stmt)
             self.swap(stmt, prefix, var_name, mapping, lines)
         # return lines
+
+    def writeParams(self, df, args, lines, prefix = ""):
+        for default in zip(ast.parse(self._extract_source_code(df)).body[0].args.args[1:], args):
+            lines.append(f"\t{prefix}{default[0].arg}={default[1]}")
 
     def _generate_test_body(self, test_name, test):
 
@@ -250,8 +265,7 @@ class UnitTestGenerator:
         for var_name, strat in given_kwargs.items():
             st = strat._LazyStrategy__wrapped_strategy  # private? nah
             if isinstance(st, CompositeStrategy):
-                for default in zip(ast.parse(self._extract_source_code(st.definition)).body[0].args.args[1:], st.args):
-                    lines.append(f"\t{default[0].arg}={default[1]}")
+                self.writeParams(st.definition, st.args, lines)
                 # lines.extend(self._render_strategy_lines(st.definition, captured_values, var_name))
                 self._render_strategy_lines(st.definition, getDraws(), var_name, lines)
             else:
